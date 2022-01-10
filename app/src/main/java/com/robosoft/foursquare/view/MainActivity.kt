@@ -1,7 +1,8 @@
-package com.robosoft.foursquare
+package com.robosoft.foursquare.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.robosoft.foursquare.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
