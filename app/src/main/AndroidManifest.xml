@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FourSquare">
         <activity
-            android:name=".view.LoginActivity"
-            android:exported="true">
+            android:name=".view.LoadingScreen"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,9 +19,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.LoginActivity"
+            android:exported="true"/>
+        <activity
             android:name=".view.MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
