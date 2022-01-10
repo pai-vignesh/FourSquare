@@ -17,10 +17,9 @@ class LoadingScreen : AppCompatActivity() {
         supportActionBar?.hide()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         binding.ivSplash.alpha = 0f
         binding.ivSplash.animate().setDuration(2000).alpha(1f).withEndAction {
-            val i = Intent(this, LoginActivity::class.java)
+            val i = Intent(this, HomeActivity::class.java)
             startActivity(i)
             finish()
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

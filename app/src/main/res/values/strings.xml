@@ -2,4 +2,6 @@
     <string name="app_name">FourSquare</string>
     <string name="logoImage">logoImage</string>
     <string name="email">Email</string>
+    <string name="filter">Filter</string>
+    <string name="search">search</string>
 </resources>

@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_home.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_loading_screen.xml" value="0.21822916666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_confirm_password.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_otp.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_signin.xml" value="0.11354166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_signup.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/top_app_bar.xml" value="0.23229166666666667" />
       </map>
     </option>
   </component>
