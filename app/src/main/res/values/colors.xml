@@ -10,4 +10,6 @@
     <color name="textGrey">#b5abab</color>
     <color name="primary">#370f24</color>
     <color name="tabUnselected">#87797F</color>
+    <color name="placeNameText">#1D1D26</color>
+    <color name="homeBackground">#e5e5e5</color>
 </resources>

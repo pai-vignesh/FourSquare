@@ -8,9 +8,12 @@
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_confirm_password.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_near_you.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_otp.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_signin.xml" value="0.11354166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_signup.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_top_pick.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/place_item_adapter.xml" value="0.264" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/top_app_bar.xml" value="0.23229166666666667" />
       </map>
     </option>
