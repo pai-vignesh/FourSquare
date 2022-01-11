@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.PlaceDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/placeImg"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/splashscreen"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/ratingBar"
+            app:layout_constraintStart_toStartOf="@id/placeImg"
+            app:layout_constraintEnd_toEndOf="@id/placeImg"
+            android:text="@string/place_type"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_marginVertical="10dp"
+            android:numStars="5"
+            android:theme="@style/RatingBar"
+            android:rating="3.5"
+            app:layout_constraintBottom_toBottomOf="@id/placeImg"
+            app:layout_constraintStart_toStartOf="@id/placeImg"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            app:layout_constraintEnd_toEndOf="@id/placeImg"/>
+
+        <LinearLayout
+            android:id="@+id/llMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/placeImg"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                app:drawableTopCompat="@drawable/rating_icon"
+                android:text="Rating"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/avenir_book"
+                app:drawableTopCompat="@drawable/photos_icon"
+                android:text="Photos"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:text="Reviews"
+                app:drawableTopCompat="@drawable/review_icon" />
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/SplitLine_hor1"
+            android:layout_width="match_parent"
+            android:layout_height= "0.5dp"
+            app:layout_constraintTop_toBottomOf="@id/llMenu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="#d3d3d3" />
+
+        <TextView
+            android:id="@+id/tvOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/overview"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/avenir_book"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SplitLine_hor1"/>
+
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dummy_text"
+            android:fontFamily="@font/avenir_book"
+            android:paddingHorizontal="20dp"
+            android:justificationMode="inter_word"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOverview"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

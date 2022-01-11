@@ -4,5 +4,11 @@
     <string name="email">Email</string>
     <string name="filter">Filter</string>
     <string name="search">search</string>
-    <string name="unFavourite">unfavourite</string>
+    <string name="unFavourite">unFavourite</string>
+    <string name="place_type">Indian Restaurant, Chineese Restaurant \n Italian Restaurant</string>
+    <string name="overview">Overview</string>
+    <string name="dummy_text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+optio, eaque rerum! Provident similique accusantium nemo autem. .</string>
 </resources>

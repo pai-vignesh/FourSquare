@@ -25,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         viewPager = binding.pager
+        viewPager.isUserInputEnabled = false;
         setPagerAdapter()
     }
 
