@@ -13,4 +13,5 @@
     <color name="placeNameText">#1D1D26</color>
     <color name="homeBackground">#e5e5e5</color>
     <color name="ratingStar"> #ffc922</color>
+    <color name="buttonColor">#351347</color>
 </resources>
