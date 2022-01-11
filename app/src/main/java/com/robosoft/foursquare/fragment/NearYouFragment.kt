@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,9 @@ import com.robosoft.foursquare.databinding.FragmentNearYouBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 
 import com.google.android.gms.maps.model.LatLng
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONObject
 
 class NearYouFragment : Fragment() {
     private lateinit var binding: FragmentNearYouBinding
@@ -37,6 +41,17 @@ class NearYouFragment : Fragment() {
         fetchLocation()
         return binding.root
     }
+
+//    private fun makeApiCall(location:Location){
+//        val request = Request.Builder().url("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=1500&type=restaurant&key=AIzaSyB2gUXijgN5MDWN_Wf6Dby55XYPSkgjLmQ")
+//            .build()
+//
+//        val response = OkHttpClient().newCall(request).execute().body?.string()
+//        val jsonObject = JSONObject(response!!) // This will make the json below as an object for you
+//
+//        Log.d("TAG", "makeApiCall: $jsonObject ")
+//        // You can access all the attributes , nested ones using JSONArray and JSONObject here
+//    }
 
     private fun fetchLocation() {
         if (ActivityCompat.checkSelfPermission(
@@ -62,6 +77,7 @@ class NearYouFragment : Fragment() {
             mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
             mapFragment.getMapAsync {
                 googleMap = it
+                Log.d("TAG", "fetchLocation: ${currentLocation.latitude} ${currentLocation.longitude} ")
                 val myLocation = LatLng(
                     location.latitude,
                     location.longitude

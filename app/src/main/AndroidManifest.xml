@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FourSquare">
         <activity
+            android:name=".view.ReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.PlaceDetailsActivity"
             android:exported="false" />
         <activity

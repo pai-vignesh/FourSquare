@@ -19,7 +19,7 @@ class LoadingScreen : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         binding.ivSplash.alpha = 0f
         binding.ivSplash.animate().setDuration(2000).alpha(1f).withEndAction {
-            val i = Intent(this, PlaceDetailsActivity::class.java)
+            val i = Intent(this, ReviewActivity::class.java)
             startActivity(i)
             finish()
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
