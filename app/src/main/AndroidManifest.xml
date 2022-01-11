@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FourSquare">
         <activity
+            android:name=".view.ImageDetails"
+            android:exported="false" />
+        <activity
+            android:name=".view.GalleryActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ReviewActivity"
             android:exported="false" />
         <activity

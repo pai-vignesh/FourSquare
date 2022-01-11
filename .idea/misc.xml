@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2484375" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/drawable/text_background.xml" value="0.2484375" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/drawable/top_shadow.xml" value="0.2484375" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_gallery.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_home.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_image_details.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_loading_screen.xml" value="0.21822916666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
@@ -19,6 +22,8 @@
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_top_pick.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/place_item_adapter.xml" value="0.264" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/review_adapter.xml" value="0.264" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/gallery_bar.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/image_details_bar.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/place_details_bar.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/review_bar.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/top_app_bar.xml" value="0.23229166666666667" />
