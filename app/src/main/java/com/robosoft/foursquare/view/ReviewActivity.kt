@@ -14,5 +14,9 @@ class ReviewActivity : AppCompatActivity() {
         supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        binding.topAppBar.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 }
