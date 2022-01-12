@@ -13,13 +13,6 @@ import com.robosoft.foursquare.adapter.MyFragmentPagerAdapter
 import com.robosoft.foursquare.databinding.ActivityHomeBinding
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 
-
-
-
-
-
-
-
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var myFragmentPagerAdapter: MyFragmentPagerAdapter
@@ -28,7 +21,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         viewPager = binding.pager
         viewPager.isUserInputEnabled = false;

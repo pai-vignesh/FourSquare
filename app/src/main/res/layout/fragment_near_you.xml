@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <include
+        android:id="@+id/place"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="10dp"

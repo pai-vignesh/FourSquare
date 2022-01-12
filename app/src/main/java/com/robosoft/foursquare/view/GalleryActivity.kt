@@ -11,7 +11,6 @@ class GalleryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGalleryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 }

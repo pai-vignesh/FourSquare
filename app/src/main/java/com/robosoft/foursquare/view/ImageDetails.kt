@@ -11,7 +11,6 @@ class ImageDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityImageDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
     }

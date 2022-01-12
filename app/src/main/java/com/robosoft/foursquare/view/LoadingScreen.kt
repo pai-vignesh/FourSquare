@@ -14,7 +14,6 @@ class LoadingScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoadingScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         binding.ivSplash.alpha = 0f

@@ -1,6 +1,7 @@
 package com.robosoft.foursquare.fragment
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -20,6 +21,8 @@ import com.robosoft.foursquare.databinding.FragmentNearYouBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 
 import com.google.android.gms.maps.model.LatLng
+import com.robosoft.foursquare.view.PlaceDetailsActivity
+import com.robosoft.foursquare.view.ReviewActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -39,6 +42,13 @@ class NearYouFragment : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         fetchLocation()
+
+
+        binding.place.imageView.setOnClickListener {
+            val i = Intent(activity, PlaceDetailsActivity::class.java)
+            startActivity(i)
+        }
+
         return binding.root
     }
 

@@ -14,4 +14,5 @@
     <color name="homeBackground">#e5e5e5</color>
     <color name="ratingStar"> #ffc922</color>
     <color name="buttonColor">#351347</color>
+    <color name="reviewText"> #8d8d8d</color>
 </resources>

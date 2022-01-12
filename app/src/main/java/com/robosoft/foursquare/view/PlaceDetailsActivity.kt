@@ -1,6 +1,7 @@
 package com.robosoft.foursquare.view
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -26,9 +27,12 @@ class PlaceDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlaceDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        binding.reviews.setOnClickListener {
+            val i = Intent(this, ReviewActivity::class.java)
+            startActivity(i)
+        }
 
     }
 
