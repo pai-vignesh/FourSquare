@@ -6,14 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.adapter.MyFragmentPagerAdapter
 import com.robosoft.foursquare.databinding.ActivityHomeBinding
+import com.robosoft.foursquare.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var myFragmentPagerAdapter: MyFragmentPagerAdapter
