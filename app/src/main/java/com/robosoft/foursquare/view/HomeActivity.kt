@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.WindowCompat
 import androidx.viewpager2.widget.ViewPager2
@@ -13,7 +14,7 @@ import com.robosoft.foursquare.adapter.MyFragmentPagerAdapter
 import com.robosoft.foursquare.databinding.ActivityHomeBinding
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var myFragmentPagerAdapter: MyFragmentPagerAdapter
     private lateinit var viewPager: ViewPager2
@@ -36,14 +37,27 @@ class HomeActivity : AppCompatActivity() {
 
         val menuView = binding.drawer.menuView
 
-        val ll1 = menuView.findViewById<LinearLayout>(R.id.list1)
+        val llFavourites = menuView.findViewById<LinearLayout>(R.id.list1)
+        val llFeedback = menuView.findViewById<LinearLayout>(R.id.list2)
+        val llAboutUs = menuView.findViewById<LinearLayout>(R.id.list3)
+        llFavourites.setOnClickListener(this)
+        llFeedback.setOnClickListener(this)
+        llAboutUs.setOnClickListener(this)
 
-        ll1.setOnClickListener {
-            binding.drawer.closeDrawer()
-            val i = Intent(this, ReviewActivity::class.java)
-            startActivity(i)
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.homeFilter -> {
+                    val i = Intent(this, SearchActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.search -> {
+                    // Handle search icon press
+                    true
+                }
+                else -> false
+            }
         }
-
         setPagerAdapter()
     }
 
@@ -67,5 +81,26 @@ class HomeActivity : AppCompatActivity() {
                 binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
             }
         })
+    }
+
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            R.id.list1 -> {
+                binding.drawer.closeDrawer()
+                val i = Intent(this, FavouritesActivity::class.java)
+                startActivity(i)
+            }
+            R.id.list2 -> {
+                binding.drawer.closeDrawer()
+                val i = Intent(this, FeedbackActivity::class.java)
+                startActivity(i)
+            }
+            R.id.list3 -> {
+
+            }
+            R.id.list4 -> {
+
+            }
+        }
     }
 }
