@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#e5e5e5">
+
+    <TextView
+        android:id="@+id/tvSort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort by"
+        android:textSize="20sp"
+        android:textColor="#a3a3a3"
+        android:fontFamily="@font/avenir_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginVertical="15dp"
+        android:layout_marginStart="20dp"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        app:layout_constraintTop_toBottomOf="@id/tvSort"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="15dp"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:text="Popular"
+            style="@style/myButton"
+            />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="15dp"
+            android:text="Distance"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            style="@style/myButton"
+            />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="Rating"
+            android:textAllCaps="false"
+            style="@style/myButton"
+            />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <TextView
+        android:id="@+id/tvFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter by"
+        android:textSize="20sp"
+        android:textColor="#a3a3a3"
+        android:fontFamily="@font/avenir_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggleButton"
+        app:layout_constraintBottom_toTopOf="@id/tt1"
+        android:layout_marginVertical="15dp"
+        android:layout_marginStart="20dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:layout_marginTop="10dp"
+        android:hint="Set Radius"
+        android:background="@color/white"
+        android:paddingVertical="20dp"
+        app:boxStrokeColor="@color/textGrey"
+        android:textColorHint="#a3a3a3"
+        app:hintTextColor="#a3a3a3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFilter">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@color/black"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"  />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButtonExpense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        app:layout_constraintTop_toBottomOf="@id/tt1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="15dp"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:text="₹"
+            style="@style/myButton"
+            />
+        <Button
+            android:id="@+id/button22"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="15dp"
+            android:text="₹₹"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            style="@style/myButton"
+            />
+        <Button
+            android:id="@+id/button33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="₹₹₹"
+            android:textAllCaps="false"
+            style="@style/myButton"
+            />
+
+        <Button
+            android:id="@+id/button44"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="₹₹₹₹"
+            android:textAllCaps="false"
+            style="@style/myButton"
+            />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <TextView
+        android:id="@+id/tvFeature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Features"
+        android:textSize="20sp"
+        android:textColor="#a3a3a3"
+        android:fontFamily="@font/avenir_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggleButtonExpense"
+        android:layout_marginVertical="15dp"
+        android:layout_marginStart="20dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

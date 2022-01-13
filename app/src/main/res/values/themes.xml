@@ -35,6 +35,15 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="myButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:paddingLeft">@dimen/mtrl_btn_padding_left</item>
+        <item name="android:paddingRight">@dimen/mtrl_btn_padding_right</item>
+        <item name="strokeColor">@color/buttonColor</item>
+        <item name="strokeWidth">@dimen/mtrl_btn_stroke_size</item>
+        <item name="backgroundTint">@color/background_color_selector</item>
+        <item name="android:textColor">@color/text_color_selector</item>
+    </style>
+
 
     <style name="MyCustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16sp</item>

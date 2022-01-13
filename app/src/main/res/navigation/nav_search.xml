@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_search"
+    app:startDestination="@id/defaultSearchFragment">
+
+    <fragment
+        android:id="@+id/defaultSearchFragment"
+        android:name="com.robosoft.foursquare.fragment.DefaultSearchFragment"
+        android:label="DefaultSearchFragment" >
+        <action
+            android:id="@+id/action_defaultSearchFragment_to_mapViewFragment"
+            app:destination="@id/mapViewFragment" />
+        <action
+            android:id="@+id/action_defaultSearchFragment_to_listViewFragment"
+            app:destination="@id/listViewFragment" />
+        <action
+            android:id="@+id/action_defaultSearchFragment_to_filterOptionsFragment"
+            app:destination="@id/filterOptionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listViewFragment"
+        android:name="com.robosoft.foursquare.fragment.ListViewFragment"
+        android:label="ListViewFragment" >
+        <action
+            android:id="@+id/action_listViewFragment_to_mapViewFragment"
+            app:destination="@id/mapViewFragment" />
+        <action
+            android:id="@+id/action_listViewFragment_to_filterOptionsFragment"
+            app:destination="@id/filterOptionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapViewFragment"
+        android:name="com.robosoft.foursquare.fragment.MapViewFragment"
+        android:label="MapViewFragment" >
+        <action
+            android:id="@+id/action_mapViewFragment_to_listViewFragment"
+            app:destination="@id/listViewFragment" />
+        <action
+            android:id="@+id/action_mapViewFragment_to_filterOptionsFragment"
+            app:destination="@id/filterOptionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterOptionsFragment"
+        android:name="com.robosoft.foursquare.fragment.FilterOptionsFragment"
+        android:label="FilterOptionsFragment" />
+</navigation>
