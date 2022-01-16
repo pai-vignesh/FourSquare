@@ -35,6 +35,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
+import com.google.android.gms.maps.model.MarkerOptions
+
+
+
 
 @AndroidEntryPoint
 class NearYouFragment : Fragment() ,CellClickListener {
@@ -63,9 +67,9 @@ class NearYouFragment : Fragment() ,CellClickListener {
 
     //recyclerview setup
     private fun setupRv(p0: String?) {
-        p0?.let {
+        p0?.let { location ->
             placeAdapter = PlaceAdapter(this)
-            homeViewModel.getNearbyPlaces(p0).observe(this, { data ->
+            homeViewModel.getNearbyPlaces(location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {
@@ -132,6 +136,11 @@ class NearYouFragment : Fragment() ,CellClickListener {
                         myLocation,
                         15.5f
                     )
+                )
+                googleMap.addMarker(
+                    MarkerOptions()
+                        .position(myLocation)
+                        .title("Marker in Sydney")
                 )
             }
         }

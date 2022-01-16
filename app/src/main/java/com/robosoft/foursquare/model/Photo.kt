@@ -4,6 +4,8 @@ package com.robosoft.foursquare.model
 import com.google.gson.annotations.SerializedName
 
 data class Photo(
+    @SerializedName("id")
+    val id : String,
     @SerializedName("classifications")
     val classifications: List<String>,
     @SerializedName("createdAt")
