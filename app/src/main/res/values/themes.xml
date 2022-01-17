@@ -57,4 +57,10 @@
         <item name="colorControlNormal">@color/textGrey</item>
         <item name="colorControlActivated">@color/ratingStar</item>
     </style>
+
+    <style name="circleImage_OR">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

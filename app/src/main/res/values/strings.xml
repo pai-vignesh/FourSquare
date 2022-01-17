@@ -12,7 +12,22 @@ molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
 numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
 optio, eaque rerum! Provident similique accusantium nemo autem. .</string>
     <string name="date">Added May 12,2016</string>
-
+    <string name="Email">Email</string>
+    <string name="or">OR</string>
+    <string name="create_account">Create Account</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="_123456">123456</string>
+    <string name="facebook_img">facebook_img</string>
+    <string name="google_img">google_img</string>
+    <string name="ryan_wilson">Ryan Wilson</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="submit">Submit</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="we_have_sent_you_an_otp">We have sent you an OTP.</string>
+    <string name="please_enter_it_below">Please enter it below.</string>
+    <string name="enter_otp">Enter OTP</string>
     <string name="navigation_drawer_open">Drawer Open</string>
     <string name="navigation_drawer_close">Drawer Closed</string>
 </resources>

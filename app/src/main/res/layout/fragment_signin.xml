@@ -1,21 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+<LinearLayout
+    android:id="@+id/linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginBottom="20dp"
+    android:orientation="vertical"
+    tools:ignore="MissingConstraints">
+
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/textField"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="@string/Email">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+
+
     <TextView
-        android:id="@+id/tvSign"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email"
+        android:id="@+id/Email"
+        android:text="Email"
+        android:textSize="20sp"
+        android:textColor="#b5abab"
+        android:fontFamily="@font/avenir_book"
+        android:gravity="center"
+        android:layout_marginTop="80dp" />
+
+
+    <EditText
+        android:id="@+id/person_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:text="@string/ryan_wilson"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:fontFamily="@font/avenir_book"
+        tools:ignore="MissingConstraints"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        app:backgroundTint="@color/textGrey"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Password"
+        android:text="@string/password"
+        android:textSize="20sp"
+        android:textColor="#b5abab"
+        android:fontFamily="@font/avenir_book"
+        android:gravity="center"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/password_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="@string/_123456"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/avenir_book"
+        tools:ignore="HardcodedText,MissingConstraints"
+        android:ems="10"
+        app:backgroundTint="@color/textGrey"
+        android:inputType="textPassword" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/forgotPassword"
+        android:gravity="center"
+        android:text="@string/forgot_password"
+        android:textColor="@color/textGrey"
+        android:textSize="20sp"
+        android:fontFamily="@font/avenir_book"
+        android:layout_marginTop="20dp"
+        tools:ignore="MissingConstraints"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:text="@string/login"
+        android:textSize="24sp"
         android:textColor="@color/white"
         android:fontFamily="@font/avenir_book"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:layout_marginTop="18dp"
+        tools:ignore="MissingConstraints"
+        app:cornerRadius="20dp"
+        android:background="@drawable/button_border"/>
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_account"
+        android:text="@string/create_account"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/avenir_book"
+        tools:ignore="MissingConstraints"/>
+
+
+
+        <TextView
+            android:id="@+id/OR"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/or"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:background="@drawable/circular_img"
+            android:layout_marginTop="15dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <ImageButton
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:id="@+id/img_facebook"
+            android:src="@drawable/facebook_btn"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:contentDescription="@string/facebook_img"
+            tools:ignore="HardcodedText" />
+
+        <ImageButton
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:id="@+id/img_google"
+            android:src="@drawable/google_btn"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:contentDescription="@string/google_img" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
