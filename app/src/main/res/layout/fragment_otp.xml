@@ -1,18 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/otp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Otp screen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/otp_notification"
+            android:text="@string/we_have_sent_you_an_otp"
+            android:textSize="28sp"
+            android:textColor="#b5abab"
+            android:fontFamily="@font/avenir_book"
+            android:gravity="center"
+            android:layout_marginTop="80dp"
+            tools:ignore="HardcodedText" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/otp_notification2"
+            android:text="@string/please_enter_it_below"
+            android:textSize="28sp"
+            android:textColor="#b5abab"
+            android:fontFamily="@font/avenir_book"
+            android:gravity="center"
+            android:layout_marginTop="1dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Enter_OTP"
+            android:text="@string/enter_otp"
+            android:textSize="20sp"
+            android:textColor="#b5abab"
+            android:fontFamily="@font/avenir_book"
+            android:gravity="center"
+            android:layout_marginTop="80dp" />
+
+        <EditText
+            android:id="@+id/OTP_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:text="75899"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/avenir_book"
+            tools:ignore="HardcodedText,MissingConstraints"
+            android:ems="10"
+            app:backgroundTint="@color/textGrey"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Resend_OTP"
+            android:text="Resend OTP"
+            android:textSize="20sp"
+            android:textColor="#b5abab"
+            android:fontFamily="@font/avenir_book"
+            android:gravity="center"
+            android:layout_marginTop="50dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/get_in"
+            android:text="Get in !"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/avenir_book"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:layout_marginTop="50dp"
+            tools:ignore="MissingConstraints"
+            app:cornerRadius="20dp"
+            android:background="@drawable/button_border" />
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
