@@ -28,4 +28,6 @@ optio, eaque rerum! Provident similique accusantium nemo autem. .</string>
     <string name="we_have_sent_you_an_otp">We have sent you an OTP.</string>
     <string name="please_enter_it_below">Please enter it below.</string>
     <string name="enter_otp">Enter OTP</string>
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Closed</string>
 </resources>

@@ -8,20 +8,24 @@
     <fragment
         android:id="@+id/mapFragment"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <include
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nearRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="10dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mapFragment"
-        layout="@layout/place_item_adapter"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

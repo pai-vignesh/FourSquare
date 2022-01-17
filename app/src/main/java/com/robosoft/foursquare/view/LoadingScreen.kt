@@ -9,17 +9,17 @@ import androidx.core.view.WindowCompat
 import com.robosoft.foursquare.databinding.ActivityLoadingScreenBinding
 
 class LoadingScreen : AppCompatActivity() {
+    //api key fsq3zwV1cGTqlpvaBC7udG4trZkuAe5SFxmUWAeqeaHNwHw=
     private lateinit var binding : ActivityLoadingScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoadingScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         binding.ivSplash.alpha = 0f
         binding.ivSplash.animate().setDuration(2000).alpha(1f).withEndAction {
-            val i = Intent(this, ImageDetails::class.java)
+            val i = Intent(this, HomeActivity::class.java)
             startActivity(i)
             finish()
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
