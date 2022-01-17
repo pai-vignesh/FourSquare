@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.robosoft.foursquare.adapter.PlaceAdapter
-import com.robosoft.foursquare.databinding.FragmentTopPickBinding
+import com.robosoft.foursquare.databinding.FragmentDinnerPlaceBinding
 import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.util.LocationPermission
@@ -19,22 +19,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TopPickFragment : Fragment(), CellClickListener {
-    private lateinit var binding: FragmentTopPickBinding
+class DinnerPlaceFragment : Fragment() ,CellClickListener{
+    private lateinit var binding : FragmentDinnerPlaceBinding
     private lateinit var placeAdapter: PlaceAdapter
     private val homeViewModel: HomeViewModel by viewModels()
     private var places = ArrayList<PlaceData>()
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTopPickBinding.inflate(inflater)
-        if (LocationPermission.checkPermission(requireActivity())) {
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+        binding= FragmentDinnerPlaceBinding.inflate(inflater)
+        if(LocationPermission.checkPermission(requireActivity())){
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location->
                 setupRv("${location.latitude},${location.longitude}")
             }
         }
@@ -45,7 +44,7 @@ class TopPickFragment : Fragment(), CellClickListener {
     private fun setupRv(p0: String?) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this)
-            homeViewModel.getNearbyPlaces(location).observe(this, { data ->
+            homeViewModel.getQueryPlaces("restaurants",location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {
@@ -79,5 +78,4 @@ class TopPickFragment : Fragment(), CellClickListener {
     override fun onCellClickListener(data: PlaceData) {
 
     }
-
 }

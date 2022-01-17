@@ -22,6 +22,11 @@ class AddReview : AppCompatActivity() {
             selectImageFromGallery()
         }
 
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
+
         val cdd = CustomDialogClass(this)
 
         binding.submitBtn.setOnClickListener {

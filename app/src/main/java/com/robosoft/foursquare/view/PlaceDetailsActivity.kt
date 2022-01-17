@@ -41,6 +41,15 @@ class PlaceDetailsActivity : AppCompatActivity() {
 
         val fsqId = intent.getStringExtra("fsqId")
 
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
+        binding.addReview.setOnClickListener {
+            val i = Intent(this, AddReview::class.java)
+            startActivity(i)
+        }
+
         binding.reviews.setOnClickListener {
             val i = Intent(this, ReviewActivity::class.java)
             startActivity(i)
@@ -48,6 +57,8 @@ class PlaceDetailsActivity : AppCompatActivity() {
 
         binding.photos.setOnClickListener {
             val i = Intent(this,GalleryActivity::class.java)
+            i.putExtra("fsqId", fsqId)
+            i.putExtra("placeName",binding.topAppBar.title)
             startActivity(i)
         }
         fusedLocationProviderClient =

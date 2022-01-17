@@ -13,6 +13,10 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
 }

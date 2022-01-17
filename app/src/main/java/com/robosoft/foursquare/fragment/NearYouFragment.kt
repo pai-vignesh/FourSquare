@@ -36,12 +36,12 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import com.google.android.gms.maps.model.MarkerOptions
-
-
+import com.robosoft.foursquare.util.LocationPermission
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class NearYouFragment : Fragment() ,CellClickListener {
+class NearYouFragment : Fragment(), CellClickListener {
     private lateinit var binding: FragmentNearYouBinding
     private lateinit var mapFragment: SupportMapFragment
     private lateinit var googleMap: GoogleMap
@@ -49,7 +49,8 @@ class NearYouFragment : Fragment() ,CellClickListener {
     private lateinit var placeAdapter: PlaceAdapter
     private val homeViewModel: HomeViewModel by viewModels()
     private var places = ArrayList<PlaceData>()
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    @Inject
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,9 +59,36 @@ class NearYouFragment : Fragment() ,CellClickListener {
         binding = FragmentNearYouBinding.inflate(inflater)
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
-        fetchLocation()
-
-
+        if (LocationPermission.checkPermission(requireActivity())) {
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                setupRv("${location.latitude},${location.longitude}")
+            }
+            val task = fusedLocationProviderClient.lastLocation
+            task.addOnSuccessListener { location ->
+                currentLocation = location
+                mapFragment =
+                    childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+                mapFragment.getMapAsync {
+                    googleMap = it
+                    Log.d(
+                        "TAG",
+                        "fetchLocation: ${currentLocation.latitude} ${currentLocation.longitude} "
+                    )
+                    val myLocation = LatLng(
+                        location.latitude,
+                        location.longitude
+                    )
+                    setupRv("${location.latitude},${location.longitude}")
+                    googleMap.animateCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            myLocation,
+                            15.5f
+                        )
+                    )
+                    googleMap.isMyLocationEnabled = true
+                }
+            }
+        }
 
         return binding.root
     }
@@ -98,52 +126,6 @@ class NearYouFragment : Fragment() ,CellClickListener {
             })
         }
 
-    }
-
-
-    private fun fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
-            ) !=
-            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION
-            ) !=
-            PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 101
-            )
-            return
-        }
-        val task = fusedLocationProviderClient.lastLocation
-        task.addOnSuccessListener { location->
-            currentLocation = location
-            Toast.makeText(requireContext(), currentLocation.latitude.toString() + "" +
-                    currentLocation.longitude, Toast.LENGTH_SHORT).show()
-
-            mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-            mapFragment.getMapAsync {
-                googleMap = it
-                Log.d("TAG", "fetchLocation: ${currentLocation.latitude} ${currentLocation.longitude} ")
-                val myLocation = LatLng(
-                    location.latitude,
-                    location.longitude
-                )
-                setupRv("${location.latitude},${location.longitude}")
-                googleMap.animateCamera(
-                    CameraUpdateFactory.newLatLngZoom(
-                        myLocation,
-                        15.5f
-                    )
-                )
-                googleMap.addMarker(
-                    MarkerOptions()
-                        .position(myLocation)
-                        .title("Marker in Sydney")
-                )
-            }
-        }
     }
 
     override fun onCellClickListener(data: PlaceData) {

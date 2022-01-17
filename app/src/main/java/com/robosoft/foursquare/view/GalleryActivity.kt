@@ -2,6 +2,7 @@ package com.robosoft.foursquare.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
@@ -29,19 +30,23 @@ class GalleryActivity : AppCompatActivity() , CellClickListener{
         binding = ActivityGalleryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        setupRv("5a187743ccad6b307315e6fe")
+        val fsqId = intent.getStringExtra("fsqId")
+        val placeName = intent.getStringExtra("placeName")
+        binding.topAppBar.title = placeName
+        setupRv(fsqId)
     }
 
     private fun setupRv(p0: String?) {
         p0?.let {
             photosAdapter = PhotosAdapter(this)
-            galleryViewModel.getPhotos(p0).observe(this, { data ->
+            galleryViewModel.getPhotos(it).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {
 
                         }
                         Status.SUCCESS -> {
+                            Log.d("TAG", "setupRv: ${resource.data?.size} ")
                             resource.data?.let { photoData ->
                                 photos = photoData as ArrayList<Photo>
                                 binding.nearRecyclerView.apply {

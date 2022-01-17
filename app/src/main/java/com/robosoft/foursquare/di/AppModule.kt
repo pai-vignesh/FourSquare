@@ -1,6 +1,8 @@
 package com.robosoft.foursquare.di
 
 import android.content.Context
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.robosoft.foursquare.api.ApiService
 import com.robosoft.foursquare.api.RetrofitInstance
 import dagger.Module
@@ -16,6 +18,11 @@ object AppModule {
     @Provides
     fun provideApiService(@ApplicationContext context: Context): ApiService {
         return RetrofitInstance.getApiService(context)
+    }
+
+    @Provides
+    fun provideFusedLocation(@ApplicationContext context: Context) : FusedLocationProviderClient{
+        return LocationServices.getFusedLocationProviderClient(context)
     }
 
 //    @Provides

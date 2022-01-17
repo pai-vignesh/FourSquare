@@ -20,4 +20,13 @@ class HomeViewModel @Inject constructor(private val repository: MainRepository) 
         }
     }
 
+    fun getQueryPlaces(query: String,ll:String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = repository.getQueryPlaces(query,ll)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
 }

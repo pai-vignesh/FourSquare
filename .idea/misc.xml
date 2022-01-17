@@ -18,12 +18,15 @@
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_place_details.xml" value="0.2" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_review.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_search.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_coffee_place.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_confirm_password.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_dinner_place.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_filter_options.xml" value="0.264" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_list_view.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_map_view.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_near_you.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_otp.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_popular_place.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_search_default.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_signin.xml" value="0.11354166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_signup.xml" value="0.23229166666666667" />

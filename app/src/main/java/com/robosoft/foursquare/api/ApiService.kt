@@ -22,6 +22,13 @@ interface ApiService {
         "Authorization: fsq3zwV1cGTqlpvaBC7udG4trZkuAe5SFxmUWAeqeaHNwHw=",
         "Accept: application/json"
     )
+    @GET(Constants.END_POINT)
+    suspend fun getQueryPlaces(@Query("query") query:String, @Query("ll") ll: String): PlaceList
+
+    @Headers(
+        "Authorization: fsq3zwV1cGTqlpvaBC7udG4trZkuAe5SFxmUWAeqeaHNwHw=",
+        "Accept: application/json"
+    )
     @GET("places/{id}/photos")
     suspend fun getPlacePhotos(@Path("id") query: String): List<Photo>
 
@@ -31,6 +38,7 @@ interface ApiService {
     )
     @GET("places/{id}")
     suspend fun getPlaceDetails(@Path("id") query: String): PlaceData
+
 
 
 }
