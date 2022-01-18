@@ -24,6 +24,8 @@ import com.robosoft.foursquare.model.Photo
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.PlaceDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.String
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class PlaceDetailsActivity : AppCompatActivity() {
@@ -73,10 +75,13 @@ class PlaceDetailsActivity : AppCompatActivity() {
                         }
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
-                                Log.d("TAG", "onCreate: ${placeData.geocodes.main} ")
+                                Log.d("TAG", "onCreate: ${placeData.location} ")
                                 binding.topAppBar.title = placeData.name
+                                binding.tvAddr.text = placeData.location.address
+                                binding.tvLocality.text = placeData.location.locality
                                 binding.placeType.text = if(placeData.categories.isEmpty())  "Unknown Type" else placeData.categories[0].name
                                 fetchLocation(placeData.geocodes.main.latitude.toDouble(),placeData.geocodes.main.longitude.toDouble())
+
                             }
                         }
                         Status.ERROR -> {
@@ -111,10 +116,15 @@ class PlaceDetailsActivity : AppCompatActivity() {
             mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
             mapFragment.getMapAsync {
                 googleMap = it
+                val destLocation = Location("destination")
                 val myLocation = LatLng(
                     lat,
                     lng
                 )
+                destLocation.latitude = lat
+                destLocation.longitude = lng
+                val km = DecimalFormat("##.##").format(location.distanceTo(destLocation)/1000)
+                binding.tvDistance.text = getString(R.string.distance_text, km)
                 googleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         myLocation,

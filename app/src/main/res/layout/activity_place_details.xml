@@ -158,12 +158,73 @@
         <fragment
             android:id="@+id/mapFragment"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:layout_marginTop="20dp"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             app:layout_constraintTop_toBottomOf="@id/details"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/map_details_background"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintEnd_toEndOf="@id/mapFragment"
+            app:layout_constraintBottom_toBottomOf="@id/mapFragment"
+            app:layout_constraintTop_toTopOf="@id/mapFragment"/>
+
+        <TextView
+            android:id="@+id/tvAddr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daffodils Laximindra"
+            android:fontFamily="@font/avenir_medium"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintTop_toTopOf="@id/mapFragment"/>
+
+        <TextView
+            android:id="@+id/tvLocality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nagar,2nd Cross udupi"
+            android:fontFamily="@font/avenir_medium"
+            android:paddingHorizontal="10dp"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintTop_toBottomOf="@id/tvAddr"/>
+
+        <TextView
+            android:id="@+id/tvphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+91 9449355988"
+            android:fontFamily="@font/avenir_medium"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintTop_toBottomOf="@id/tvLocality"/>
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drive : 5km"
+            android:fontFamily="@font/avenir_medium"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintTop_toBottomOf="@id/tvphone"/>
+
 
         <TextView
             android:id="@+id/addReview"
