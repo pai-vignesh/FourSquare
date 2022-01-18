@@ -15,4 +15,5 @@
     <color name="ratingStar"> #ffc922</color>
     <color name="buttonColor">#351347</color>
     <color name="reviewText"> #8d8d8d</color>
+    <color name="transparent">#80000000</color>
 </resources>
