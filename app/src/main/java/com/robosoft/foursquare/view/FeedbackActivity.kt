@@ -12,6 +12,8 @@ class FeedbackActivity : AppCompatActivity() {
         binding = ActivityFeedbackBinding.inflate(layoutInflater)
         setContentView(binding.root)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 }

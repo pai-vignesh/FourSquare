@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.robosoft.foursquare.databinding.FragmentSearchDefaultBinding
+import com.robosoft.foursquare.R
 
 class DefaultSearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchDefaultBinding
@@ -18,8 +19,12 @@ class DefaultSearchFragment : Fragment() {
     ): View? {
         binding= FragmentSearchDefaultBinding.inflate(inflater)
 
-        binding.tvDefault.setOnClickListener{
-            findNavController().navigate(com.robosoft.foursquare.R.id.action_defaultSearchFragment_to_filterOptionsFragment)
+        binding.useLocation.setOnClickListener{
+            findNavController().navigate(R.id.action_defaultSearchFragment_to_listViewFragment)
+        }
+
+        binding.useMap.setOnClickListener{
+            findNavController().navigate(R.id.action_defaultSearchFragment_to_mapViewFragment)
         }
 
 

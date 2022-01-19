@@ -7,8 +7,9 @@ import com.robosoft.foursquare.databinding.ActivitySearchBinding
 import com.robosoft.foursquare.R
 import androidx.fragment.app.FragmentTransaction
 import com.robosoft.foursquare.fragment.FilterOptionsFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     override fun onCreate(savedInstanceState: Bundle?) {

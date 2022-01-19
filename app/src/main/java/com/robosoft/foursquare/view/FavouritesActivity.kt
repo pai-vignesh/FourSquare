@@ -12,5 +12,8 @@ class FavouritesActivity : AppCompatActivity() {
         binding = ActivityFavouritesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 }

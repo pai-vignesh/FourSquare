@@ -38,7 +38,7 @@
                 <SearchView
                     android:id="@+id/search_view"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/bg_white_rounded"
                     android:focusable="false"
                     android:layout_gravity="center"
@@ -52,7 +52,7 @@
                 <SearchView
                     android:id="@+id/search_view2"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/bg_white_rounded"
                     android:focusable="false"
                     android:layout_gravity="center"
@@ -60,7 +60,7 @@
                     android:queryHint="Near me"
                     android:searchIcon="@drawable/near_me"
                     android:queryBackground="@color/white"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginVertical="2dp"
                     app:defaultQueryHint="hint" />
 
             </LinearLayout>

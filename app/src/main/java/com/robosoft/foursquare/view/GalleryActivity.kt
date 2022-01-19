@@ -29,6 +29,9 @@ class GalleryActivity : AppCompatActivity() , CellClickListener{
         super.onCreate(savedInstanceState)
         binding = ActivityGalleryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val fsqId = intent.getStringExtra("fsqId")
         val placeName = intent.getStringExtra("placeName")
