@@ -22,8 +22,8 @@ interface ApiService {
         "Authorization: fsq3zwV1cGTqlpvaBC7udG4trZkuAe5SFxmUWAeqeaHNwHw=",
         "Accept: application/json"
     )
-    @GET(Constants.END_POINT)
-    suspend fun getQueryPlaces(@Query("query") query:String, @Query("ll") ll: String): PlaceList
+    @GET(Constants.SEARCH_POINT)
+    suspend fun getQueryPlaces(@Query("query") query:String, @Query("ll") ll: String,@Query("fields") fields:String): PlaceList
 
     @Headers(
         "Authorization: fsq3zwV1cGTqlpvaBC7udG4trZkuAe5SFxmUWAeqeaHNwHw=",
@@ -36,7 +36,7 @@ interface ApiService {
         "Authorization: fsq3zwV1cGTqlpvaBC7udG4trZkuAe5SFxmUWAeqeaHNwHw=",
         "Accept: application/json"
     )
-    @GET("places/{id}")
+    @GET("places/{id}?fields=fsq_id,photos,name,price,location,categories,description,tel,geocodes,rating")
     suspend fun getPlaceDetails(@Path("id") query: String): PlaceData
 
 

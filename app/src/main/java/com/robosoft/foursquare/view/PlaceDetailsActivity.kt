@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -58,16 +61,16 @@ class PlaceDetailsActivity : AppCompatActivity() {
         }
 
         binding.photos.setOnClickListener {
-            val i = Intent(this,GalleryActivity::class.java)
+            val i = Intent(this, GalleryActivity::class.java)
             i.putExtra("fsqId", fsqId)
-            i.putExtra("placeName",binding.topAppBar.title)
+            i.putExtra("placeName", binding.topAppBar.title)
             startActivity(i)
         }
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(this)
 
         fsqId?.let {
-            placeDetailsViewModel.getPlaceDetails(it).observe(this,{ data ->
+            placeDetailsViewModel.getPlaceDetails(it).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {
@@ -75,12 +78,36 @@ class PlaceDetailsActivity : AppCompatActivity() {
                         }
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
-                                Log.d("TAG", "onCreate: ${placeData.location} ")
+                                if (!placeData.photos.isNullOrEmpty()) {
+                                    Log.d("TAG", "onCreate: ${placeData.photos} ")
+                                    val requestOptions = RequestOptions().diskCacheStrategy(
+                                        DiskCacheStrategy.ALL
+                                    )
+                                    val imgSize = "400x400"
+                                    val imageUrl =
+                                        placeData.photos[0].prefix + imgSize + placeData.photos[0].suffix
+                                    Log.d("TAG", "onCreate: $imageUrl ")
+                                    Glide.with(this).load(imageUrl).apply(requestOptions)
+                                        .into(binding.placeImg)
+                                }
                                 binding.topAppBar.title = placeData.name
                                 binding.tvAddr.text = placeData.location.address
                                 binding.tvLocality.text = placeData.location.locality
-                                binding.placeType.text = if(placeData.categories.isEmpty())  "Unknown Type" else placeData.categories[0].name
-                                fetchLocation(placeData.geocodes.main.latitude.toDouble(),placeData.geocodes.main.longitude.toDouble())
+                                placeData.rating?.let { stars ->
+                                    binding.ratingBar.rating = ((stars * 5) / 10).toFloat()
+                                }
+                                placeData.tel?.let { tel ->
+                                    binding.tvphone.text = tel
+                                }
+                                if (placeData.categories.isEmpty()) {
+                                    binding.placeType.text = "unknown type"
+                                } else {
+                                    binding.placeType.text = placeData.categories[0].name
+                                }
+                                fetchLocation(
+                                    placeData.geocodes.main.latitude.toDouble(),
+                                    placeData.geocodes.main.longitude.toDouble()
+                                )
 
                             }
                         }
@@ -95,7 +122,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
 
     }
 
-    private fun fetchLocation(lat : Double,lng: Double) {
+    private fun fetchLocation(lat: Double, lng: Double) {
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION
             ) !=
@@ -111,9 +138,10 @@ class PlaceDetailsActivity : AppCompatActivity() {
             return
         }
         val task = fusedLocationProviderClient.lastLocation
-        task.addOnSuccessListener { location->
+        task.addOnSuccessListener { location ->
             currentLocation = location
-            mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+            mapFragment =
+                supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
             mapFragment.getMapAsync {
                 googleMap = it
                 val destLocation = Location("destination")
@@ -123,7 +151,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
                 )
                 destLocation.latitude = lat
                 destLocation.longitude = lng
-                val km = DecimalFormat("##.##").format(location.distanceTo(destLocation)/1000)
+                val km = DecimalFormat("##.##").format(location.distanceTo(destLocation) / 1000)
                 binding.tvDistance.text = getString(R.string.distance_text, km)
                 googleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(

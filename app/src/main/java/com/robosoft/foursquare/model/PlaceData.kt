@@ -39,7 +39,7 @@ data class PlaceData(
     @SerializedName("price")
     val price: String,
     @SerializedName("rating")
-    val rating: String,
+    val rating: Double?,
     @SerializedName("related_places")
     val relatedPlaces: RelatedPlaces,
     @SerializedName("social_media")
@@ -49,7 +49,7 @@ data class PlaceData(
     @SerializedName("tastes")
     val tastes: List<String>,
     @SerializedName("tel")
-    val tel: String,
+    val tel: String?,
     @SerializedName("timezone")
     val timezone: String,
     @SerializedName("tips")

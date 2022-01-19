@@ -45,7 +45,7 @@ class TopPickFragment : Fragment(), CellClickListener {
     private fun setupRv(p0: String?) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this)
-            homeViewModel.getNearbyPlaces(location).observe(this, { data ->
+            homeViewModel.getQueryPlaces("",location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/scrollView"
     android:orientation="vertical"
     tools:context=".view.PlaceDetailsActivity">
 
@@ -20,6 +21,15 @@
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="centerCrop"
             android:src="@drawable/splashscreen"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/top_shadow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/placeImg"
+            app:layout_constraintBottom_toBottomOf="@id/placeImg"
+            app:layout_constraintTop_toTopOf="@id/placeImg" />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar"
@@ -69,7 +79,7 @@
             android:layout_marginVertical="10dp"
             android:numStars="5"
             android:theme="@style/RatingBar"
-            android:rating="3.5"
+            android:rating="1.5"
             app:layout_constraintBottom_toBottomOf="@id/placeImg"
             app:layout_constraintStart_toStartOf="@id/placeImg"
             android:stepSize="0.1"
@@ -203,7 +213,7 @@
             android:id="@+id/tvphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+91 9449355988"
+            android:text="No Phone number found"
             android:fontFamily="@font/avenir_medium"
             android:paddingHorizontal="10dp"
             android:layout_marginTop="20dp"
@@ -242,6 +252,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="Add Review"/>
+
 
 
 

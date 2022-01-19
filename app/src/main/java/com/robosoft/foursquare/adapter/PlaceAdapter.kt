@@ -1,6 +1,7 @@
 package com.robosoft.foursquare.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,11 +41,25 @@ class PlaceAdapter(private val cellClickListener: CellClickListener) :
         private val placeType = binding.distanceAndValue
         private val placeAddr = binding.placeAddress
         private val placeImg = binding.imageView
+        private val ratings = binding.ratings
         private val fav = binding.fav
         private val unFav = binding.unfav
         private val card = binding.layout
 
         fun bind(cellClickListener: CellClickListener, place: PlaceData) {
+            if (!place.photos.isNullOrEmpty()) {
+                val requestOptions = RequestOptions().diskCacheStrategy(
+                    DiskCacheStrategy.ALL
+                )
+                val imgSize = "400x400"
+                val imageUrl =
+                    place.photos[0].prefix + imgSize + place.photos[0].suffix
+                Glide.with(placeImg.context).load(imageUrl).apply(requestOptions)
+                    .into(placeImg)
+            }
+            place.rating?.let { stars ->
+                ratings.text = ((stars * 5) / 10).toString()
+            }
             placeName.text = place.name
             if (place.categories.isNotEmpty()) {
                 placeType.text = place.categories[0].name

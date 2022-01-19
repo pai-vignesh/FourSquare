@@ -22,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.FragmentNearYouBinding
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 import com.google.android.gms.maps.model.LatLng
 import com.robosoft.foursquare.adapter.PlaceAdapter
@@ -49,6 +50,7 @@ class NearYouFragment : Fragment(), CellClickListener {
     private lateinit var placeAdapter: PlaceAdapter
     private val homeViewModel: HomeViewModel by viewModels()
     private var places = ArrayList<PlaceData>()
+
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreateView(
@@ -61,10 +63,6 @@ class NearYouFragment : Fragment(), CellClickListener {
             LocationServices.getFusedLocationProviderClient(requireActivity())
         if (LocationPermission.checkPermission(requireActivity())) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-                setupRv("${location.latitude},${location.longitude}")
-            }
-            val task = fusedLocationProviderClient.lastLocation
-            task.addOnSuccessListener { location ->
                 currentLocation = location
                 mapFragment =
                     childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
@@ -85,7 +83,12 @@ class NearYouFragment : Fragment(), CellClickListener {
                             15.5f
                         )
                     )
-                    googleMap.isMyLocationEnabled = true
+                    val marker = MarkerOptions()
+                        .position(myLocation)
+                        .title("My Marker")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
+
+                    googleMap.addMarker(marker)
                 }
             }
         }
@@ -97,7 +100,7 @@ class NearYouFragment : Fragment(), CellClickListener {
     private fun setupRv(p0: String?) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this)
-            homeViewModel.getNearbyPlaces(location).observe(this, { data ->
+            homeViewModel.getQueryPlaces("", location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {
