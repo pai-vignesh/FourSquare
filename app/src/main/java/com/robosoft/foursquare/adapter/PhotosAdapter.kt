@@ -1,5 +1,6 @@
 package com.robosoft.foursquare.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import com.robosoft.foursquare.databinding.PlaceItemAdapterBinding
 import com.robosoft.foursquare.model.Photo
 import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.util.CellClickListener
+import com.robosoft.foursquare.view.ImageDetails
+import com.robosoft.foursquare.view.PlaceDetailsActivity
 
 class PhotosAdapter (private val cellClickListener: CellClickListener) :
     RecyclerView.Adapter<PhotosAdapter.MyViewHolder>() {
@@ -43,6 +46,11 @@ class PhotosAdapter (private val cellClickListener: CellClickListener) :
             val imgSize = "400x400"
             val imageUrl = photo.prefix + imgSize + photo.suffix
             Glide.with(image.context).load(imageUrl).apply(requestOptions).into(image)
+            image.setOnClickListener { v ->
+                val intent = Intent(v.context, ImageDetails::class.java)
+                intent.putExtra("imageUrl", imageUrl)
+                v.context.startActivity(intent)
+            }
         }
 
     }
