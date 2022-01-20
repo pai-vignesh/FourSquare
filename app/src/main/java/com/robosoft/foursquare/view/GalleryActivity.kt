@@ -1,5 +1,6 @@
 package com.robosoft.foursquare.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,13 +15,18 @@ import com.robosoft.foursquare.databinding.ActivityGalleryBinding
 import com.robosoft.foursquare.model.Photo
 import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.util.CellClickListener
+import com.robosoft.foursquare.util.PhotoClickListener
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.GalleryViewModel
 import com.robosoft.foursquare.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class GalleryActivity : AppCompatActivity() , CellClickListener{
+class GalleryActivity : AppCompatActivity() , PhotoClickListener{
     private lateinit var binding: ActivityGalleryBinding
     private lateinit var photosAdapter: PhotosAdapter
     private val galleryViewModel: GalleryViewModel by viewModels()
@@ -71,7 +77,15 @@ class GalleryActivity : AppCompatActivity() , CellClickListener{
 
     }
 
-    override fun onCellClickListener(data: PlaceData) {
-
+    override fun onPhotoClickListener(photo: Photo) {
+        val imgSize = "400x400"
+        val imageUrl = photo.prefix + imgSize + photo.suffix
+        val placeName = intent.getStringExtra("placeName")
+        Log.d("TAG", "onPhotoClickListener: ${photo.createdAt}")
+        val intent = Intent(this, ImageDetails::class.java)
+        intent.putExtra("imageUrl", imageUrl)
+        intent.putExtra("placeName",placeName)
+        intent.putExtra("date",photo.createdAt)
+        startActivity(intent)
     }
 }

@@ -15,10 +15,11 @@ import com.robosoft.foursquare.databinding.PlaceItemAdapterBinding
 import com.robosoft.foursquare.model.Photo
 import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.util.CellClickListener
+import com.robosoft.foursquare.util.PhotoClickListener
 import com.robosoft.foursquare.view.ImageDetails
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 
-class PhotosAdapter (private val cellClickListener: CellClickListener) :
+class PhotosAdapter (private val photoClickListener: PhotoClickListener) :
     RecyclerView.Adapter<PhotosAdapter.MyViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<Photo>() {
@@ -41,15 +42,14 @@ class PhotosAdapter (private val cellClickListener: CellClickListener) :
     class MyViewHolder(binding: PhotoItemAdapterBinding) : RecyclerView.ViewHolder(binding.root) {
         private val image = binding.imgIv
 
-        fun bind(cellClickListener: CellClickListener, photo: Photo) {
+        fun bind(photoClickListener: PhotoClickListener, photo: Photo) {
             val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
             val imgSize = "400x400"
             val imageUrl = photo.prefix + imgSize + photo.suffix
             Glide.with(image.context).load(imageUrl).apply(requestOptions).into(image)
-            image.setOnClickListener { v ->
-                val intent = Intent(v.context, ImageDetails::class.java)
-                intent.putExtra("imageUrl", imageUrl)
-                v.context.startActivity(intent)
+
+            image.setOnClickListener {
+                photoClickListener.onPhotoClickListener(photo)
             }
         }
 
@@ -66,7 +66,7 @@ class PhotosAdapter (private val cellClickListener: CellClickListener) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(cellClickListener,photos[position])
+        holder.bind(photoClickListener,photos[position])
     }
 
     override fun getItemCount(): Int {

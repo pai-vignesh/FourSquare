@@ -8,7 +8,7 @@ data class Photo(
     val id : String,
     @SerializedName("classifications")
     val classifications: List<String>,
-    @SerializedName("createdAt")
+    @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("height")
     val height: String,
