@@ -53,7 +53,7 @@ class PopularFragment : Fragment(), CellClickListener {
     private fun setupRv(p0: String?) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this)
-            homeViewModel.getQueryPlaces("popular",location).observe(this, { data ->
+            homeViewModel.getQueryPlaces("",location,"RATING").observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {

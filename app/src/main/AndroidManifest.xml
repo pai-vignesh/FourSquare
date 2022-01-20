@@ -11,18 +11,21 @@
         android:maxSdkVersion="28" />
 
     <application
-        android:allowBackup="true"
         android:name=".helper.MyApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FourSquare">
         <activity
+            android:name=".view.AboutUsActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SearchActivity"
+            android:exported="true"
             android:theme="@style/AddReviewTheme"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".view.FavouritesActivity"
             android:exported="true"

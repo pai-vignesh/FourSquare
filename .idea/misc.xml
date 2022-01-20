@@ -13,6 +13,7 @@
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/drawable/map_marker.xml" value="0.2484375" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/drawable/text_background.xml" value="0.2484375" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/drawable/top_shadow.xml" value="0.2484375" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_about_us.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_add_review.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_favourites.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_feedback.xml" value="0.23229166666666667" />
@@ -22,7 +23,7 @@
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_loading_screen.xml" value="0.21822916666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
-        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_place_details.xml" value="0.264" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_place_details.xml" value="0.4" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_review.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/activity_search.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/fragment_coffee_place.xml" value="0.23229166666666667" />
@@ -42,6 +43,8 @@
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/place_item_adapter.xml" value="0.264" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/review_adapter.xml" value="0.264" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/layout/review_dialog.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/feedback_bar.xml" value="0.23229166666666667" />
+        <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/filter_bar.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/gallery_bar.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/image_details_bar.xml" value="0.23229166666666667" />
         <entry key="..\:/Robosoft/FourSquareApp/app/src/main/res/menu/place_details_bar.xml" value="0.23229166666666667" />

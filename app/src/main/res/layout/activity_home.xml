@@ -33,13 +33,20 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.50" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.80" />
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/splashscreen"
-                app:layout_constraintEnd_toEndOf="@id/guideline3"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/guideline"
                 app:shapeAppearance="@style/circleImage" />
@@ -50,6 +57,7 @@
                 android:layout_marginTop="6dp"
                 android:text="Swaroop Kumar"
                 android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@id/imageView"
                 app:layout_constraintStart_toStartOf="@id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -66,7 +74,7 @@
                 android:id="@+id/list1"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="30dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/guideline2">
@@ -86,17 +94,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="16dp"
+                    android:textSize="18sp"
                     android:text="Favourites"
                     android:textColor="@color/white" />
 
             </LinearLayout>
 
             <View
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="#5fd3d3d3"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/list1" />
 
@@ -104,8 +114,8 @@
                 android:id="@+id/list2"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list1">
@@ -125,17 +135,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="16dp"
+                    android:textSize="18sp"
                     android:text="Feedback"
                     android:textColor="@color/white" />
 
             </LinearLayout>
 
             <View
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="#5fd3d3d3"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/list2" />
 
@@ -143,8 +155,8 @@
                 android:id="@+id/list3"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list2">
@@ -164,17 +176,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="16dp"
+                    android:textSize="18sp"
                     android:text="About us"
                     android:textColor="@color/white" />
 
             </LinearLayout>
 
             <View
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="#5fd3d3d3"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/list3" />
 
@@ -182,8 +196,8 @@
                 android:id="@+id/list4"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list3">
@@ -203,17 +217,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="16dp"
+                    android:textSize="18sp"
                     android:text="Logout"
                     android:textColor="@color/white" />
 
             </LinearLayout>
 
             <View
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="#5fd3d3d3"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/list4" />
 

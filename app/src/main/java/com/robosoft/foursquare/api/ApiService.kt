@@ -23,7 +23,7 @@ interface ApiService {
         "Accept: application/json"
     )
     @GET(Constants.SEARCH_POINT)
-    suspend fun getQueryPlaces(@Query("query") query:String, @Query("ll") ll: String,@Query("fields") fields:String): PlaceList
+    suspend fun getQueryPlaces(@Query("query") query:String, @Query("ll") ll: String,@Query("fields") fields:String,@Query("sort") sort:String): PlaceList
 
     @Headers(
         "Authorization: fsq3zwV1cGTqlpvaBC7udG4trZkuAe5SFxmUWAeqeaHNwHw=",

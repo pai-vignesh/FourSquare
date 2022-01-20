@@ -89,7 +89,7 @@ class MapViewFragment : Fragment() {
     //recyclerview setup
     private fun updateCard(p0: String?) {
         p0?.let { location ->
-            homeViewModel.getNearbyPlaces(location).observe(this, { data ->
+            homeViewModel.getQueryPlaces("",location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {

@@ -54,8 +54,14 @@
     </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/textGrey</item>
+        <item name="colorControlNormal">@color/transparent</item>
         <item name="colorControlActivated">@color/ratingStar</item>
+        <item name="strokeColor">@color/ratingStar</item>
+    </style>
+
+    <style name="customRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/fav_unselected</item>
+        <item name="android:indeterminateDrawable">@drawable/fav_unselected</item>
     </style>
 
     <style name="circleImage_OR">

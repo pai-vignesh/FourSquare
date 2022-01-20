@@ -20,11 +20,11 @@ class HomeViewModel @Inject constructor(private val repository: MainRepository) 
         }
     }
 
-    fun getQueryPlaces(query: String,ll:String) = liveData(Dispatchers.IO) {
+    fun getQueryPlaces(query: String,ll:String,sort:String = "RELEVANCE") = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             val fields = "fsq_id,photos,name,price,location,categories,geocodes,rating"
-            emit(Resource.success(data = repository.getQueryPlaces(query,ll,fields)))
+            emit(Resource.success(data = repository.getQueryPlaces(query,ll,fields,sort)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
