@@ -60,8 +60,7 @@
     </style>
 
     <style name="customRatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/fav_unselected</item>
-        <item name="android:indeterminateDrawable">@drawable/fav_unselected</item>
+        <item name="android:progressDrawable">@drawable/custom_rating</item>
     </style>
 
     <style name="circleImage_OR">
