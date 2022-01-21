@@ -5,6 +5,8 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.robosoft.foursquare.api.ApiService
 import com.robosoft.foursquare.api.RetrofitInstance
+import com.robosoft.foursquare.room.FourSquareDao
+import com.robosoft.foursquare.room.FourSquareRoomDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,9 +27,9 @@ object AppModule {
         return LocationServices.getFusedLocationProviderClient(context)
     }
 
-//    @Provides
-//    fun provideRoomInstance(@ApplicationContext context: Context): FavouritesDao {
-//        return RoomFavouritesDatabase.getInstance(context).favouritesDao
-//    }
+    @Provides
+    fun provideRoomInstance(@ApplicationContext context: Context): FourSquareDao {
+        return FourSquareRoomDatabase.getInstance(context).fourSquareDao
+    }
 
 }

@@ -100,10 +100,15 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(i)
             }
             R.id.list3 -> {
-
+                binding.drawer.closeDrawer()
+                val i = Intent(this, AboutUsActivity::class.java)
+                startActivity(i)
             }
             R.id.list4 -> {
-
+                binding.drawer.closeDrawer()
+                val i = Intent(this, LoginActivity::class.java)
+                startActivity(i)
+                finish()
             }
         }
     }
