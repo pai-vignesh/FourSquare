@@ -8,4 +8,5 @@ class MainRepository @Inject constructor(private val apiHelper: ApiHelper) {
     suspend fun getPlacePhotos(id:String) = apiHelper.getPlacePhotos(id)
     suspend fun getPlaceDetails(id: String) = apiHelper.getPlaceDetails(id)
     suspend fun getQueryPlaces(query:String,ll:String,fields:String,sort:String) = apiHelper.getQueryPlaces(query,ll,fields,sort)
+    suspend fun getPlaceReviews(id:String) = apiHelper.getPlaceReviews(id)
 }

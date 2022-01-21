@@ -57,6 +57,8 @@ class PlaceDetailsActivity : AppCompatActivity() {
 
         binding.reviews.setOnClickListener {
             val i = Intent(this, ReviewActivity::class.java)
+            i.putExtra("fsqId", fsqId)
+            i.putExtra("placeName", binding.topAppBar.title)
             startActivity(i)
         }
 

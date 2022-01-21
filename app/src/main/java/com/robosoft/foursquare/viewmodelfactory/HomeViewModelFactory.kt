@@ -8,6 +8,7 @@ import com.robosoft.foursquare.repository.MainRepository
 import com.robosoft.foursquare.viewmodel.GalleryViewModel
 import com.robosoft.foursquare.viewmodel.HomeViewModel
 import com.robosoft.foursquare.viewmodel.PlaceDetailsViewModel
+import com.robosoft.foursquare.viewmodel.ReviewViewModel
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
@@ -23,6 +24,9 @@ class HomeViewModelFactory @Inject constructor(
         }
         if (modelClass.isAssignableFrom(PlaceDetailsViewModel::class.java)){
             return PlaceDetailsViewModel(MainRepository(apiHelper)) as T
+        }
+        if (modelClass.isAssignableFrom(ReviewViewModel::class.java)){
+            return ReviewViewModel(MainRepository(apiHelper)) as T
         }
         throw IllegalArgumentException("Unknown View Model Class")
     }

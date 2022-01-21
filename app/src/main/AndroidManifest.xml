@@ -74,7 +74,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB2gUXijgN5MDWN_Wf6Dby55XYPSkgjLmQ" />
+            android:value="${MAP_KEY}" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
