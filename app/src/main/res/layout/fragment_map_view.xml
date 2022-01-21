@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <fragment
-        android:id="@+id/mapFragment"
+        android:id="@+id/mapSearchFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -21,9 +21,9 @@
         android:layout_width="match_parent"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@id/mapFragment"
-        app:layout_constraintEnd_toEndOf="@id/mapFragment"
-        app:layout_constraintTop_toTopOf="@id/mapFragment"/>
+        app:layout_constraintStart_toStartOf="@id/mapSearchFragment"
+        app:layout_constraintEnd_toEndOf="@id/mapSearchFragment"
+        app:layout_constraintTop_toTopOf="@id/mapSearchFragment"/>
 
     <TextView
         android:id="@+id/listView"

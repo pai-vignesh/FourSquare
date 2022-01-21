@@ -40,7 +40,7 @@
             android:fontFamily="@font/avenir_book"
             android:gravity="center"
             android:inputType="textEmailAddress"
-            android:text="@string/ryan_wilson"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:backgroundTint="@color/textGrey"
@@ -65,7 +65,7 @@
             android:fontFamily="@font/avenir_book"
             android:gravity="center"
             android:inputType="textPassword"
-            android:text="@string/_123456"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:backgroundTint="@color/textGrey"
@@ -95,7 +95,7 @@
             android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="22sp"
             app:cornerRadius="20dp"
             tools:ignore="MissingConstraints" />
 
@@ -124,7 +124,7 @@
             android:padding="5dp"
             android:text="@string/or"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

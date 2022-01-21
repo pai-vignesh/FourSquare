@@ -55,6 +55,8 @@ class MapViewFragment : Fragment() {
             findNavController().navigate(R.id.action_mapViewFragment_to_listViewFragment)
         }
 
+        binding.placeCard.layout.visibility = View.GONE
+
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         if (LocationPermission.checkPermission(requireActivity())) {
@@ -62,7 +64,7 @@ class MapViewFragment : Fragment() {
             task.addOnSuccessListener { location ->
                 currentLocation = location
                 mapFragment =
-                    childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+                    childFragmentManager.findFragmentById(R.id.mapSearchFragment) as SupportMapFragment
                 mapFragment.getMapAsync {
                     googleMap = it
                     val myLocation = LatLng(
@@ -102,6 +104,7 @@ class MapViewFragment : Fragment() {
                         }
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
+                                binding.placeCard.layout.visibility = View.VISIBLE
                                 places = placeData.results as ArrayList<PlaceData>
                                 if (!places[0].photos.isNullOrEmpty()) {
                                     val requestOptions = RequestOptions().diskCacheStrategy(

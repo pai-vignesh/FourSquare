@@ -44,9 +44,11 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         val llFavourites = menuView.findViewById<LinearLayout>(R.id.list1)
         val llFeedback = menuView.findViewById<LinearLayout>(R.id.list2)
         val llAboutUs = menuView.findViewById<LinearLayout>(R.id.list3)
+        val llLogout = menuView.findViewById<LinearLayout>(R.id.list4)
         llFavourites.setOnClickListener(this)
         llFeedback.setOnClickListener(this)
         llAboutUs.setOnClickListener(this)
+        llLogout.setOnClickListener(this)
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {

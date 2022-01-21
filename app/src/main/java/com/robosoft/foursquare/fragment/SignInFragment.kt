@@ -2,10 +2,12 @@ package com.robosoft.foursquare.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -40,26 +42,32 @@ class SignInFragment : Fragment(){
         }
 
         binding.login.setOnClickListener {
+            if(!(TextUtils.isEmpty(binding.personName.text.toString())|| TextUtils.isEmpty(binding.passwordEntry.text.toString()))){
+                loginViewModel.signInUser(binding.personName.text.toString(),binding.passwordEntry.text.toString()).observe(viewLifecycleOwner, { dataFav ->
+                    dataFav?.let { resource ->
+                        when (resource.status) {
+                            Status.LOADING -> {
 
-            loginViewModel.signInUser(binding.personName.text.toString(),binding.passwordEntry.text.toString()).observe(viewLifecycleOwner, { dataFav ->
-                dataFav?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {
+                            }
+                            Status.SUCCESS -> {
+                                resource.data?.also {
+                                    Log.d("TAG", "onViewCreated: $it ")
+                                    val i = Intent(requireActivity(), HomeActivity::class.java)
+                                    startActivity(i)
+                                    activity?.finish()
+                                } ?: run{
+                                    Toast.makeText(requireActivity(),"No user found.Please register", Toast.LENGTH_LONG).show()
+                                }
+                            }
+                            Status.ERROR -> {
 
-                        }
-                        Status.SUCCESS -> {
-                            resource.data?.let {
-                                Log.d("TAG", "onViewCreated: $it ")
-                                val i = Intent(requireActivity(), HomeActivity::class.java)
-                                startActivity(i)
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
                     }
-                }
-            })
+                })
+            }else {
+                Toast.makeText(requireActivity(),"Please enter all the fields", Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.createAccount.setOnClickListener {
@@ -67,6 +75,5 @@ class SignInFragment : Fragment(){
                 findNavController().navigate(com.robosoft.foursquare.R.id.action_signInFragment_to_signupFragment)
             }
         }
-
     }
 }

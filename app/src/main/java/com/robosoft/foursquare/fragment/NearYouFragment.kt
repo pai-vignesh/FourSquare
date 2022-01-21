@@ -65,7 +65,7 @@ class NearYouFragment : Fragment(), CellClickListener {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                 currentLocation = location
                 mapFragment =
-                    childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+                    childFragmentManager.findFragmentById(R.id.mapNearFragment) as SupportMapFragment
                 mapFragment.getMapAsync {
                     googleMap = it
                     Log.d(
