@@ -7,7 +7,6 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowCompat
@@ -23,7 +22,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.ActivityPlaceDetailsBinding
-import com.robosoft.foursquare.model.Photo
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.PlaceDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint

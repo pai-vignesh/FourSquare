@@ -43,16 +43,16 @@ class PopularFragment : Fragment(), CellClickListener {
         binding= FragmentPopularPlaceBinding.inflate(inflater)
         if(LocationPermission.checkPermission(requireActivity())){
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location->
-                setupRv("${location.latitude},${location.longitude}")
+                setupRv("${location.latitude},${location.longitude}",location)
             }
         }
         return binding.root
     }
 
     //recyclerview setup
-    private fun setupRv(p0: String?) {
+    private fun setupRv(p0: String?,currentLocation: Location) {
         p0?.let { location ->
-            placeAdapter = PlaceAdapter(this)
+            placeAdapter = PlaceAdapter(this,currentLocation)
             homeViewModel.getQueryPlaces("",location,"RATING").observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {

@@ -68,15 +68,11 @@ class NearYouFragment : Fragment(), CellClickListener {
                     childFragmentManager.findFragmentById(R.id.mapNearFragment) as SupportMapFragment
                 mapFragment.getMapAsync {
                     googleMap = it
-                    Log.d(
-                        "TAG",
-                        "fetchLocation: ${currentLocation.latitude} ${currentLocation.longitude} "
-                    )
                     val myLocation = LatLng(
                         location.latitude,
                         location.longitude
                     )
-                    setupRv("${location.latitude},${location.longitude}")
+                    setupRv("${location.latitude},${location.longitude}",location)
                     googleMap.animateCamera(
                         CameraUpdateFactory.newLatLngZoom(
                             myLocation,
@@ -97,9 +93,9 @@ class NearYouFragment : Fragment(), CellClickListener {
     }
 
     //recyclerview setup
-    private fun setupRv(p0: String?) {
+    private fun setupRv(p0: String?,currentLocation: Location) {
         p0?.let { location ->
-            placeAdapter = PlaceAdapter(this)
+            placeAdapter = PlaceAdapter(this,currentLocation)
             homeViewModel.getQueryPlaces("", location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {

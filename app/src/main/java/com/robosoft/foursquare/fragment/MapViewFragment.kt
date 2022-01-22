@@ -30,6 +30,7 @@ import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import com.robosoft.foursquare.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -84,7 +85,7 @@ class MapViewFragment : Fragment() {
                                 .position(pointLocation)
                                 .title("Marker in Sydney")
                         )
-                        updateCard("${pointLocation.latitude},${pointLocation.longitude}")
+                        updateCard("${pointLocation.latitude},${pointLocation.longitude}",location)
                     }
                 }
 
@@ -94,7 +95,7 @@ class MapViewFragment : Fragment() {
     }
 
     //recyclerview setup
-    private fun updateCard(p0: String?) {
+    private fun updateCard(p0: String?,currentLocation: Location) {
         p0?.let { location ->
             homeViewModel.getQueryPlaces("",location).observe(this, { data ->
                 data?.let { resource ->
@@ -123,7 +124,24 @@ class MapViewFragment : Fragment() {
                                 }
                                 binding.placeCard.placeName.text = places[0].name
                                 binding.placeCard.placeAddress.text = places[0].location.address
-                                binding.placeCard.distanceAndValue.text = places[0].location.locality
+                                if (places[0].categories.isNotEmpty()) {
+                                    binding.placeCard.placeType.text = places[0].categories[0].name
+                                }
+                                places[0].price?.let { price ->
+                                    when(price){
+                                        1 -> binding.placeCard.price.text = getString(R.string.expense,"₹")
+                                        2 -> binding.placeCard.price.text = getString(R.string.expense,"₹₹")
+                                        3 -> binding.placeCard.price.text = getString(R.string.expense,"₹₹₹")
+                                        4 -> binding.placeCard.price.text = getString(R.string.expense,"₹₹₹₹")
+                                        5 -> binding.placeCard.price.text = getString(R.string.expense,"₹₹₹₹₹")
+                                        else -> binding.placeCard.price.text = getString(R.string.expense,"")
+                                    }
+                                }
+                                val destLocation = Location("destination")
+                                destLocation.latitude = places[0].geocodes.main.latitude.toDouble()
+                                destLocation.longitude = places[0].geocodes.main.longitude.toDouble()
+                                val km = DecimalFormat("##.##").format(currentLocation.distanceTo(destLocation) / 1000)
+                                binding.placeCard.distance.text =  getString(R.string.card_distance_text, km)
                             }
                         }
                         Status.ERROR -> {

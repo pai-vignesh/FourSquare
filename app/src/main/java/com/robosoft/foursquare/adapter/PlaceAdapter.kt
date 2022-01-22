@@ -1,6 +1,7 @@
 package com.robosoft.foursquare.adapter
 
 import android.content.Intent
+import android.location.Location
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.maps.model.LatLng
+import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.PlaceItemAdapterBinding
 import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
+import java.text.DecimalFormat
 
-class PlaceAdapter(private val cellClickListener: CellClickListener) :
+class PlaceAdapter(private val cellClickListener: CellClickListener,private val currentLocation: Location) :
     RecyclerView.Adapter<PlaceAdapter.MyViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<PlaceData>() {
@@ -38,7 +42,9 @@ class PlaceAdapter(private val cellClickListener: CellClickListener) :
 
     class MyViewHolder(binding: PlaceItemAdapterBinding) : RecyclerView.ViewHolder(binding.root) {
         private val placeName = binding.placeName
-        private val placeType = binding.distanceAndValue
+        private val placeType = binding.placeType
+        private val distance = binding.distance
+        private val placePrice = binding.price
         private val placeAddr = binding.placeAddress
         private val placeImg = binding.imageView
         private val ratings = binding.ratings
@@ -46,7 +52,7 @@ class PlaceAdapter(private val cellClickListener: CellClickListener) :
         private val unFav = binding.unfav
         private val card = binding.layout
 
-        fun bind(cellClickListener: CellClickListener, place: PlaceData) {
+        fun bind(cellClickListener: CellClickListener, place: PlaceData,currentLocation: Location) {
             if (!place.photos.isNullOrEmpty()) {
                 val requestOptions = RequestOptions().diskCacheStrategy(
                     DiskCacheStrategy.ALL
@@ -57,8 +63,23 @@ class PlaceAdapter(private val cellClickListener: CellClickListener) :
                 Glide.with(placeImg.context).load(imageUrl).apply(requestOptions)
                     .into(placeImg)
             }
+            val destLocation = Location("destination")
+            destLocation.latitude = place.geocodes.main.latitude.toDouble()
+            destLocation.longitude = place.geocodes.main.longitude.toDouble()
+            val km = DecimalFormat("##.##").format(currentLocation.distanceTo(destLocation) / 1000)
+            distance.text =  distance.context.getString(R.string.card_distance_text, km)
             place.rating?.let { stars ->
                 ratings.text = ((stars * 5) / 10).toString()
+            }
+            place.price?.let { price ->
+                when(price){
+                    1 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹")
+                    2 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹₹")
+                    3 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹₹₹")
+                    4 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹₹₹₹")
+                    5 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹₹₹₹₹")
+                    else -> placePrice.text = placePrice.context.getString(R.string.expense,"")
+                }
             }
             placeName.text = place.name
             if (place.categories.isNotEmpty()) {
@@ -95,7 +116,7 @@ class PlaceAdapter(private val cellClickListener: CellClickListener) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(cellClickListener, placeData[position])
+        holder.bind(cellClickListener, placeData[position],currentLocation)
     }
 
     override fun getItemCount(): Int {

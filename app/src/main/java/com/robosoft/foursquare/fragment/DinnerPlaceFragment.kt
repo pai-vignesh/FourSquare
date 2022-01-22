@@ -1,5 +1,6 @@
 package com.robosoft.foursquare.fragment
 
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,16 +35,16 @@ class DinnerPlaceFragment : Fragment() ,CellClickListener{
         binding= FragmentDinnerPlaceBinding.inflate(inflater)
         if(LocationPermission.checkPermission(requireActivity())){
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location->
-                setupRv("${location.latitude},${location.longitude}")
+                setupRv("${location.latitude},${location.longitude}",location)
             }
         }
         return binding.root
     }
 
     //recyclerview setup
-    private fun setupRv(p0: String?) {
+    private fun setupRv(p0: String?,currentLocation: Location) {
         p0?.let { location ->
-            placeAdapter = PlaceAdapter(this)
+            placeAdapter = PlaceAdapter(this,currentLocation)
             homeViewModel.getQueryPlaces("restaurants",location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {

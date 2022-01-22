@@ -37,7 +37,7 @@ data class PlaceData(
     @SerializedName("popularity")
     val popularity: String,
     @SerializedName("price")
-    val price: String,
+    val price: Int?,
     @SerializedName("rating")
     val rating: Double?,
     @SerializedName("related_places")
