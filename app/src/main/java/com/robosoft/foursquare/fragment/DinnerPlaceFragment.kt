@@ -21,11 +21,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DinnerPlaceFragment : Fragment() ,CellClickListener{
-    private lateinit var binding : FragmentDinnerPlaceBinding
+class DinnerPlaceFragment : Fragment(), CellClickListener {
+    private lateinit var binding: FragmentDinnerPlaceBinding
     private lateinit var placeAdapter: PlaceAdapter
     private val homeViewModel: HomeViewModel by viewModels()
     private var places = ArrayList<PlaceData>()
+
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreateView(
@@ -33,20 +34,20 @@ class DinnerPlaceFragment : Fragment() ,CellClickListener{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentDinnerPlaceBinding.inflate(inflater)
-        if(LocationPermission.checkPermission(requireActivity())){
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location->
-                setupRv("${location.latitude},${location.longitude}",location)
+        binding = FragmentDinnerPlaceBinding.inflate(inflater)
+        if (LocationPermission.checkPermission(requireActivity())) {
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                setupRv("${location.latitude},${location.longitude}", location)
             }
         }
         return binding.root
     }
 
     //recyclerview setup
-    private fun setupRv(p0: String?,currentLocation: Location) {
+    private fun setupRv(p0: String?, currentLocation: Location) {
         p0?.let { location ->
-            placeAdapter = PlaceAdapter(this,currentLocation)
-            homeViewModel.getQueryPlaces("restaurants",location).observe(this, { data ->
+            placeAdapter = PlaceAdapter(this, currentLocation)
+            homeViewModel.getQueryPlaces("restaurants", location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {
@@ -77,7 +78,39 @@ class DinnerPlaceFragment : Fragment() ,CellClickListener{
 
     }
 
-    override fun onCellClickListener(data: FavouriteModel) {
+    override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
+        if (isRemove) {
+            homeViewModel.deleteFavourites(data).observe(this, { data ->
+                data?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {
 
+                        }
+                        Status.SUCCESS -> {
+
+                        }
+                        Status.ERROR -> {
+
+                        }
+                    }
+                }
+            })
+        } else {
+            homeViewModel.insertFavourites(data).observe(this, { data ->
+                data?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {
+
+                        }
+                        Status.SUCCESS -> {
+
+                        }
+                        Status.ERROR -> {
+
+                        }
+                    }
+                }
+            })
+        }
     }
 }

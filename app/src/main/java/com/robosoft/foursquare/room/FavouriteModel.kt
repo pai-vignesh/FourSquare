@@ -6,10 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favourites")
 data class FavouriteModel (
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "place_id")
-    var id: Long,
-
+    @PrimaryKey
     @ColumnInfo(name = "fsq_id")
     var fsqId: String,
 

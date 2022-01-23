@@ -86,8 +86,40 @@ class ListViewFragment : Fragment(), CellClickListener{
 
     }
 
-    override fun onCellClickListener(data: FavouriteModel) {
+    override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
+        if (isRemove) {
+            homeViewModel.deleteFavourites(data).observe(this, { data ->
+                data?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {
 
+                        }
+                        Status.SUCCESS -> {
+
+                        }
+                        Status.ERROR -> {
+
+                        }
+                    }
+                }
+            })
+        } else {
+            homeViewModel.insertFavourites(data).observe(this, { data ->
+                data?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {
+
+                        }
+                        Status.SUCCESS -> {
+
+                        }
+                        Status.ERROR -> {
+
+                        }
+                    }
+                }
+            })
+        }
     }
 
 }

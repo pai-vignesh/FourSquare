@@ -76,7 +76,7 @@ class FavouritesAdapter(
             placeAddr.text = favourite.address
             fav.setOnClickListener {
                 fav.visibility = View.GONE
-                cellClickListener.onCellClickListener(favourite)
+                cellClickListener.onCellClickListener(favourite,true)
             }
 
             card.setOnClickListener { v ->

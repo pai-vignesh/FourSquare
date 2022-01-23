@@ -53,6 +53,21 @@ class PlaceDetailsActivity : AppCompatActivity() {
             startActivity(i)
         }
 
+
+//        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.share -> {
+//                    val i = Intent(this, SearchActivity::class.java)
+//                    startActivity(i)
+//                    true
+//                }
+//                R.id.favorite -> {
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+
         binding.reviews.setOnClickListener {
             val i = Intent(this, ReviewActivity::class.java)
             i.putExtra("fsqId", fsqId)

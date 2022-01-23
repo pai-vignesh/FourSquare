@@ -92,7 +92,6 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
                 fav.visibility = View.GONE
                 unFav.visibility = View.VISIBLE
                 val favouriteModel = FavouriteModel(
-                    0,
                     place.fsqId,
                     place.name,
                     placeType.text.toString(),
@@ -104,12 +103,25 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
                     placeAddr.text.toString()
                 )
                 Log.d("TAG", "bind: $favouriteModel")
-                cellClickListener.onCellClickListener(favouriteModel)
+                cellClickListener.onCellClickListener(favouriteModel,false)
             }
 
             unFav.setOnClickListener {
                 unFav.visibility = View.GONE
                 fav.visibility = View.VISIBLE
+                val favouriteModel = FavouriteModel(
+                    place.fsqId,
+                    place.name,
+                    placeType.text.toString(),
+                    placePrice.text.toString(),
+                    place.geocodes.main.latitude,
+                    place.geocodes.main.longitude,
+                    ratings.text.toString(),
+                    imageUrl,
+                    placeAddr.text.toString()
+                )
+                Log.d("TAG", "bind: $favouriteModel")
+                cellClickListener.onCellClickListener(favouriteModel,true)
             }
 
             card.setOnClickListener { v ->

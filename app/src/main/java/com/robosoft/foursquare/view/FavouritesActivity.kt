@@ -76,7 +76,23 @@ class FavouritesActivity : AppCompatActivity() ,CellClickListener{
 
     }
 
-    override fun onCellClickListener(data: FavouriteModel) {
+    override fun onCellClickListener(data: FavouriteModel,isRemove:Boolean) {
+        if (isRemove) {
+            favouritesViewModel.deleteFavourites(data).observe(this, { data ->
+                data?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {
 
+                        }
+                        Status.SUCCESS -> {
+
+                        }
+                        Status.ERROR -> {
+
+                        }
+                    }
+                }
+            })
+        }
     }
 }
