@@ -21,6 +21,7 @@ import com.robosoft.foursquare.R
 import com.robosoft.foursquare.adapter.PlaceAdapter
 import com.robosoft.foursquare.databinding.FragmentPopularPlaceBinding
 import com.robosoft.foursquare.model.PlaceData
+import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.util.LocationPermission
 import com.robosoft.foursquare.util.Status
@@ -84,7 +85,7 @@ class PopularFragment : Fragment(), CellClickListener {
 
     }
 
-    override fun onCellClickListener(data: PlaceData) {
+    override fun onCellClickListener(data: FavouriteModel) {
 
     }
 }

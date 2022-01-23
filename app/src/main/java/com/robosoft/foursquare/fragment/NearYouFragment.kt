@@ -37,6 +37,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import com.google.android.gms.maps.model.MarkerOptions
+import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.LocationPermission
 import javax.inject.Inject
 
@@ -72,7 +73,7 @@ class NearYouFragment : Fragment(), CellClickListener {
                         location.latitude,
                         location.longitude
                     )
-                    setupRv("${location.latitude},${location.longitude}",location)
+                    setupRv("${location.latitude},${location.longitude}", location)
                     googleMap.animateCamera(
                         CameraUpdateFactory.newLatLngZoom(
                             myLocation,
@@ -93,9 +94,9 @@ class NearYouFragment : Fragment(), CellClickListener {
     }
 
     //recyclerview setup
-    private fun setupRv(p0: String?,currentLocation: Location) {
+    private fun setupRv(p0: String?, currentLocation: Location) {
         p0?.let { location ->
-            placeAdapter = PlaceAdapter(this,currentLocation)
+            placeAdapter = PlaceAdapter(this, currentLocation)
             homeViewModel.getQueryPlaces("", location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
@@ -127,7 +128,21 @@ class NearYouFragment : Fragment(), CellClickListener {
 
     }
 
-    override fun onCellClickListener(data: PlaceData) {
+    override fun onCellClickListener(data: FavouriteModel) {
+        homeViewModel.insertFavourites(data).observe(this, { data ->
+            data?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
 
+                    }
+                    Status.SUCCESS -> {
+
+                    }
+                    Status.ERROR -> {
+
+                    }
+                }
+            }
+        })
     }
 }

@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.PlaceItemAdapterBinding
 import com.robosoft.foursquare.model.PlaceData
+import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import java.text.DecimalFormat
@@ -51,6 +52,7 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
         private val fav = binding.fav
         private val unFav = binding.unfav
         private val card = binding.layout
+        private var imageUrl = ""
 
         fun bind(cellClickListener: CellClickListener, place: PlaceData,currentLocation: Location) {
             if (!place.photos.isNullOrEmpty()) {
@@ -58,7 +60,7 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
                     DiskCacheStrategy.ALL
                 )
                 val imgSize = "400x400"
-                val imageUrl =
+                imageUrl =
                     place.photos[0].prefix + imgSize + place.photos[0].suffix
                 Glide.with(placeImg.context).load(imageUrl).apply(requestOptions)
                     .into(placeImg)
@@ -89,6 +91,20 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
             fav.setOnClickListener {
                 fav.visibility = View.GONE
                 unFav.visibility = View.VISIBLE
+                val favouriteModel = FavouriteModel(
+                    0,
+                    place.fsqId,
+                    place.name,
+                    placeType.text.toString(),
+                    placePrice.text.toString(),
+                    place.geocodes.main.latitude,
+                    place.geocodes.main.longitude,
+                    ratings.text.toString(),
+                    imageUrl,
+                    placeAddr.text.toString()
+                )
+                Log.d("TAG", "bind: $favouriteModel")
+                cellClickListener.onCellClickListener(favouriteModel)
             }
 
             unFav.setOnClickListener {
@@ -101,7 +117,6 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
                 intent.putExtra("fsqId", place.fsqId)
                 v.context.startActivity(intent)
             }
-
         }
     }
 
