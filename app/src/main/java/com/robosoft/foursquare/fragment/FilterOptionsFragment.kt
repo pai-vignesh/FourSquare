@@ -7,18 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.robosoft.foursquare.databinding.FragmentFilterOptionsBinding
 
-class FilterOptionsFragment : Fragment(){
-
+class FilterOptionsFragment : Fragment() {
     private lateinit var binding: FragmentFilterOptionsBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        binding= FragmentFilterOptionsBinding.inflate(inflater)
-
+    ): View {
+        binding = FragmentFilterOptionsBinding.inflate(inflater)
         return binding.root
     }
 }

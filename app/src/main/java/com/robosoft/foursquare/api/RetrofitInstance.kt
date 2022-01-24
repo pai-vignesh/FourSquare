@@ -15,7 +15,6 @@ import javax.inject.Inject
 
 class RetrofitInstance @Inject constructor() {
     companion object {
-
         private fun isInternetAvailable(context: Context): Boolean {
             var isConnected: Boolean = false // Initial Value
             val connectivityManager =
@@ -30,7 +29,7 @@ class RetrofitInstance @Inject constructor() {
             val cacheSize = (10 * 1024 * 1024).toLong() // 10 MB
             val cache = Cache(context.cacheDir, cacheSize)
 
-            var onlineInterceptor = Interceptor { chain ->
+            val onlineInterceptor = Interceptor { chain ->
                 val response = chain.proceed(chain.request())
                 val maxAge =
                     60 // read from cache for 60 seconds even if there is internet connection
@@ -40,7 +39,7 @@ class RetrofitInstance @Inject constructor() {
                     .build()
             }
 
-            var offlineInterceptor = Interceptor { chain ->
+            val offlineInterceptor = Interceptor { chain ->
                 var request: Request = chain.request()
                 if (!isInternetAvailable(context)) {
                     val maxStale = 60 * 60 * 24 * 30 // Offline cache available for 30 days
@@ -58,7 +57,6 @@ class RetrofitInstance @Inject constructor() {
                     .addNetworkInterceptor(onlineInterceptor)
                     .cache(cache)
                     .build()
-
 
             return Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)

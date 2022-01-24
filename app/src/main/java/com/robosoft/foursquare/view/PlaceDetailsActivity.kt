@@ -1,14 +1,11 @@
 package com.robosoft.foursquare.view
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -22,10 +19,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.ActivityPlaceDetailsBinding
+import com.robosoft.foursquare.util.LocationPermission
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.PlaceDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.String
 import java.text.DecimalFormat
 
 @AndroidEntryPoint
@@ -41,19 +38,14 @@ class PlaceDetailsActivity : AppCompatActivity() {
         binding = ActivityPlaceDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
         val fsqId = intent.getStringExtra("fsqId")
-
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
-
         binding.addReview.setOnClickListener {
             val i = Intent(this, AddReview::class.java)
             startActivity(i)
         }
-
-
 //        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
 //            when (menuItem.itemId) {
 //                R.id.share -> {
@@ -74,7 +66,6 @@ class PlaceDetailsActivity : AppCompatActivity() {
             i.putExtra("placeName", binding.topAppBar.title)
             startActivity(i)
         }
-
         binding.photos.setOnClickListener {
             val i = Intent(this, GalleryActivity::class.java)
             i.putExtra("fsqId", fsqId)
@@ -88,9 +79,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
             placeDetailsViewModel.getPlaceDetails(it).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
+                        Status.LOADING -> {}
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
                                 if (!placeData.photos.isNullOrEmpty()) {
@@ -123,62 +112,45 @@ class PlaceDetailsActivity : AppCompatActivity() {
                                     placeData.geocodes.main.latitude.toDouble(),
                                     placeData.geocodes.main.longitude.toDouble()
                                 )
-
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
+                        Status.ERROR -> {}
                     }
                 }
-
             })
         }
-
     }
 
     private fun fetchLocation(lat: Double, lng: Double) {
-        if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION
-            ) !=
-            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_COARSE_LOCATION
-            ) !=
-            PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 101
-            )
-            return
-        }
-        val task = fusedLocationProviderClient.lastLocation
-        task.addOnSuccessListener { location ->
-            currentLocation = location
-            mapFragment =
-                supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-            mapFragment.getMapAsync {
-                googleMap = it
-                val destLocation = Location("destination")
-                val myLocation = LatLng(
-                    lat,
-                    lng
-                )
-                destLocation.latitude = lat
-                destLocation.longitude = lng
-                val km = DecimalFormat("##.##").format(location.distanceTo(destLocation) / 1000)
-                binding.tvDistance.text = getString(R.string.distance_text, km)
-                googleMap.animateCamera(
-                    CameraUpdateFactory.newLatLngZoom(
-                        myLocation,
-                        15.5f
+        if (LocationPermission.checkPermission(this)) {
+            val task = fusedLocationProviderClient.lastLocation
+            task.addOnSuccessListener { location ->
+                currentLocation = location
+                mapFragment =
+                    supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+                mapFragment.getMapAsync {
+                    googleMap = it
+                    val destLocation = Location("destination")
+                    val myLocation = LatLng(
+                        lat,
+                        lng
                     )
-                )
-                googleMap.addMarker(
-                    MarkerOptions()
-                        .position(myLocation)
-                        .title("Marker in Sydney")
-                )
+                    destLocation.latitude = lat
+                    destLocation.longitude = lng
+                    val km = DecimalFormat("##.##").format(location.distanceTo(destLocation) / 1000)
+                    binding.tvDistance.text = getString(R.string.distance_text, km)
+                    googleMap.animateCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            myLocation,
+                            15.5f
+                        )
+                    )
+                    googleMap.addMarker(
+                        MarkerOptions()
+                            .position(myLocation)
+                            .title("Marker in Sydney")
+                    )
+                }
             }
         }
     }

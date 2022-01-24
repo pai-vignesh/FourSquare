@@ -9,7 +9,7 @@ import androidx.core.view.WindowCompat
 import com.robosoft.foursquare.databinding.ActivityLoadingScreenBinding
 
 class LoadingScreen : AppCompatActivity() {
-    private lateinit var binding : ActivityLoadingScreenBinding
+    private lateinit var binding: ActivityLoadingScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoadingScreenBinding.inflate(layoutInflater)

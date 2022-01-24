@@ -20,8 +20,6 @@ class SearchActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
-
-
         binding.filterMenu.setOnClickListener {
             val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
             val filterOption = FilterOptionsFragment()
@@ -29,7 +27,5 @@ class SearchActivity : AppCompatActivity() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
-
     }
-
 }

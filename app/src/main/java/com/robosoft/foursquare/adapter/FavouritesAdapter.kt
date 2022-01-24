@@ -46,7 +46,7 @@ class FavouritesAdapter(
         private val placeType = binding.placeType
         private val distance = binding.distance
         private val placePrice = binding.price
-        private val placeAddr = binding.placeAddress
+        private val placeAddress = binding.placeAddress
         private val placeImg = binding.imageView
         private val ratings = binding.ratings
         private val fav = binding.fav
@@ -69,23 +69,20 @@ class FavouritesAdapter(
             destLocation.longitude = favourite.lng.toDouble()
             val km = DecimalFormat("##.##").format(currentLocation.distanceTo(destLocation) / 1000)
             distance.text = distance.context.getString(R.string.card_distance_text, km)
-            ratings.text=favourite.rating
+            ratings.text = favourite.rating
             placePrice.text = favourite.price
             placeName.text = favourite.placeName
             placeType.text = favourite.placeType
-            placeAddr.text = favourite.address
+            placeAddress.text = favourite.address
             fav.setOnClickListener {
                 fav.visibility = View.GONE
-                cellClickListener.onCellClickListener(favourite,true)
+                cellClickListener.onCellClickListener(favourite, true)
             }
-
             card.setOnClickListener { v ->
                 val intent = Intent(v.context, PlaceDetailsActivity::class.java)
                 intent.putExtra("fsqId", favourite.fsqId)
                 v.context.startActivity(intent)
             }
-
-
         }
     }
 

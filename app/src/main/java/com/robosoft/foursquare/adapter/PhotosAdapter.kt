@@ -1,7 +1,5 @@
 package com.robosoft.foursquare.adapter
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -11,15 +9,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.robosoft.foursquare.databinding.PhotoItemAdapterBinding
-import com.robosoft.foursquare.databinding.PlaceItemAdapterBinding
 import com.robosoft.foursquare.model.Photo
-import com.robosoft.foursquare.model.PlaceData
-import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.util.PhotoClickListener
-import com.robosoft.foursquare.view.ImageDetails
-import com.robosoft.foursquare.view.PlaceDetailsActivity
 
-class PhotosAdapter (private val photoClickListener: PhotoClickListener) :
+class PhotosAdapter(private val photoClickListener: PhotoClickListener) :
     RecyclerView.Adapter<PhotosAdapter.MyViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<Photo>() {
@@ -47,12 +40,10 @@ class PhotosAdapter (private val photoClickListener: PhotoClickListener) :
             val imgSize = "400x400"
             val imageUrl = photo.prefix + imgSize + photo.suffix
             Glide.with(image.context).load(imageUrl).apply(requestOptions).into(image)
-
             image.setOnClickListener {
                 photoClickListener.onPhotoClickListener(photo)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -66,7 +57,7 @@ class PhotosAdapter (private val photoClickListener: PhotoClickListener) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(photoClickListener,photos[position])
+        holder.bind(photoClickListener, photos[position])
     }
 
     override fun getItemCount(): Int {

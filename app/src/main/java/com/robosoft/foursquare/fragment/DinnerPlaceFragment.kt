@@ -35,7 +35,7 @@ class DinnerPlaceFragment : Fragment(), CellClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDinnerPlaceBinding.inflate(inflater)
         if (LocationPermission.checkPermission(requireActivity())) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
@@ -66,7 +66,12 @@ class DinnerPlaceFragment : Fragment(), CellClickListener {
                                                 LinearLayoutManager.VERTICAL, false
                                             )
                                         } else {
-                                            GridLayoutManager(activity,2,LinearLayoutManager.VERTICAL,false)
+                                            GridLayoutManager(
+                                                activity,
+                                                2,
+                                                LinearLayoutManager.VERTICAL,
+                                                false
+                                            )
                                         }
                                     placeAdapter.placeData = places
                                     adapter = placeAdapter
@@ -87,34 +92,22 @@ class DinnerPlaceFragment : Fragment(), CellClickListener {
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
-            homeViewModel.deleteFavourites(data).observe(this, { data ->
-                data?.let { resource ->
+            homeViewModel.deleteFavourites(data).observe(this, { dataDeleted ->
+                dataDeleted?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
-                        Status.SUCCESS -> {
-
-                        }
-                        Status.ERROR -> {
-
-                        }
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {}
+                        Status.ERROR -> {}
                     }
                 }
             })
         } else {
-            homeViewModel.insertFavourites(data).observe(this, { data ->
-                data?.let { resource ->
+            homeViewModel.insertFavourites(data).observe(this, { dataInserted ->
+                dataInserted?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
-                        Status.SUCCESS -> {
-
-                        }
-                        Status.ERROR -> {
-
-                        }
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {}
+                        Status.ERROR -> {}
                     }
                 }
             })

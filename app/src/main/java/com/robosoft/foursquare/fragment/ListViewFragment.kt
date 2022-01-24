@@ -26,11 +26,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ListViewFragment : Fragment(), CellClickListener{
+class ListViewFragment : Fragment(), CellClickListener {
     private lateinit var binding: FragmentListViewBinding
     private lateinit var placeAdapter: PlaceAdapter
     private val homeViewModel: HomeViewModel by viewModels()
     private var places = ArrayList<PlaceData>()
+
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
@@ -38,31 +39,27 @@ class ListViewFragment : Fragment(), CellClickListener{
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding= FragmentListViewBinding.inflate(inflater)
-
-        binding.mapView.setOnClickListener{
+    ): View {
+        binding = FragmentListViewBinding.inflate(inflater)
+        binding.mapView.setOnClickListener {
             findNavController().navigate(R.id.action_listViewFragment_to_mapViewFragment)
         }
-
         if (LocationPermission.checkPermission(requireActivity())) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-                setupRv("${location.latitude},${location.longitude}",location)
+                setupRv("${location.latitude},${location.longitude}", location)
             }
         }
         return binding.root
     }
 
     //recyclerview setup
-    private fun setupRv(p0: String?,currentLocation: Location) {
+    private fun setupRv(p0: String?, currentLocation: Location) {
         p0?.let { location ->
-            placeAdapter = PlaceAdapter(this,currentLocation)
-            homeViewModel.getQueryPlaces("",location).observe(this, { data ->
+            placeAdapter = PlaceAdapter(this, currentLocation)
+            homeViewModel.getQueryPlaces("", location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
+                        Status.LOADING -> {}
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
                                 places = placeData.results as ArrayList<PlaceData>
@@ -74,7 +71,12 @@ class ListViewFragment : Fragment(), CellClickListener{
                                                 LinearLayoutManager.VERTICAL, false
                                             )
                                         } else {
-                                            GridLayoutManager(activity,2,LinearLayoutManager.VERTICAL,false)
+                                            GridLayoutManager(
+                                                activity,
+                                                2,
+                                                LinearLayoutManager.VERTICAL,
+                                                false
+                                            )
                                         }
                                     placeAdapter.placeData = places
                                     adapter = placeAdapter
@@ -82,51 +84,34 @@ class ListViewFragment : Fragment(), CellClickListener{
                                 }
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
+                        Status.ERROR -> {}
                     }
                 }
-
             })
         }
-
     }
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
-            homeViewModel.deleteFavourites(data).observe(this, { data ->
-                data?.let { resource ->
+            homeViewModel.deleteFavourites(data).observe(this, { dataDeleted ->
+                dataDeleted?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
-                        Status.SUCCESS -> {
-
-                        }
-                        Status.ERROR -> {
-
-                        }
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {}
+                        Status.ERROR -> {}
                     }
                 }
             })
         } else {
-            homeViewModel.insertFavourites(data).observe(this, { data ->
-                data?.let { resource ->
+            homeViewModel.insertFavourites(data).observe(this, { dataInserted ->
+                dataInserted?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
-                        Status.SUCCESS -> {
-
-                        }
-                        Status.ERROR -> {
-
-                        }
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {}
+                        Status.ERROR -> {}
                     }
                 }
             })
         }
     }
-
 }

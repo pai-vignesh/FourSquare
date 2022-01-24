@@ -3,7 +3,6 @@ package com.robosoft.foursquare.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,17 +37,11 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSigninBinding.inflate(inflater)
         auth = FirebaseAuth.getInstance()
-
-        var currentUser = auth.currentUser
-        if (currentUser != null) {
-            //do smtng
-        }
         // Callback function for Phone Auth
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 startActivity(Intent(requireContext(), HomeActivity::class.java))
                 activity?.finish()
@@ -62,8 +55,6 @@ class SignInFragment : Fragment() {
                 verificationId: String,
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
-
-                Log.d("TAG", "onCodeSent:$verificationId")
                 storedVerificationId = verificationId
                 resendToken = token
                 val bundle = bundleOf(
@@ -84,17 +75,18 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.forgotPassword.setOnClickListener {
             if (!(TextUtils.isEmpty(binding.personName.text.toString()))) {
                 updateUserPassword()
             } else {
-                Toast.makeText(requireActivity(), "Please enter email to reset password", Toast.LENGTH_LONG)
+                Toast.makeText(
+                    requireActivity(),
+                    "Please enter email to reset password",
+                    Toast.LENGTH_LONG
+                )
                     .show()
             }
-
         }
-
         binding.login.setOnClickListener {
             if (!(TextUtils.isEmpty(binding.personName.text.toString()) || TextUtils.isEmpty(binding.passwordEntry.text.toString()))) {
                 checkUserAndLogin()
@@ -103,7 +95,6 @@ class SignInFragment : Fragment() {
                     .show()
             }
         }
-
         binding.createAccount.setOnClickListener {
             if (requireActivity() is LoginActivity) {
                 findNavController().navigate(com.robosoft.foursquare.R.id.action_signInFragment_to_signupFragment)
@@ -116,9 +107,7 @@ class SignInFragment : Fragment() {
             .observe(viewLifecycleOwner, { dataFav ->
                 dataFav?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
+                        Status.LOADING -> {}
                         Status.SUCCESS -> {
                             resource.data?.also {
                                 val number = "+91${it.phone}"
@@ -132,9 +121,7 @@ class SignInFragment : Fragment() {
                                 ).show()
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
+                        Status.ERROR -> {}
                     }
                 }
             })
@@ -147,9 +134,7 @@ class SignInFragment : Fragment() {
         ).observe(viewLifecycleOwner, { dataFav ->
             dataFav?.let { resource ->
                 when (resource.status) {
-                    Status.LOADING -> {
-
-                    }
+                    Status.LOADING -> {}
                     Status.SUCCESS -> {
                         resource.data?.also {
                             val i = Intent(requireActivity(), HomeActivity::class.java)
@@ -164,9 +149,7 @@ class SignInFragment : Fragment() {
                             ).show()
                         }
                     }
-                    Status.ERROR -> {
-
-                    }
+                    Status.ERROR -> {}
                 }
             }
         })

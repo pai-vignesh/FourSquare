@@ -24,10 +24,10 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
 
     private val differ = AsyncListDiffer(this, diffCallback)
     var tips: List<Tip>
-    get() = differ.currentList
-    set(value) {
-        differ.submitList(value)
-    }
+        get() = differ.currentList
+        set(value) {
+            differ.submitList(value)
+        }
 
     class MyViewHolder(binding: ReviewAdapterBinding) : RecyclerView.ViewHolder(binding.root) {
         private val image = binding.imgProfile
@@ -39,7 +39,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
             date.text = convertDate(tip.createdAt)
         }
 
-        fun convertDate(dateString: String): String{
+        private fun convertDate(dateString: String): String {
             val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
             val sdf = SimpleDateFormat("MMM dd,yyyy", Locale.US)
             val date: Date? = format.parse(dateString)

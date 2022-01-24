@@ -2,18 +2,14 @@ package com.robosoft.foursquare.util
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.Button
-import android.widget.ImageView
 import com.robosoft.foursquare.R
-import com.robosoft.foursquare.view.PlaceDetailsActivity
 
-class CustomDialogClass(var c: Context) : Dialog(c), View.OnClickListener {
-    lateinit var d: Dialog
-    lateinit var close: Button
+class CustomDialogClass(c: Context) : Dialog(c), View.OnClickListener {
+    private lateinit var close: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,19 +20,10 @@ class CustomDialogClass(var c: Context) : Dialog(c), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-
         when (v.id) {
-            R.id.imageView1 -> {
-
-            }
-            else -> {
-            }
+            R.id.imageView1 -> {}
+            else -> {}
         }
         dismiss()
-    }
-
-    fun startVideoView(v: View){
-        val intent = Intent(v.context, PlaceDetailsActivity::class.java)
-        v.context.startActivity(intent)
     }
 }

@@ -25,7 +25,12 @@ interface ApiService {
         "Accept: application/json"
     )
     @GET(Constants.SEARCH_POINT)
-    suspend fun getQueryPlaces(@Query("query") query:String, @Query("ll") ll: String,@Query("fields") fields:String,@Query("sort") sort:String): PlaceList
+    suspend fun getQueryPlaces(
+        @Query("query") query: String,
+        @Query("ll") ll: String,
+        @Query("fields") fields: String,
+        @Query("sort") sort: String
+    ): PlaceList
 
     @Headers(
         "Authorization: ${BuildConfig.API_KEY}",
@@ -47,7 +52,6 @@ interface ApiService {
     )
     @GET("places/{id}/tips")
     suspend fun getPlaceReviews(@Path("id") query: String): List<Tip>
-
 
 
 }

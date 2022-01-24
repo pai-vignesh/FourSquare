@@ -10,7 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
-class FavouritesViewModel @Inject constructor(private val roomRepository: RoomRepository) : ViewModel(){
+class FavouritesViewModel @Inject constructor(private val roomRepository: RoomRepository) :
+    ViewModel() {
 
     fun deleteFavourites(favouriteModel: FavouriteModel) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
@@ -20,7 +21,5 @@ class FavouritesViewModel @Inject constructor(private val roomRepository: RoomRe
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
-
     val favourites = roomRepository.favourites
-
 }

@@ -2,7 +2,6 @@ package com.robosoft.foursquare.adapter
 
 import android.content.Intent
 import android.location.Location
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.maps.model.LatLng
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.PlaceItemAdapterBinding
 import com.robosoft.foursquare.model.PlaceData
@@ -21,7 +19,10 @@ import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import java.text.DecimalFormat
 
-class PlaceAdapter(private val cellClickListener: CellClickListener,private val currentLocation: Location) :
+class PlaceAdapter(
+    private val cellClickListener: CellClickListener,
+    private val currentLocation: Location
+) :
     RecyclerView.Adapter<PlaceAdapter.MyViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<PlaceData>() {
@@ -46,7 +47,7 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
         private val placeType = binding.placeType
         private val distance = binding.distance
         private val placePrice = binding.price
-        private val placeAddr = binding.placeAddress
+        private val placeAddress = binding.placeAddress
         private val placeImg = binding.imageView
         private val ratings = binding.ratings
         private val fav = binding.fav
@@ -54,7 +55,11 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
         private val card = binding.layout
         private var imageUrl = ""
 
-        fun bind(cellClickListener: CellClickListener, place: PlaceData,currentLocation: Location) {
+        fun bind(
+            cellClickListener: CellClickListener,
+            place: PlaceData,
+            currentLocation: Location
+        ) {
             if (!place.photos.isNullOrEmpty()) {
                 val requestOptions = RequestOptions().diskCacheStrategy(
                     DiskCacheStrategy.ALL
@@ -69,25 +74,25 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
             destLocation.latitude = place.geocodes.main.latitude.toDouble()
             destLocation.longitude = place.geocodes.main.longitude.toDouble()
             val km = DecimalFormat("##.##").format(currentLocation.distanceTo(destLocation) / 1000)
-            distance.text =  distance.context.getString(R.string.card_distance_text, km)
+            distance.text = distance.context.getString(R.string.card_distance_text, km)
             place.rating?.let { stars ->
                 ratings.text = ((stars * 5) / 10).toString()
             }
             place.price?.let { price ->
-                when(price){
-                    1 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹")
-                    2 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹₹")
-                    3 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹₹₹")
-                    4 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹₹₹₹")
-                    5 -> placePrice.text = placePrice.context.getString(R.string.expense,"₹₹₹₹₹")
-                    else -> placePrice.text = placePrice.context.getString(R.string.expense,"")
+                when (price) {
+                    1 -> placePrice.text = placePrice.context.getString(R.string.expense, "₹")
+                    2 -> placePrice.text = placePrice.context.getString(R.string.expense, "₹₹")
+                    3 -> placePrice.text = placePrice.context.getString(R.string.expense, "₹₹₹")
+                    4 -> placePrice.text = placePrice.context.getString(R.string.expense, "₹₹₹₹")
+                    5 -> placePrice.text = placePrice.context.getString(R.string.expense, "₹₹₹₹₹")
+                    else -> placePrice.text = placePrice.context.getString(R.string.expense, "")
                 }
             }
             placeName.text = place.name
             if (place.categories.isNotEmpty()) {
                 placeType.text = place.categories[0].name
             }
-            placeAddr.text = place.location.address
+            placeAddress.text = place.location.address
             fav.setOnClickListener {
                 fav.visibility = View.GONE
                 unFav.visibility = View.VISIBLE
@@ -100,10 +105,9 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
                     place.geocodes.main.longitude,
                     ratings.text.toString(),
                     imageUrl,
-                    placeAddr.text.toString()
+                    placeAddress.text.toString()
                 )
-                Log.d("TAG", "bind: $favouriteModel")
-                cellClickListener.onCellClickListener(favouriteModel,false)
+                cellClickListener.onCellClickListener(favouriteModel, false)
             }
 
             unFav.setOnClickListener {
@@ -118,10 +122,9 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
                     place.geocodes.main.longitude,
                     ratings.text.toString(),
                     imageUrl,
-                    placeAddr.text.toString()
+                    placeAddress.text.toString()
                 )
-                Log.d("TAG", "bind: $favouriteModel")
-                cellClickListener.onCellClickListener(favouriteModel,true)
+                cellClickListener.onCellClickListener(favouriteModel, true)
             }
 
             card.setOnClickListener { v ->
@@ -143,7 +146,7 @@ class PlaceAdapter(private val cellClickListener: CellClickListener,private val 
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(cellClickListener, placeData[position],currentLocation)
+        holder.bind(cellClickListener, placeData[position], currentLocation)
     }
 
     override fun getItemCount(): Int {

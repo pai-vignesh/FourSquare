@@ -10,7 +10,7 @@ class LocationPermission {
 
     companion object {
 
-        fun checkPermission(context: Activity) :Boolean {
+        fun checkPermission(context: Activity): Boolean {
             if (ActivityCompat.checkSelfPermission(
                     context, Manifest.permission.ACCESS_FINE_LOCATION
                 ) !=

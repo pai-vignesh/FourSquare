@@ -9,8 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
-class GalleryViewModel @Inject constructor(private val repository: MainRepository) : ViewModel(){
-
+class GalleryViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
     fun getPhotos(query: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
@@ -19,5 +18,4 @@ class GalleryViewModel @Inject constructor(private val repository: MainRepositor
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
-
 }

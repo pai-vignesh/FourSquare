@@ -23,7 +23,7 @@ object AppModule {
     }
 
     @Provides
-    fun provideFusedLocation(@ApplicationContext context: Context) : FusedLocationProviderClient{
+    fun provideFusedLocation(@ApplicationContext context: Context): FusedLocationProviderClient {
         return LocationServices.getFusedLocationProviderClient(context)
     }
 

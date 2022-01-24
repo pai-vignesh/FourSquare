@@ -3,7 +3,6 @@ package com.robosoft.foursquare.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,16 +38,10 @@ class SignupFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         binding = FragmentSignupBinding.inflate(inflater)
-
         auth = FirebaseAuth.getInstance()
 
-        var currentUser = auth.currentUser
-        if (currentUser != null) {
-            //do smtng
-        }
         // Callback function for Phone Auth
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -65,13 +58,15 @@ class SignupFragment : Fragment() {
                 verificationId: String,
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
-
-                Log.d("TAG", "onCodeSent:$verificationId")
                 storedVerificationId = verificationId
                 resendToken = token
                 val isForgot = false
                 val phone = ""
-                val bundle = bundleOf("storedVerificationId" to storedVerificationId,"isForgot" to isForgot,"phone" to phone)
+                val bundle = bundleOf(
+                    "storedVerificationId" to storedVerificationId,
+                    "isForgot" to isForgot,
+                    "phone" to phone
+                )
                 if (requireActivity() is LoginActivity) {
                     findNavController().navigate(
                         R.id.action_signupFragment_to_otpFragment,
@@ -80,8 +75,6 @@ class SignupFragment : Fragment() {
                 }
             }
         }
-
-
         binding.login2.setOnClickListener {
             if (validateFormField()) {
                 val userModel = UserModel(
@@ -93,9 +86,7 @@ class SignupFragment : Fragment() {
                 loginViewModel.registerUser(userModel).observe(viewLifecycleOwner, { dataFav ->
                     dataFav?.let { resource ->
                         when (resource.status) {
-                            Status.LOADING -> {
-
-                            }
+                            Status.LOADING -> {}
                             Status.SUCCESS -> {
                                 resource.data?.let {
                                     Toast.makeText(
@@ -107,16 +98,12 @@ class SignupFragment : Fragment() {
                                     sendVerificationCode(number)
                                 }
                             }
-                            Status.ERROR -> {
-
-                            }
+                            Status.ERROR -> {}
                         }
                     }
                 })
             }
         }
-
-
         return binding.root
     }
 
@@ -130,27 +117,21 @@ class SignupFragment : Fragment() {
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-private fun validateFormField(): Boolean {
-    var isValid = true
-
-    if (TextUtils.isEmpty(binding.EmailAddress.text.toString()) ||
-        TextUtils.isEmpty(binding.passwordEntry2.text.toString()) ||
-        TextUtils.isEmpty(binding.confirmPasswordEntry.text.toString()) ||
-        TextUtils.isEmpty(binding.mobileNum.text.toString())
-    ) {
-        Toast.makeText(requireActivity(), "Please enter all the fields", Toast.LENGTH_LONG).show()
-        isValid = false
+    private fun validateFormField(): Boolean {
+        var isValid = true
+        if (TextUtils.isEmpty(binding.EmailAddress.text.toString()) ||
+            TextUtils.isEmpty(binding.passwordEntry2.text.toString()) ||
+            TextUtils.isEmpty(binding.confirmPasswordEntry.text.toString()) ||
+            TextUtils.isEmpty(binding.mobileNum.text.toString())
+        ) {
+            Toast.makeText(requireActivity(), "Please enter all the fields", Toast.LENGTH_LONG)
+                .show()
+            isValid = false
+        }
+        if (isValid && binding.passwordEntry2.text.toString() != binding.confirmPasswordEntry.text.toString()) {
+            Toast.makeText(requireActivity(), "Password not matching", Toast.LENGTH_LONG).show()
+            isValid = false
+        }
+        return isValid
     }
-
-    if (isValid && binding.passwordEntry2.text.toString() != binding.confirmPasswordEntry.text.toString()) {
-        Toast.makeText(requireActivity(), "Password not matching", Toast.LENGTH_LONG).show()
-        isValid = false
-    }
-
-
-
-
-
-    return isValid
-}
 }

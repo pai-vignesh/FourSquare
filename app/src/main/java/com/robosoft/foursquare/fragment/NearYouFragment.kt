@@ -1,17 +1,10 @@
 package com.robosoft.foursquare.fragment
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,24 +16,17 @@ import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.FragmentNearYouBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-
 import com.google.android.gms.maps.model.LatLng
 import com.robosoft.foursquare.adapter.PlaceAdapter
 import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.util.Status
-import com.robosoft.foursquare.view.PlaceDetailsActivity
-import com.robosoft.foursquare.view.ReviewActivity
 import com.robosoft.foursquare.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.json.JSONObject
 import com.google.android.gms.maps.model.MarkerOptions
 import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.LocationPermission
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class NearYouFragment : Fragment(), CellClickListener {
@@ -58,7 +44,7 @@ class NearYouFragment : Fragment(), CellClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNearYouBinding.inflate(inflater)
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -84,12 +70,10 @@ class NearYouFragment : Fragment(), CellClickListener {
                         .position(myLocation)
                         .title("My Marker")
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-
                     googleMap.addMarker(marker)
                 }
             }
         }
-
         return binding.root
     }
 
@@ -100,9 +84,7 @@ class NearYouFragment : Fragment(), CellClickListener {
             homeViewModel.getQueryPlaces("", location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
+                        Status.LOADING -> {}
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
                                 places = placeData.results as ArrayList<PlaceData>
@@ -117,47 +99,31 @@ class NearYouFragment : Fragment(), CellClickListener {
                                 }
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
+                        Status.ERROR -> {}
                     }
                 }
-
             })
         }
-
     }
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
-            homeViewModel.deleteFavourites(data).observe(this, { data ->
-                data?.let { resource ->
+            homeViewModel.deleteFavourites(data).observe(this, { dataDeleted ->
+                dataDeleted?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
-                        Status.SUCCESS -> {
-
-                        }
-                        Status.ERROR -> {
-
-                        }
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {}
+                        Status.ERROR -> {}
                     }
                 }
             })
         } else {
-            homeViewModel.insertFavourites(data).observe(this, { data ->
-                data?.let { resource ->
+            homeViewModel.insertFavourites(data).observe(this, { dataInserted ->
+                dataInserted?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
-                        Status.SUCCESS -> {
-
-                        }
-                        Status.ERROR -> {
-
-                        }
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {}
+                        Status.ERROR -> {}
                     }
                 }
             })

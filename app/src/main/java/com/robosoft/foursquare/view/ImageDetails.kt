@@ -3,7 +3,6 @@ package com.robosoft.foursquare.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.view.WindowCompat
 import com.bumptech.glide.Glide
 import com.robosoft.foursquare.R
@@ -29,7 +28,6 @@ class ImageDetails : AppCompatActivity() {
         dt?.let {
             convertDate(it)
         }
-
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.share -> {
@@ -45,14 +43,13 @@ class ImageDetails : AppCompatActivity() {
         }
     }
 
-    private fun convertDate(dateString: String){
+    private fun convertDate(dateString: String) {
         val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
         val sdf = SimpleDateFormat("MMM dd,yyyy", Locale.US)
         val date: Date? = format.parse(dateString)
         date?.let {
             val res = sdf.format(it)
-            Log.d("TAG", "convertDate: $res")
-            binding.review.text = "Added "+ res
+            binding.review.text = getString(R.string.image_added, res)
         }
     }
 }

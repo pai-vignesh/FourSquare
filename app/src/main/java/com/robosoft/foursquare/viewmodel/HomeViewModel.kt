@@ -11,8 +11,10 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: MainRepository,private val roomRepository: RoomRepository) : ViewModel(){
-
+class HomeViewModel @Inject constructor(
+    private val repository: MainRepository,
+    private val roomRepository: RoomRepository
+) : ViewModel() {
     fun getNearbyPlaces(query: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
@@ -40,15 +42,15 @@ class HomeViewModel @Inject constructor(private val repository: MainRepository,p
         }
     }
 
-
-    fun getQueryPlaces(query: String,ll:String,sort:String = "RELEVANCE") = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            val fields = "fsq_id,photos,name,price,location,categories,geocodes,rating"
-            emit(Resource.success(data = repository.getQueryPlaces(query,ll,fields,sort)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+    fun getQueryPlaces(query: String, ll: String, sort: String = "RELEVANCE") =
+        liveData(Dispatchers.IO) {
+            emit(Resource.loading(data = null))
+            try {
+                val fields = "fsq_id,photos,name,price,location,categories,geocodes,rating"
+                emit(Resource.success(data = repository.getQueryPlaces(query, ll, fields, sort)))
+            } catch (exception: Exception) {
+                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            }
         }
-    }
 
 }

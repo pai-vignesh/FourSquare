@@ -1,6 +1,5 @@
 package com.robosoft.foursquare.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.robosoft.foursquare.repository.RoomRepository

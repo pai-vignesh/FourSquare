@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
-class ReviewViewModel @Inject constructor(private val repository: MainRepository) : ViewModel(){
+class ReviewViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
 
     fun getPlaceReviews(query: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
@@ -19,5 +19,4 @@ class ReviewViewModel @Inject constructor(private val repository: MainRepository
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
-
 }

@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favourites")
-data class FavouriteModel (
+data class FavouriteModel(
     @PrimaryKey
     @ColumnInfo(name = "fsq_id")
     var fsqId: String,
@@ -23,7 +23,7 @@ data class FavouriteModel (
     val lat: String,
 
     @ColumnInfo(name = "longitude")
-    val lng:String,
+    val lng: String,
 
     @ColumnInfo(name = "ratings")
     val rating: String,

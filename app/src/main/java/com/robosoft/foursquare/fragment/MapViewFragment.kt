@@ -3,14 +3,12 @@ package com.robosoft.foursquare.fragment
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -22,7 +20,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.robosoft.foursquare.R
-import com.robosoft.foursquare.adapter.PlaceAdapter
 import com.robosoft.foursquare.databinding.FragmentMapViewBinding
 import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.util.LocationPermission
@@ -35,11 +32,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapViewFragment : Fragment() {
-
     private lateinit var binding: FragmentMapViewBinding
     private lateinit var mapFragment: SupportMapFragment
     private lateinit var googleMap: GoogleMap
     private lateinit var currentLocation: Location
+
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val homeViewModel: HomeViewModel by viewModels()
@@ -49,15 +46,12 @@ class MapViewFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding= FragmentMapViewBinding.inflate(inflater)
-
-        binding.listView.setOnClickListener{
+    ): View {
+        binding = FragmentMapViewBinding.inflate(inflater)
+        binding.listView.setOnClickListener {
             findNavController().navigate(R.id.action_mapViewFragment_to_listViewFragment)
         }
-
         binding.placeCard.layout.visibility = View.GONE
-
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         if (LocationPermission.checkPermission(requireActivity())) {
@@ -85,7 +79,7 @@ class MapViewFragment : Fragment() {
                                 .position(pointLocation)
                                 .title("Marker in Sydney")
                         )
-                        updateCard("${pointLocation.latitude},${pointLocation.longitude}",location)
+                        updateCard("${pointLocation.latitude},${pointLocation.longitude}", location)
                     }
                 }
 
@@ -95,14 +89,12 @@ class MapViewFragment : Fragment() {
     }
 
     //recyclerview setup
-    private fun updateCard(p0: String?,currentLocation: Location) {
+    private fun updateCard(p0: String?, currentLocation: Location) {
         p0?.let { location ->
-            homeViewModel.getQueryPlaces("",location).observe(this, { data ->
+            homeViewModel.getQueryPlaces("", location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
+                        Status.LOADING -> {}
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
                                 binding.placeCard.layout.visibility = View.VISIBLE
@@ -118,7 +110,8 @@ class MapViewFragment : Fragment() {
                                         .into(binding.placeCard.imageView)
                                 }
                                 binding.placeCard.layout.setOnClickListener { v ->
-                                    val intent = Intent(requireActivity(), PlaceDetailsActivity::class.java)
+                                    val intent =
+                                        Intent(requireActivity(), PlaceDetailsActivity::class.java)
                                     intent.putExtra("fsqId", places[0].fsqId)
                                     v.context.startActivity(intent)
                                 }
@@ -128,32 +121,36 @@ class MapViewFragment : Fragment() {
                                     binding.placeCard.placeType.text = places[0].categories[0].name
                                 }
                                 places[0].price?.let { price ->
-                                    when(price){
-                                        1 -> binding.placeCard.price.text = getString(R.string.expense,"₹")
-                                        2 -> binding.placeCard.price.text = getString(R.string.expense,"₹₹")
-                                        3 -> binding.placeCard.price.text = getString(R.string.expense,"₹₹₹")
-                                        4 -> binding.placeCard.price.text = getString(R.string.expense,"₹₹₹₹")
-                                        5 -> binding.placeCard.price.text = getString(R.string.expense,"₹₹₹₹₹")
-                                        else -> binding.placeCard.price.text = getString(R.string.expense,"")
+                                    when (price) {
+                                        1 -> binding.placeCard.price.text =
+                                            getString(R.string.expense, "₹")
+                                        2 -> binding.placeCard.price.text =
+                                            getString(R.string.expense, "₹₹")
+                                        3 -> binding.placeCard.price.text =
+                                            getString(R.string.expense, "₹₹₹")
+                                        4 -> binding.placeCard.price.text =
+                                            getString(R.string.expense, "₹₹₹₹")
+                                        5 -> binding.placeCard.price.text =
+                                            getString(R.string.expense, "₹₹₹₹₹")
+                                        else -> binding.placeCard.price.text =
+                                            getString(R.string.expense, "")
                                     }
                                 }
                                 val destLocation = Location("destination")
                                 destLocation.latitude = places[0].geocodes.main.latitude.toDouble()
-                                destLocation.longitude = places[0].geocodes.main.longitude.toDouble()
-                                val km = DecimalFormat("##.##").format(currentLocation.distanceTo(destLocation) / 1000)
-                                binding.placeCard.distance.text =  getString(R.string.card_distance_text, km)
+                                destLocation.longitude =
+                                    places[0].geocodes.main.longitude.toDouble()
+                                val km = DecimalFormat("##.##").format(
+                                    currentLocation.distanceTo(destLocation) / 1000
+                                )
+                                binding.placeCard.distance.text =
+                                    getString(R.string.card_distance_text, km)
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
+                        Status.ERROR -> {}
                     }
                 }
-
             })
         }
-
     }
-
-
 }

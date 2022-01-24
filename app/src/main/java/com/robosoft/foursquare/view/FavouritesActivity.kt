@@ -5,35 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.robosoft.foursquare.R
 import com.robosoft.foursquare.adapter.FavouritesAdapter
-import com.robosoft.foursquare.adapter.PlaceAdapter
 import com.robosoft.foursquare.databinding.ActivityFavouritesBinding
-import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.util.LocationPermission
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.FavouritesViewModel
-import com.robosoft.foursquare.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavouritesActivity : AppCompatActivity() ,CellClickListener{
+class FavouritesActivity : AppCompatActivity(), CellClickListener {
     private lateinit var binding: ActivityFavouritesBinding
     private lateinit var currentLocation: Location
     private lateinit var favouritesAdapter: FavouritesAdapter
     private val favouritesViewModel: FavouritesViewModel by viewModels()
+
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var favourites = ArrayList<FavouriteModel>()
@@ -50,46 +41,38 @@ class FavouritesActivity : AppCompatActivity() ,CellClickListener{
         if (LocationPermission.checkPermission(this)) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                 currentLocation = location
-                setupRv("${location.latitude},${location.longitude}",location)
+                setupRv(location)
             }
         }
     }
-    //recyclerview setup
-    private fun setupRv(p0: String?,currentLocation: Location) {
-        p0?.let { location ->
-            favouritesAdapter = FavouritesAdapter(this,currentLocation)
-            favouritesViewModel.favourites.observe(this, { data ->
-                data?.let { favouritesData ->
-                    favourites = favouritesData as ArrayList<FavouriteModel>
-                    binding.favouriteRecyclerView.apply {
-                        layoutManager = LinearLayoutManager(
-                            this@FavouritesActivity,
-                            LinearLayoutManager.VERTICAL, false
-                        )
-                        favouritesAdapter.favourites = favourites
-                        adapter = favouritesAdapter
-                        setHasFixedSize(true)
-                    }
-                }
-            })
-        }
 
+    //recyclerview setup
+    private fun setupRv(currentLocation: Location) {
+        favouritesAdapter = FavouritesAdapter(this, currentLocation)
+        favouritesViewModel.favourites.observe(this, { data ->
+            data?.let { favouritesData ->
+                favourites = favouritesData as ArrayList<FavouriteModel>
+                binding.favouriteRecyclerView.apply {
+                    layoutManager = LinearLayoutManager(
+                        this@FavouritesActivity,
+                        LinearLayoutManager.VERTICAL, false
+                    )
+                    favouritesAdapter.favourites = favourites
+                    adapter = favouritesAdapter
+                    setHasFixedSize(true)
+                }
+            }
+        })
     }
 
-    override fun onCellClickListener(data: FavouriteModel,isRemove:Boolean) {
+    override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
-            favouritesViewModel.deleteFavourites(data).observe(this, { data ->
-                data?.let { resource ->
+            favouritesViewModel.deleteFavourites(data).observe(this, { dataDeleted ->
+                dataDeleted?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
-                        Status.SUCCESS -> {
-
-                        }
-                        Status.ERROR -> {
-
-                        }
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {}
+                        Status.ERROR -> {}
                     }
                 }
             })

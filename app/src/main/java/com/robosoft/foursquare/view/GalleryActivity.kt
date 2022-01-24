@@ -7,27 +7,20 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.robosoft.foursquare.adapter.PhotosAdapter
-import com.robosoft.foursquare.adapter.PlaceAdapter
 import com.robosoft.foursquare.databinding.ActivityGalleryBinding
 import com.robosoft.foursquare.model.Photo
-import com.robosoft.foursquare.model.PlaceData
-import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.util.PhotoClickListener
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.GalleryViewModel
-import com.robosoft.foursquare.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class GalleryActivity : AppCompatActivity() , PhotoClickListener{
+class GalleryActivity : AppCompatActivity(), PhotoClickListener {
     private lateinit var binding: ActivityGalleryBinding
     private lateinit var photosAdapter: PhotosAdapter
     private val galleryViewModel: GalleryViewModel by viewModels()
@@ -52,9 +45,7 @@ class GalleryActivity : AppCompatActivity() , PhotoClickListener{
             galleryViewModel.getPhotos(it).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
+                        Status.LOADING -> {}
                         Status.SUCCESS -> {
                             Log.d("TAG", "setupRv: ${resource.data?.size} ")
                             resource.data?.let { photoData ->
@@ -62,9 +53,19 @@ class GalleryActivity : AppCompatActivity() , PhotoClickListener{
                                 binding.nearRecyclerView.apply {
                                     layoutManager =
                                         if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                                            GridLayoutManager(this@GalleryActivity,3,LinearLayoutManager.VERTICAL,false)
+                                            GridLayoutManager(
+                                                this@GalleryActivity,
+                                                3,
+                                                LinearLayoutManager.VERTICAL,
+                                                false
+                                            )
                                         } else {
-                                            GridLayoutManager(this@GalleryActivity,5,LinearLayoutManager.VERTICAL,false)
+                                            GridLayoutManager(
+                                                this@GalleryActivity,
+                                                5,
+                                                LinearLayoutManager.VERTICAL,
+                                                false
+                                            )
                                         }
                                     photosAdapter.photos = photos
                                     adapter = photosAdapter
@@ -72,15 +73,11 @@ class GalleryActivity : AppCompatActivity() , PhotoClickListener{
                                 }
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
+                        Status.ERROR -> {}
                     }
                 }
-
             })
         }
-
     }
 
     override fun onPhotoClickListener(photo: Photo) {
@@ -90,8 +87,8 @@ class GalleryActivity : AppCompatActivity() , PhotoClickListener{
         Log.d("TAG", "onPhotoClickListener: ${photo.createdAt}")
         val intent = Intent(this, ImageDetails::class.java)
         intent.putExtra("imageUrl", imageUrl)
-        intent.putExtra("placeName",placeName)
-        intent.putExtra("date",photo.createdAt)
+        intent.putExtra("placeName", placeName)
+        intent.putExtra("date", photo.createdAt)
         startActivity(intent)
     }
 }

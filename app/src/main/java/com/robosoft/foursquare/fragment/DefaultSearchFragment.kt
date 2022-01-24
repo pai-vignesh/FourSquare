@@ -11,24 +11,18 @@ import com.robosoft.foursquare.R
 
 class DefaultSearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchDefaultBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding= FragmentSearchDefaultBinding.inflate(inflater)
-
-        binding.useLocation.setOnClickListener{
+    ): View {
+        binding = FragmentSearchDefaultBinding.inflate(inflater)
+        binding.useLocation.setOnClickListener {
             findNavController().navigate(R.id.action_defaultSearchFragment_to_listViewFragment)
         }
-
-        binding.useMap.setOnClickListener{
+        binding.useMap.setOnClickListener {
             findNavController().navigate(R.id.action_defaultSearchFragment_to_mapViewFragment)
         }
-
-
-
         return binding.root
     }
 }

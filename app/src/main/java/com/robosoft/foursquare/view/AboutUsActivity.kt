@@ -12,11 +12,9 @@ class AboutUsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAboutUsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
-
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.home -> {
