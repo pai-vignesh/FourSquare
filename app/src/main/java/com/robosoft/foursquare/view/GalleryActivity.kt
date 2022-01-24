@@ -1,6 +1,7 @@
 package com.robosoft.foursquare.view
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -59,7 +60,12 @@ class GalleryActivity : AppCompatActivity() , PhotoClickListener{
                             resource.data?.let { photoData ->
                                 photos = photoData as ArrayList<Photo>
                                 binding.nearRecyclerView.apply {
-                                    layoutManager = GridLayoutManager(this@GalleryActivity,3,LinearLayoutManager.VERTICAL,false)
+                                    layoutManager =
+                                        if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                            GridLayoutManager(this@GalleryActivity,3,LinearLayoutManager.VERTICAL,false)
+                                        } else {
+                                            GridLayoutManager(this@GalleryActivity,5,LinearLayoutManager.VERTICAL,false)
+                                        }
                                     photosAdapter.photos = photos
                                     adapter = photosAdapter
                                     setHasFixedSize(true)

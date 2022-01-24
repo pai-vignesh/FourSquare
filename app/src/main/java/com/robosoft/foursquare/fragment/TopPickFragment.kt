@@ -1,5 +1,6 @@
 package com.robosoft.foursquare.fragment
 
+import android.content.res.Configuration
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +20,10 @@ import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import androidx.recyclerview.widget.GridLayoutManager
+
+
+
 
 @AndroidEntryPoint
 class TopPickFragment : Fragment(), CellClickListener {
@@ -57,10 +62,15 @@ class TopPickFragment : Fragment(), CellClickListener {
                             resource.data?.let { placeData ->
                                 places = placeData.results as ArrayList<PlaceData>
                                 binding.nearRecyclerView.apply {
-                                    layoutManager = LinearLayoutManager(
-                                        activity,
-                                        LinearLayoutManager.VERTICAL, false
-                                    )
+                                    layoutManager =
+                                        if (activity!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                            LinearLayoutManager(
+                                                activity,
+                                                LinearLayoutManager.VERTICAL, false
+                                            )
+                                        } else {
+                                            GridLayoutManager(activity,2,LinearLayoutManager.VERTICAL,false)
+                                        }
                                     placeAdapter.placeData = places
                                     adapter = placeAdapter
                                     setHasFixedSize(true)

@@ -1,6 +1,7 @@
 package com.robosoft.foursquare.fragment
 
 
+import android.content.res.Configuration
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.robosoft.foursquare.R
@@ -65,10 +67,15 @@ class ListViewFragment : Fragment(), CellClickListener{
                             resource.data?.let { placeData ->
                                 places = placeData.results as ArrayList<PlaceData>
                                 binding.searchRecyclerview.apply {
-                                    layoutManager = LinearLayoutManager(
-                                        activity,
-                                        LinearLayoutManager.VERTICAL, false
-                                    )
+                                    layoutManager =
+                                        if (activity!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                            LinearLayoutManager(
+                                                activity,
+                                                LinearLayoutManager.VERTICAL, false
+                                            )
+                                        } else {
+                                            GridLayoutManager(activity,2,LinearLayoutManager.VERTICAL,false)
+                                        }
                                     placeAdapter.placeData = places
                                     adapter = placeAdapter
                                     setHasFixedSize(true)

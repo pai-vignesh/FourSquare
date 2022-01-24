@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scrollView"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context=".view.PlaceDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/midLine"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+
+        <ImageView
+            android:id="@+id/placeImg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/mapFragment"
+            app:layout_constraintEnd_toStartOf="@id/midLine"
+            android:scaleType="centerCrop"
+            android:src="@drawable/splashscreen"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/image_shadow"
+            app:layout_constraintEnd_toStartOf="@id/midLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/mapFragment"
+            app:layout_constraintTop_toTopOf="@id/placeImg" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:animateLayoutChanges="true"
+            android:stateListAnimator="@null"
+            app:layout_constraintEnd_toStartOf="@id/midLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/place_details_bar"
+                android:backgroundTint="#00000000"
+                app:title="Attil"
+                android:elevation="0dp"
+                app:titleCentered="true"
+                android:layout_marginHorizontal="5dp"
+                app:navigationIcon="@drawable/back_icon"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <TextView
+            android:id="@+id/placeType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@id/ratingBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/midLine"
+            android:text="@string/place_type"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginVertical="7dp"
+            android:numStars="5"
+            style="@style/customRatingBar"
+            android:rating="2.5"
+            app:layout_constraintBottom_toBottomOf="@id/placeImg"
+            app:layout_constraintStart_toStartOf="parent"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            app:layout_constraintEnd_toStartOf="@id/midLine"/>
+
+        <LinearLayout
+            android:id="@+id/llMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/midLine"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                app:drawableTopCompat="@drawable/rating_icon"
+                android:text="Rating"/>
+
+            <TextView
+                android:id="@+id/photos"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/avenir_book"
+                app:drawableTopCompat="@drawable/photos_icon"
+                android:text="Photos"/>
+
+            <TextView
+                android:id="@+id/reviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:text="Reviews"
+                app:drawableTopCompat="@drawable/review_icon" />
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/SplitLine_hor1"
+            android:layout_width="0dp"
+            android:layout_height= "2dp"
+            app:layout_constraintTop_toBottomOf="@id/llMenu"
+            app:layout_constraintStart_toEndOf="@id/midLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="#d3d3d3" />
+
+        <TextView
+            android:id="@+id/tvOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/overview"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/avenir_book"
+            android:textSize="26sp"
+            app:layout_constraintStart_toEndOf="@id/midLine"
+            app:layout_constraintTop_toBottomOf="@id/SplitLine_hor1"/>
+
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/dummy_text"
+            android:fontFamily="@font/avenir_book"
+            android:paddingHorizontal="20dp"
+            android:justificationMode="inter_word"
+            app:layout_constraintStart_toEndOf="@id/midLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOverview"/>
+
+        <fragment
+            android:id="@+id/mapFragment"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            app:layout_constraintTop_toBottomOf="@id/details"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/map_details_background"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintEnd_toEndOf="@id/mapFragment"
+            app:layout_constraintBottom_toBottomOf="@id/mapFragment"
+            app:layout_constraintTop_toTopOf="@id/mapFragment"/>
+
+        <TextView
+            android:id="@+id/tvAddr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daffodils Laximindra"
+            android:fontFamily="@font/avenir_medium"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintTop_toTopOf="@id/mapFragment"/>
+
+        <TextView
+            android:id="@+id/tvLocality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nagar,2nd Cross udupi"
+            android:fontFamily="@font/avenir_medium"
+            android:paddingHorizontal="10dp"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintTop_toBottomOf="@id/tvAddr"/>
+
+        <TextView
+            android:id="@+id/tvphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Phone number found"
+            android:fontFamily="@font/avenir_medium"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintTop_toBottomOf="@id/tvLocality"/>
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drive : 5km"
+            android:fontFamily="@font/avenir_medium"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/mapFragment"
+            app:layout_constraintTop_toBottomOf="@id/tvphone"/>
+
+
+        <TextView
+            android:id="@+id/addReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:textAllCaps="false"
+            android:background="@drawable/text_background"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintTop_toBottomOf="@id/mapFragment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Add Review"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

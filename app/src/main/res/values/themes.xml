@@ -47,6 +47,7 @@
     <style name="myCheckbox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="buttonTint">@color/button_tint</item>
         <item name="android:textColor">@color/text_color_filter</item>
+        <item name="fontFamily">@font/avenir_book</item>
     </style>
 
     <style name="MyCustomTabText" parent="TextAppearance.Design.Tab">

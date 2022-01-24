@@ -2,6 +2,7 @@ package com.robosoft.foursquare.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -64,10 +66,15 @@ class PopularFragment : Fragment(), CellClickListener {
                             resource.data?.let { placeData ->
                                 places = placeData.results as ArrayList<PlaceData>
                                 binding.nearRecyclerView.apply {
-                                    layoutManager = LinearLayoutManager(
-                                        activity,
-                                        LinearLayoutManager.VERTICAL, false
-                                    )
+                                    layoutManager =
+                                        if (activity!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                            LinearLayoutManager(
+                                                activity,
+                                                LinearLayoutManager.VERTICAL, false
+                                            )
+                                        } else {
+                                            GridLayoutManager(activity,2,LinearLayoutManager.VERTICAL,false)
+                                        }
                                     placeAdapter.placeData = places
                                     adapter = placeAdapter
                                     setHasFixedSize(true)
