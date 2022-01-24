@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.robosoft.foursquare.databinding.FragmentSignupBinding
 import com.robosoft.foursquare.room.UserModel
 import com.robosoft.foursquare.util.Status
@@ -28,6 +29,7 @@ class SignupFragment : Fragment(){
     ): View? {
 
         binding= FragmentSignupBinding.inflate(inflater)
+
 
         binding.login2.setOnClickListener {
             if(validateFormField()){

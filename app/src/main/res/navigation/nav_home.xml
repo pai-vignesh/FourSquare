@@ -10,7 +10,7 @@
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_otpFragment"
-            app:destination="@id/otpFragment" />
+            app:destination="@id/otpFragment"/>
         <action
             android:id="@+id/action_signInFragment_to_signupFragment"
             app:destination="@id/signupFragment" />

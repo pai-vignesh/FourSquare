@@ -8,27 +8,69 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
 import com.robosoft.foursquare.databinding.FragmentSigninBinding
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.view.HomeActivity
 import com.robosoft.foursquare.view.LoginActivity
 import com.robosoft.foursquare.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class SignInFragment : Fragment(){
     private lateinit var binding: FragmentSigninBinding
     private val loginViewModel: LoginViewModel by viewModels()
+    private lateinit var auth: FirebaseAuth
+    private lateinit var storedVerificationId : String
+    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding= FragmentSigninBinding.inflate(inflater)
+        auth= FirebaseAuth.getInstance()
+
+        var currentUser = auth.currentUser
+        if(currentUser != null) {
+            //do smtng
+        }
+        // Callback function for Phone Auth
+        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                startActivity(Intent(requireContext(), HomeActivity::class.java))
+                activity?.finish()
+            }
+
+            override fun onVerificationFailed(e: FirebaseException) {
+                Toast.makeText(requireContext(), "Failed", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+
+                Log.d("TAG","onCodeSent:$verificationId")
+                storedVerificationId = verificationId
+                resendToken = token
+                val bundle = bundleOf("storedVerificationId" to storedVerificationId)
+                if(requireActivity() is LoginActivity){
+                    findNavController().navigate(com.robosoft.foursquare.R.id.action_signInFragment_to_otpFragment,bundle)
+                }
+            }
+        }
         return binding.root
     }
 
@@ -36,9 +78,7 @@ class SignInFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         binding.forgotPassword.setOnClickListener{
-            if(requireActivity() is LoginActivity){
-                findNavController().navigate(com.robosoft.foursquare.R.id.action_signInFragment_to_otpFragment)
-            }
+            login()
         }
 
         binding.login.setOnClickListener {
@@ -75,5 +115,25 @@ class SignInFragment : Fragment(){
                 findNavController().navigate(com.robosoft.foursquare.R.id.action_signInFragment_to_signupFragment)
             }
         }
+    }
+
+    private fun login() {
+        var number="8762699896"
+        if(number.isNotEmpty()){
+            number= "+91$number"
+            sendVerificationcode (number)
+        }else{
+            Toast.makeText(requireContext(),"Enter mobile number",Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun sendVerificationcode(number: String) {
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(number) // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(requireActivity()) // Activity (for callback binding)
+            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
     }
 }
