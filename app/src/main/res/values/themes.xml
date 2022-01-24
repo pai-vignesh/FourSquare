@@ -44,6 +44,10 @@
         <item name="android:textColor">@color/text_color_selector</item>
     </style>
 
+    <style name="myCheckbox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/button_tint</item>
+        <item name="android:textColor">@color/text_color_filter</item>
+    </style>
 
     <style name="MyCustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16sp</item>

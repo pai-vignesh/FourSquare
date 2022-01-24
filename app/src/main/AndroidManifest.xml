@@ -52,6 +52,8 @@
             android:exported="false" />
         <activity
             android:name=".view.PlaceDetailsActivity"
+            android:theme="@style/AddReviewTheme"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".view.HomeActivity"

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/scrollView"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".view.PlaceDetailsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00000000"
-            android:paddingTop="20dp"
             android:animateLayoutChanges="true"
             android:stateListAnimator="@null"
             app:layout_constraintStart_toStartOf="parent"

@@ -18,6 +18,7 @@ class FilterOptionsFragment : Fragment(){
     ): View? {
 
         binding= FragmentFilterOptionsBinding.inflate(inflater)
+
         return binding.root
     }
 }
