@@ -36,7 +36,7 @@
         android:name="com.robosoft.foursquare.fragment.SignupFragment"
         android:label="SignupFragment" >
         <action
-            android:id="@+id/action_signupFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            android:id="@+id/action_signupFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
     </fragment>
 </navigation>

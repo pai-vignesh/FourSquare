@@ -22,6 +22,24 @@ class LoginViewModel @Inject constructor(val repository: RoomRepository) : ViewM
         }
     }
 
+    fun updatePassword(password: String,phone:String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = repository.updatePassword(password,phone)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun getUserData(email: String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = repository.getUserData(email)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
     fun registerUser(userModel: UserModel) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {

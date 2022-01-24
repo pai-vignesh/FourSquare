@@ -26,23 +26,24 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class SignInFragment : Fragment(){
+class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSigninBinding
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var auth: FirebaseAuth
-    private lateinit var storedVerificationId : String
+    private lateinit var storedVerificationId: String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private lateinit var phoneNum: String
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentSigninBinding.inflate(inflater)
-        auth= FirebaseAuth.getInstance()
+        binding = FragmentSigninBinding.inflate(inflater)
+        auth = FirebaseAuth.getInstance()
 
         var currentUser = auth.currentUser
-        if(currentUser != null) {
+        if (currentUser != null) {
             //do smtng
         }
         // Callback function for Phone Auth
@@ -62,12 +63,19 @@ class SignInFragment : Fragment(){
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
 
-                Log.d("TAG","onCodeSent:$verificationId")
+                Log.d("TAG", "onCodeSent:$verificationId")
                 storedVerificationId = verificationId
                 resendToken = token
-                val bundle = bundleOf("storedVerificationId" to storedVerificationId)
-                if(requireActivity() is LoginActivity){
-                    findNavController().navigate(com.robosoft.foursquare.R.id.action_signInFragment_to_otpFragment,bundle)
+                val bundle = bundleOf(
+                    "storedVerificationId" to storedVerificationId,
+                    "isForgot" to true,
+                    "phone" to phoneNum
+                )
+                if (requireActivity() is LoginActivity) {
+                    findNavController().navigate(
+                        com.robosoft.foursquare.R.id.action_signInFragment_to_otpFragment,
+                        bundle
+                    )
                 }
             }
         }
@@ -77,57 +85,94 @@ class SignInFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.forgotPassword.setOnClickListener{
-            login()
+        binding.forgotPassword.setOnClickListener {
+            if (!(TextUtils.isEmpty(binding.personName.text.toString()))) {
+                updateUserPassword()
+            } else {
+                Toast.makeText(requireActivity(), "Please enter email to reset password", Toast.LENGTH_LONG)
+                    .show()
+            }
+
         }
 
         binding.login.setOnClickListener {
-            if(!(TextUtils.isEmpty(binding.personName.text.toString())|| TextUtils.isEmpty(binding.passwordEntry.text.toString()))){
-                loginViewModel.signInUser(binding.personName.text.toString(),binding.passwordEntry.text.toString()).observe(viewLifecycleOwner, { dataFav ->
-                    dataFav?.let { resource ->
-                        when (resource.status) {
-                            Status.LOADING -> {
-
-                            }
-                            Status.SUCCESS -> {
-                                resource.data?.also {
-                                    Log.d("TAG", "onViewCreated: $it ")
-                                    val i = Intent(requireActivity(), HomeActivity::class.java)
-                                    startActivity(i)
-                                    activity?.finish()
-                                } ?: run{
-                                    Toast.makeText(requireActivity(),"No user found.Please register", Toast.LENGTH_LONG).show()
-                                }
-                            }
-                            Status.ERROR -> {
-
-                            }
-                        }
-                    }
-                })
-            }else {
-                Toast.makeText(requireActivity(),"Please enter all the fields", Toast.LENGTH_LONG).show()
+            if (!(TextUtils.isEmpty(binding.personName.text.toString()) || TextUtils.isEmpty(binding.passwordEntry.text.toString()))) {
+                checkUserAndLogin()
+            } else {
+                Toast.makeText(requireActivity(), "Please enter all the fields", Toast.LENGTH_LONG)
+                    .show()
             }
         }
 
         binding.createAccount.setOnClickListener {
-            if(requireActivity() is LoginActivity){
+            if (requireActivity() is LoginActivity) {
                 findNavController().navigate(com.robosoft.foursquare.R.id.action_signInFragment_to_signupFragment)
             }
         }
     }
 
-    private fun login() {
-        var number="8762699896"
-        if(number.isNotEmpty()){
-            number= "+91$number"
-            sendVerificationcode (number)
-        }else{
-            Toast.makeText(requireContext(),"Enter mobile number",Toast.LENGTH_SHORT).show()
-        }
+    private fun updateUserPassword() {
+        loginViewModel.getUserData(binding.personName.text.toString())
+            .observe(viewLifecycleOwner, { dataFav ->
+                dataFav?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {
+
+                        }
+                        Status.SUCCESS -> {
+                            resource.data?.also {
+                                val number = "+91${it.phone}"
+                                phoneNum = it.phone
+                                sendVerificationCode(number)
+                            } ?: run {
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "No user found.Please register",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        }
+                        Status.ERROR -> {
+
+                        }
+                    }
+                }
+            })
     }
 
-    private fun sendVerificationcode(number: String) {
+    private fun checkUserAndLogin() {
+        loginViewModel.signInUser(
+            binding.personName.text.toString(),
+            binding.passwordEntry.text.toString()
+        ).observe(viewLifecycleOwner, { dataFav ->
+            dataFav?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+
+                    }
+                    Status.SUCCESS -> {
+                        resource.data?.also {
+                            val i = Intent(requireActivity(), HomeActivity::class.java)
+                            startActivity(i)
+                            activity?.finish()
+
+                        } ?: run {
+                            Toast.makeText(
+                                requireActivity(),
+                                "No user found.Please register",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                    Status.ERROR -> {
+
+                    }
+                }
+            }
+        })
+    }
+
+    private fun sendVerificationCode(number: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(number) // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit

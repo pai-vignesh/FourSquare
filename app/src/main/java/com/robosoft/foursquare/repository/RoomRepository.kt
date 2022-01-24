@@ -10,8 +10,12 @@ class RoomRepository @Inject constructor(private val dao: FourSquareDao) {
     suspend fun registerUser(userModel: UserModel): Long =
         dao.registerUser(userModel)
 
-    suspend fun signInUser(email:String,password:String) =
+    fun signInUser(email:String,password:String) =
         dao.signInUser(email,password)
+
+    fun updatePassword(password: String,phone:String) = dao.updatePassword(password,phone)
+
+    fun getUserData(email: String) = dao.getUserData(email)
 
     suspend fun deleteFavourites(favourites: FavouriteModel){
         dao.deleteFavourites(favourites)

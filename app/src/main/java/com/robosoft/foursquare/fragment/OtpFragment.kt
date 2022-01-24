@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.FirebaseException
@@ -33,15 +34,21 @@ class OtpFragment : Fragment() {
         binding = FragmentOtpBinding.inflate(inflater)
         auth = FirebaseAuth.getInstance()
         val storedVerificationId = arguments?.getString("storedVerificationId")
-        Log.d("TAG", "onCreateView: $storedVerificationId")
+        val isForgot = arguments?.getBoolean("isForgot")
+        val phone = arguments?.getString("phone")
+        Log.d("TAG", "onCreateView: $storedVerificationId $isForgot")
 
         binding.getIn.setOnClickListener {
-            var otp = binding.OTPEntry.text.toString().trim()
+            val otp = binding.OTPEntry.text.toString().trim()
             if (!otp.isEmpty()) {
                 val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
                     storedVerificationId.toString(), otp
                 )
-                signInWithPhoneAuthCredential(credential)
+                isForgot?.let { forgot ->
+                    phone?.let { num ->
+                        signInWithPhoneAuthCredential(credential, forgot, num)
+                    }
+                }
             } else {
                 Toast.makeText(requireActivity(), "Enter OTP", Toast.LENGTH_SHORT).show()
             }
@@ -50,12 +57,26 @@ class OtpFragment : Fragment() {
     }
 
 
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+    private fun signInWithPhoneAuthCredential(
+        credential: PhoneAuthCredential,
+        isForgot: Boolean,
+        phone: String = ""
+    ) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    startActivity(Intent(requireActivity(), HomeActivity::class.java))
-                    activity?.finish()
+                    if (isForgot) {
+                        if (requireActivity() is LoginActivity) {
+                            val bundle = bundleOf("phone" to phone)
+                            findNavController().navigate(
+                                com.robosoft.foursquare.R.id.action_otpFragment_to_confirmPasswordFragment,
+                                bundle
+                            )
+                        }
+                    } else {
+                        startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                        activity?.finish()
+                    }
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         Toast.makeText(requireActivity(), "Invalid OTP", Toast.LENGTH_SHORT).show()
