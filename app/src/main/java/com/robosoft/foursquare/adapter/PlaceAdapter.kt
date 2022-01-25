@@ -76,7 +76,8 @@ class PlaceAdapter(
             val km = DecimalFormat("##.##").format(currentLocation.distanceTo(destLocation) / 1000)
             distance.text = distance.context.getString(R.string.card_distance_text, km)
             place.rating?.let { stars ->
-                ratings.text = ((stars * 5) / 10).toString()
+                val finalRating = ((stars * 5) / 10)
+                ratings.text = String.format("%.1f",finalRating)
             }
             place.price?.let { price ->
                 when (price) {

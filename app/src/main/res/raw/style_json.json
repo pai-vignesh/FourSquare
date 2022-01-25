@@ -1,0 +1,269 @@
+[
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "saturation": -84
+      },
+      {
+        "lightness": 59
+      },
+      {
+        "visibility": "on"
+      },
+      {
+        "color": "#ede7d6"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "saturation": "-27"
+      },
+      {
+        "lightness": 100
+      },
+      {
+        "visibility": "on"
+      },
+      {
+        "color": "#f1c808"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "hue": "#00ff8f"
+      },
+      {
+        "saturation": 1
+      },
+      {
+        "lightness": -15
+      },
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.place_of_worship",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "all",
+    "stylers": [
+      {
+        "saturation": -60
+      },
+      {
+        "lightness": 23
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#e8e0cb"
+      },
+      {
+        "saturation": "25"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "saturation": "43"
+      },
+      {
+        "lightness": "-90"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "saturation": -100
+      },
+      {
+        "lightness": 100
+      },
+      {
+        "color": "#ffdd33"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "hue": "#ff0000"
+      },
+      {
+        "saturation": -100
+      },
+      {
+        "lightness": 26
+      },
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "saturation": 100
+      },
+      {
+        "lightness": -22
+      },
+      {
+        "visibility": "on"
+      },
+      {
+        "color": "#f8eaa5"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "saturation": 100
+      },
+      {
+        "lightness": -35
+      },
+      {
+        "visibility": "simplified"
+      },
+      {
+        "color": "#f8eaa5"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "all",
+    "stylers": [
+      {
+        "hue": "#7fc8ed"
+      },
+      {
+        "saturation": 55
+      },
+      {
+        "lightness": -6
+      },
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "hue": "#7fc8ed"
+      },
+      {
+        "saturation": 55
+      },
+      {
+        "lightness": -6
+      },
+      {
+        "visibility": "off"
+      }
+    ]
+  }
+]

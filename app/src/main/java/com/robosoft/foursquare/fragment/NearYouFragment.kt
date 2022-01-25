@@ -28,6 +28,12 @@ import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.LocationPermission
 import javax.inject.Inject
 
+import com.google.android.gms.maps.GoogleMapOptions
+
+import com.google.android.gms.maps.MapFragment
+import com.google.android.gms.maps.model.MapStyleOptions
+
+
 @AndroidEntryPoint
 class NearYouFragment : Fragment(), CellClickListener {
     private lateinit var binding: FragmentNearYouBinding
@@ -55,6 +61,7 @@ class NearYouFragment : Fragment(), CellClickListener {
                     childFragmentManager.findFragmentById(R.id.mapNearFragment) as SupportMapFragment
                 mapFragment.getMapAsync {
                     googleMap = it
+                    googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(),R.raw.style_json))
                     val myLocation = LatLng(
                         location.latitude,
                         location.longitude
@@ -81,7 +88,7 @@ class NearYouFragment : Fragment(), CellClickListener {
     private fun setupRv(p0: String?, currentLocation: Location) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
-            homeViewModel.getQueryPlaces("", location).observe(this, { data ->
+            homeViewModel.getQueryPlaces("", location,"DISTANCE").observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}

@@ -75,9 +75,12 @@
         <entry key="app/src/main/res/layout/activity_feedback.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_image_details.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_place_details.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_review.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_coffee_place.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_confirm_password.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/layout/fragment_dinner_place.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_filter_options.xml" value="0.33" />
@@ -87,6 +90,7 @@
         <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/layout/fragment_popular_place.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_search_default.xml" value="0.2111111111111111" />
+        <entry key="app/src/main/res/layout/fragment_signin.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_top_pick.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/item_option.xml" value="0.3333333333333333" />
