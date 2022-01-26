@@ -17,4 +17,8 @@
     <color name="reviewText"> #8d8d8d</color>
     <color name="transparent">#80000000</color>
     <color name="textBlack">#000000</color>
+    <color name="green900">#00ab08</color>
+    <color name="green700">#00c301</color>
+    <color name="green500">#26d701</color>
+    <color name="green300">#4ded30</color>
 </resources>

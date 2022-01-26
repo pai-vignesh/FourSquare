@@ -5,6 +5,8 @@ import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,12 +19,15 @@ import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FavouritesAdapter(
     private val cellClickListener: CellClickListener,
     private val currentLocation: Location
 ) :
     RecyclerView.Adapter<FavouritesAdapter.MyViewHolder>() {
+
     private val diffCallback = object : DiffUtil.ItemCallback<FavouriteModel>() {
         override fun areItemsTheSame(oldItem: FavouriteModel, newItem: FavouriteModel): Boolean {
             return oldItem.fsqId == newItem.fsqId
@@ -39,6 +44,10 @@ class FavouritesAdapter(
         set(value) {
             differ.submitList(value)
         }
+
+    fun updateList(fav : List<FavouriteModel>){
+        differ.submitList(fav)
+    }
 
     class MyViewHolder(binding: FavouriteItemAdapterBinding) :
         RecyclerView.ViewHolder(binding.root) {

@@ -24,17 +24,17 @@
             app:titleCentered="true"
             app:titleTextColor="@color/white"/>
 
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
+            app:searchIcon="@drawable/search_black"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginHorizontal="70dp"
             android:background="@drawable/bg_white_rounded"
-            android:focusable="false"
             android:layout_gravity="center"
-            android:queryBackground="@color/white"
-            android:layout_marginVertical="10dp"
-            app:defaultQueryHint="hint" />
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent"
+            android:layout_marginVertical="10dp"/>
 
 
     </com.google.android.material.appbar.AppBarLayout>

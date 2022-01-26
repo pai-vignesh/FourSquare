@@ -1,10 +1,14 @@
 package com.robosoft.foursquare.adapter
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.location.Location
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +22,8 @@ import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import java.text.DecimalFormat
+import androidx.core.content.ContextCompat
+
 
 class PlaceAdapter(
     private val cellClickListener: CellClickListener,
@@ -77,8 +83,27 @@ class PlaceAdapter(
             distance.text = distance.context.getString(R.string.card_distance_text, km)
             place.rating?.let { stars ->
                 val finalRating = ((stars * 5) / 10)
+                when {
+                    finalRating>=4 -> {
+                        ratings.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(ratings.context,R.color.green900))
+                    }
+                    finalRating>=3 -> {
+                        ratings.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(ratings.context,R.color.green700))
+                    }
+                    finalRating>=2 -> {
+                        ratings.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(ratings.context,R.color.green500))
+                    }
+                    else -> {
+                        ratings.backgroundTintList =
+                            ColorStateList.valueOf(ContextCompat.getColor(ratings.context,R.color.green300))
+                    }
+                }
                 ratings.text = String.format("%.1f",finalRating)
             }
+
             place.price?.let { price ->
                 when (price) {
                     1 -> placePrice.text = placePrice.context.getString(R.string.expense, "₹")

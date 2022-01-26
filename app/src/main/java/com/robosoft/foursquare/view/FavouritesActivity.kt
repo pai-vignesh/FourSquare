@@ -4,6 +4,7 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -16,7 +17,9 @@ import com.robosoft.foursquare.util.LocationPermission
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.FavouritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class FavouritesActivity : AppCompatActivity(), CellClickListener {
@@ -28,6 +31,7 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var favourites = ArrayList<FavouriteModel>()
+    private var favouritesFilter = ArrayList<FavouriteModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFavouritesBinding.inflate(layoutInflater)
@@ -44,6 +48,35 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
                 setupRv(location)
             }
         }
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                favouritesFilter.clear()
+                val searchText = newText!!.lowercase(Locale.getDefault())
+                if(searchText.isNotEmpty()){
+                    favourites.forEach { model ->
+                        if(model.placeName.lowercase(Locale.getDefault()).contains(searchText)){
+                            favouritesFilter.add(model)
+                        }
+                    }
+                    favouritesAdapter.favourites = favouritesFilter
+                    favouritesAdapter.notifyDataSetChanged()
+                }else{
+                    favouritesFilter.clear()
+                    favouritesFilter.addAll(favourites)
+                    favouritesAdapter.favourites = favouritesFilter
+                    favouritesAdapter.notifyDataSetChanged()
+                }
+                return true
+            }
+        })
+
+
+
     }
 
     //recyclerview setup
@@ -52,12 +85,13 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
         favouritesViewModel.favourites.observe(this, { data ->
             data?.let { favouritesData ->
                 favourites = favouritesData as ArrayList<FavouriteModel>
+                favouritesFilter.addAll(favourites)
                 binding.favouriteRecyclerView.apply {
                     layoutManager = LinearLayoutManager(
                         this@FavouritesActivity,
                         LinearLayoutManager.VERTICAL, false
                     )
-                    favouritesAdapter.favourites = favourites
+                    favouritesAdapter.favourites = favouritesFilter
                     adapter = favouritesAdapter
                     setHasFixedSize(true)
                 }
@@ -71,7 +105,10 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
                 dataDeleted?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
-                        Status.SUCCESS -> {}
+                        Status.SUCCESS -> {
+                            favouritesFilter.clear()
+                            favouritesAdapter.notifyDataSetChanged()
+                        }
                         Status.ERROR -> {}
                     }
                 }
