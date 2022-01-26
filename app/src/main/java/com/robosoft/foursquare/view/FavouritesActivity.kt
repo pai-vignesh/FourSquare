@@ -63,13 +63,11 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
                             favouritesFilter.add(model)
                         }
                     }
-                    favouritesAdapter.favourites = favouritesFilter
-                    favouritesAdapter.notifyDataSetChanged()
+                    favouritesAdapter.submitList(favouritesFilter)
                 }else{
                     favouritesFilter.clear()
                     favouritesFilter.addAll(favourites)
-                    favouritesAdapter.favourites = favouritesFilter
-                    favouritesAdapter.notifyDataSetChanged()
+                    favouritesAdapter.submitList(favouritesFilter)
                 }
                 return true
             }
@@ -91,7 +89,7 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
                         this@FavouritesActivity,
                         LinearLayoutManager.VERTICAL, false
                     )
-                    favouritesAdapter.favourites = favouritesFilter
+                    favouritesAdapter.submitList(favourites)
                     adapter = favouritesAdapter
                     setHasFixedSize(true)
                 }
@@ -106,8 +104,6 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
                     when (resource.status) {
                         Status.LOADING -> {}
                         Status.SUCCESS -> {
-                            favouritesFilter.clear()
-                            favouritesAdapter.notifyDataSetChanged()
                         }
                         Status.ERROR -> {}
                     }

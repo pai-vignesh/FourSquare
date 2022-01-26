@@ -28,25 +28,42 @@ class FavouritesAdapter(
 ) :
     RecyclerView.Adapter<FavouritesAdapter.MyViewHolder>() {
 
-    private val diffCallback = object : DiffUtil.ItemCallback<FavouriteModel>() {
-        override fun areItemsTheSame(oldItem: FavouriteModel, newItem: FavouriteModel): Boolean {
-            return oldItem.fsqId == newItem.fsqId
-        }
+    var favourites: ArrayList<FavouriteModel> = ArrayList()
 
-        override fun areContentsTheSame(oldItem: FavouriteModel, newItem: FavouriteModel): Boolean {
-            return newItem == oldItem
-        }
+    fun submitList(favouriteList: List<FavouriteModel>){
+        val oldList = favourites
+        val diffResult : DiffUtil.DiffResult = DiffUtil.calculateDiff(
+            FavouriteItemDiffCallback(
+                oldList,
+                favouriteList
+            )
+        )
+        favourites.clear()
+        favourites.addAll(favouriteList)
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    private val differ = AsyncListDiffer(this, diffCallback)
-    var favourites: List<FavouriteModel>
-        get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
+
+    class FavouriteItemDiffCallback(
+        var oldItem : List<FavouriteModel>,
+        var newItem : List<FavouriteModel>
+    ) : DiffUtil.Callback(){
+        override fun getOldListSize(): Int {
+           return oldItem.size
         }
 
-    fun updateList(fav : List<FavouriteModel>){
-        differ.submitList(fav)
+        override fun getNewListSize(): Int {
+            return newItem.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return (oldItem[oldItemPosition].fsqId == newItem[newItemPosition].fsqId)
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return (oldItem[oldItemPosition] == newItem[newItemPosition])
+        }
+
     }
 
     class MyViewHolder(binding: FavouriteItemAdapterBinding) :
