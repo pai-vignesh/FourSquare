@@ -51,7 +51,6 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
 
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             ReviewAdapterBinding.inflate(

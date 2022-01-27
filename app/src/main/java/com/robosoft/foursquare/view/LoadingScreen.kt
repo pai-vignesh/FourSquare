@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowCompat
 import com.robosoft.foursquare.databinding.ActivityLoadingScreenBinding
+import com.robosoft.foursquare.preferences.Preferences
 
 class LoadingScreen : AppCompatActivity() {
     private lateinit var binding: ActivityLoadingScreenBinding
@@ -18,9 +19,16 @@ class LoadingScreen : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         binding.ivSplash.alpha = 0f
         binding.ivSplash.animate().setDuration(2000).alpha(1f).withEndAction {
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
-            finish()
+            val isLogged = Preferences.getPrefs("isLogged",this)
+            if (isLogged == "true"){
+                val i = Intent(this, HomeActivity::class.java)
+                startActivity(i)
+                finish()
+            }else{
+                val i = Intent(this, LoginActivity::class.java)
+                startActivity(i)
+                finish()
+            }
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }

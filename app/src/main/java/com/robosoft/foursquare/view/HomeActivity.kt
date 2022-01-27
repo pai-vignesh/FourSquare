@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayout
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.adapter.MyFragmentPagerAdapter
 import com.robosoft.foursquare.databinding.ActivityHomeBinding
+import com.robosoft.foursquare.preferences.Preferences
 import dagger.hilt.android.AndroidEntryPoint
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 
@@ -98,6 +99,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.list4 -> {
                 binding.drawer.closeDrawer()
+                Preferences.setPrefs("isLogged","notFound",this)
                 val i = Intent(this, LoginActivity::class.java)
                 startActivity(i)
                 finish()

@@ -21,6 +21,9 @@ import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import java.text.DecimalFormat
 import androidx.core.content.ContextCompat
+import android.R.attr.name
+import com.robosoft.foursquare.preferences.Preferences
+
 
 class PlaceAdapter(
     private val cellClickListener: CellClickListener,
@@ -63,6 +66,14 @@ class PlaceAdapter(
             place: PlaceData,
             currentLocation: Location
         ) {
+            val fsqList = Preferences.getArrayPrefs("PlaceList",fav.context)
+            if(fsqList.contains(place.fsqId)){
+                fav.visibility = View.GONE
+                unFav.visibility = View.VISIBLE
+            }else{
+                unFav.visibility = View.GONE
+                fav.visibility = View.VISIBLE
+            }
             if (!place.photos.isNullOrEmpty()) {
                 val requestOptions = RequestOptions().diskCacheStrategy(
                     DiskCacheStrategy.ALL
@@ -129,6 +140,10 @@ class PlaceAdapter(
                     imageUrl,
                     placeAddress.text.toString()
                 )
+                val idList= Preferences.getArrayPrefs("PlaceList",fav.context)
+                idList.add(place.fsqId)
+                Preferences.setArrayPrefs("PlaceList",idList,fav.context)
+                Log.d("TAG", "bind: $idList")
                 cellClickListener.onCellClickListener(favouriteModel, false)
             }
 
@@ -146,6 +161,9 @@ class PlaceAdapter(
                     imageUrl,
                     placeAddress.text.toString()
                 )
+                val idList= Preferences.getArrayPrefs("PlaceList",fav.context)
+                idList.remove(place.fsqId)
+                Preferences.setArrayPrefs("PlaceList",idList,fav.context)
                 cellClickListener.onCellClickListener(favouriteModel, true)
             }
 

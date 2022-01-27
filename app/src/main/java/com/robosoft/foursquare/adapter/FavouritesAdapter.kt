@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.FavouriteItemAdapterBinding
+import com.robosoft.foursquare.preferences.Preferences
 import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
@@ -94,6 +95,9 @@ class FavouritesAdapter(
             placeAddress.text = favourite.address
             fav.setOnClickListener {
                 fav.visibility = View.GONE
+                val idList= Preferences.getArrayPrefs("PlaceList",fav.context)
+                idList.remove(favourite.fsqId)
+                Preferences.setArrayPrefs("PlaceList",idList,fav.context)
                 cellClickListener.onCellClickListener(favourite, true)
             }
             card.setOnClickListener { v ->

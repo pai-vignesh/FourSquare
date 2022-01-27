@@ -17,6 +17,7 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.robosoft.foursquare.databinding.FragmentSigninBinding
+import com.robosoft.foursquare.preferences.Preferences
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.view.HomeActivity
 import com.robosoft.foursquare.view.LoginActivity
@@ -137,6 +138,7 @@ class SignInFragment : Fragment() {
                     Status.LOADING -> {}
                     Status.SUCCESS -> {
                         resource.data?.also {
+                            Preferences.setPrefs("isLogged","true",requireActivity())
                             val i = Intent(requireActivity(), HomeActivity::class.java)
                             startActivity(i)
                             activity?.finish()

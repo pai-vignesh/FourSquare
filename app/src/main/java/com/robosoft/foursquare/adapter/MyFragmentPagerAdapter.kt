@@ -13,18 +13,13 @@ class MyFragmentPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     }
 
     override fun createFragment(position: Int): Fragment {
-        val nearYouFragment = NearYouFragment()
-        val topPickFragment = TopPickFragment()
-        val popularFragment = PopularFragment()
-        val coffeePlaceFragment = CoffeePlaceFragment()
-        val dinnerPlaceFragment = DinnerPlaceFragment()
         return when (position) {
-            0 -> nearYouFragment
-            1 -> topPickFragment
-            2 -> popularFragment
-            3 -> dinnerPlaceFragment
-            4 -> coffeePlaceFragment
-            else -> coffeePlaceFragment
+            0 -> NearYouFragment()
+            1 -> TopPickFragment()
+            2 -> PopularFragment()
+            3 -> DinnerPlaceFragment()
+            4 -> CoffeePlaceFragment()
+            else -> CoffeePlaceFragment()
         }
     }
 

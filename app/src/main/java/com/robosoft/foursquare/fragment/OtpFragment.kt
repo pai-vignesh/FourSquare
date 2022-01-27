@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.*
 import com.robosoft.foursquare.databinding.FragmentOtpBinding
+import com.robosoft.foursquare.preferences.Preferences
 import com.robosoft.foursquare.view.HomeActivity
 import com.robosoft.foursquare.view.LoginActivity
 
@@ -62,6 +63,7 @@ class OtpFragment : Fragment() {
                             )
                         }
                     } else {
+                        Preferences.setPrefs("isLogged","true",requireActivity())
                         startActivity(Intent(requireActivity(), HomeActivity::class.java))
                         activity?.finish()
                     }
