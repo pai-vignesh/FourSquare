@@ -5,7 +5,11 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -19,6 +23,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.ActivityPlaceDetailsBinding
+import com.robosoft.foursquare.preferences.Preferences
+import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.LocationPermission
 import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.PlaceDetailsViewModel
@@ -33,10 +39,12 @@ class PlaceDetailsActivity : AppCompatActivity() {
     private lateinit var currentLocation: Location
     private val placeDetailsViewModel: PlaceDetailsViewModel by viewModels()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var favouriteModel: FavouriteModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlaceDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.topAppBar)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val fsqId = intent.getStringExtra("fsqId")
         binding.topAppBar.setNavigationOnClickListener {
@@ -46,20 +54,6 @@ class PlaceDetailsActivity : AppCompatActivity() {
             val i = Intent(this, AddReview::class.java)
             startActivity(i)
         }
-//        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-//            when (menuItem.itemId) {
-//                R.id.share -> {
-//                    val i = Intent(this, SearchActivity::class.java)
-//                    startActivity(i)
-//                    true
-//                }
-//                R.id.favorite -> {
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-
         binding.reviews.setOnClickListener {
             val i = Intent(this, ReviewActivity::class.java)
             i.putExtra("fsqId", fsqId)
@@ -119,6 +113,43 @@ class PlaceDetailsActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.place_details_bar, menu)
+        val fsqId = intent.getStringExtra("fsqId")
+        val fsqList = Preferences.getArrayPrefs("PlaceList", this)
+        if (fsqList.contains(fsqId)) {
+            menu.getItem(1).icon = ContextCompat.getDrawable(this, R.drawable.fav_selected)
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.share ->{
+                val i = Intent(Intent.ACTION_SEND)
+                i.type = "text/plain"
+                i.putExtra(Intent.EXTRA_SUBJECT, "Sharing URL")
+                i.putExtra(Intent.EXTRA_TEXT, "Thank you for using app")
+                startActivity(Intent.createChooser(i, "Share URL"))
+            }
+            R.id.favorite ->{
+                val fsqId = intent.getStringExtra("fsqId")
+                val fsqList = Preferences.getArrayPrefs("PlaceList", this)
+                if (fsqList.contains(fsqId)) {
+                    item.icon = ContextCompat.getDrawable(this, R.drawable.favourite)
+                    fsqList.remove(fsqId)
+                    Preferences.setArrayPrefs("PlaceList",fsqList,this)
+                }else{
+                    fsqList.add(fsqId)
+                    Preferences.setArrayPrefs("PlaceList",fsqList,this)
+                    item.icon = ContextCompat.getDrawable(this, R.drawable.fav_selected)
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+
     }
 
     private fun fetchLocation(lat: Double, lng: Double) {

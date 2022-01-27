@@ -142,7 +142,6 @@ class SignInFragment : Fragment() {
                             val i = Intent(requireActivity(), HomeActivity::class.java)
                             startActivity(i)
                             activity?.finish()
-
                         } ?: run {
                             Toast.makeText(
                                 requireActivity(),
