@@ -12,7 +12,7 @@ molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
 numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
 optio, eaque rerum! Provident similique accusantium nemo autem. .</string>
     <string name="distance_text">Distance : %1$s km.</string>
-    <string name="card_distance_text">%1$s km.</string>
+    <string name="card_distance_text">• %1$s km.</string>
     <string name="date">Added May 12,2016</string>
     <string name="Email">Email</string>
     <string name="or">OR</string>

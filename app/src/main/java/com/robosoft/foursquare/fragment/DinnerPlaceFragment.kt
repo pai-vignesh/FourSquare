@@ -52,9 +52,7 @@ class DinnerPlaceFragment : Fragment(), CellClickListener {
             homeViewModel.getQueryPlaces("restaurants", location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
+                        Status.LOADING -> {}
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
                                 places = placeData.results as ArrayList<PlaceData>
@@ -79,9 +77,7 @@ class DinnerPlaceFragment : Fragment(), CellClickListener {
                                 }
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
+                        Status.ERROR -> {}
                     }
                 }
 

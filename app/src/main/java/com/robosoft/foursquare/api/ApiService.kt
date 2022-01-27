@@ -36,6 +36,17 @@ interface ApiService {
         "Authorization: ${BuildConfig.API_KEY}",
         "Accept: application/json"
     )
+    @GET(Constants.SEARCH_POINT)
+    suspend fun getSearchPlaces(
+        @Query("query") query: String,
+        @Query("fields") fields: String,
+        @Query("near") near: String
+    ): PlaceList
+
+    @Headers(
+        "Authorization: ${BuildConfig.API_KEY}",
+        "Accept: application/json"
+    )
     @GET("places/{id}/photos")
     suspend fun getPlacePhotos(@Path("id") query: String): List<Photo>
 

@@ -5,9 +5,6 @@ import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -19,7 +16,6 @@ import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class FavouritesAdapter(
@@ -27,9 +23,7 @@ class FavouritesAdapter(
     private val currentLocation: Location
 ) :
     RecyclerView.Adapter<FavouritesAdapter.MyViewHolder>() {
-
     var favourites: ArrayList<FavouriteModel> = ArrayList()
-
     fun submitList(favouriteList: List<FavouriteModel>){
         val oldList = favourites
         val diffResult : DiffUtil.DiffResult = DiffUtil.calculateDiff(
@@ -43,10 +37,9 @@ class FavouritesAdapter(
         diffResult.dispatchUpdatesTo(this)
     }
 
-
     class FavouriteItemDiffCallback(
-        var oldItem : List<FavouriteModel>,
-        var newItem : List<FavouriteModel>
+        private var oldItem : List<FavouriteModel>,
+        private var newItem : List<FavouriteModel>
     ) : DiffUtil.Callback(){
         override fun getOldListSize(): Int {
            return oldItem.size
@@ -63,7 +56,6 @@ class FavouritesAdapter(
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return (oldItem[oldItemPosition] == newItem[newItemPosition])
         }
-
     }
 
     class MyViewHolder(binding: FavouriteItemAdapterBinding) :

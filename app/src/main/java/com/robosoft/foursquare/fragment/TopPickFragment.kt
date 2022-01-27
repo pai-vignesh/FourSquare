@@ -113,5 +113,4 @@ class TopPickFragment : Fragment(), CellClickListener {
             })
         }
     }
-
 }

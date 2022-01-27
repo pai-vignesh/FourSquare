@@ -110,7 +110,7 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="• ₹"
             android:textSize="12sp"
             android:ellipsize="end"
             android:maxLines="1"

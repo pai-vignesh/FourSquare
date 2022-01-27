@@ -55,27 +55,29 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                favouritesFilter.clear()
                 val searchText = newText!!.lowercase(Locale.getDefault())
-                if(searchText.isNotEmpty()){
-                    favourites.forEach { model ->
-                        if(model.placeName.lowercase(Locale.getDefault()).contains(searchText)){
-                            favouritesFilter.add(model)
-                        }
-                    }
-                    favouritesAdapter.submitList(favouritesFilter)
-                }else{
-                    favouritesFilter.clear()
-                    favouritesFilter.addAll(favourites)
-                    favouritesAdapter.submitList(favouritesFilter)
-                }
+                performFilter(searchText)
                 return true
             }
         })
-
-
-
     }
+
+    private fun performFilter(searchText:String){
+        favouritesFilter.clear()
+        if(searchText.isNotEmpty()){
+            favourites.forEach { model ->
+                if(model.placeName.lowercase(Locale.getDefault()).contains(searchText)){
+                    favouritesFilter.add(model)
+                }
+            }
+            favouritesAdapter.submitList(favouritesFilter)
+        }else{
+            favouritesFilter.clear()
+            favouritesFilter.addAll(favourites)
+            favouritesAdapter.submitList(favouritesFilter)
+        }
+    }
+
 
     //recyclerview setup
     private fun setupRv(currentLocation: Location) {

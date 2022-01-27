@@ -11,4 +11,5 @@ class MainRepository @Inject constructor(private val apiHelper: ApiHelper) {
         apiHelper.getQueryPlaces(query, ll, fields, sort)
 
     suspend fun getPlaceReviews(id: String) = apiHelper.getPlaceReviews(id)
+    suspend fun getSearchPlace(query: String,fields: String, near: String) = apiHelper.getSearchPlace(query,fields,near)
 }

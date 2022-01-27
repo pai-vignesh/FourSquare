@@ -53,4 +53,16 @@ class HomeViewModel @Inject constructor(
             }
         }
 
+    fun getSearchPlaces(query: String,near: String = "") =
+        liveData(Dispatchers.IO) {
+            emit(Resource.loading(data = null))
+            try {
+                val fields = "fsq_id,photos,name,price,location,categories,geocodes,rating"
+                emit(Resource.success(data = repository.getSearchPlace(query,fields, near)))
+            } catch (exception: Exception) {
+                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            }
+        }
+
+
 }

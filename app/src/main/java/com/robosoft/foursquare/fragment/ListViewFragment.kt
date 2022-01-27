@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,22 +43,87 @@ class ListViewFragment : Fragment(), CellClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentListViewBinding.inflate(inflater)
+        val query = arguments?.getString("query")
+        val near = arguments?.getString("near")
         binding.mapView.setOnClickListener {
-            findNavController().navigate(R.id.action_listViewFragment_to_mapViewFragment)
+            query?.let {
+                val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
+                val mapViewFragment = MapViewFragment()
+                transaction.replace(R.id.fcvSearch, mapViewFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            } ?: run{
+                findNavController().navigate(R.id.action_listViewFragment_to_mapViewFragment)
+            }
         }
         if (LocationPermission.checkPermission(requireActivity())) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-                setupRv("${location.latitude},${location.longitude}", location)
+                query?.let { q->
+                    near?.let { n->
+                        setupSearchRv(q, location,n)
+                    } ?: run{
+                        setupSearchRv(q, location,"")
+                    }
+                } ?: run{
+                    near?.let { n->
+                        query?.let { q->
+                            setupSearchRv(q, location,n)
+                        } ?: run{
+                            setupSearchRv("", location,n)
+                        }
+                    } ?: run{
+                        setupRv("${location.latitude},${location.longitude}", location)
+                    }
+                }
             }
         }
         return binding.root
     }
 
     //recyclerview setup
-    private fun setupRv(p0: String?, currentLocation: Location) {
+    private fun setupSearchRv(p0: String?, currentLocation: Location,near: String) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
-            homeViewModel.getQueryPlaces("", location).observe(this, { data ->
+            homeViewModel.getSearchPlaces(location, near).observe(this, { data ->
+                data?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> {
+                            resource.data?.let { placeData ->
+                                places = placeData.results as ArrayList<PlaceData>
+                                binding.searchRecyclerview.apply {
+                                    layoutManager =
+                                        if (activity!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                            LinearLayoutManager(
+                                                activity,
+                                                LinearLayoutManager.VERTICAL, false
+                                            )
+                                        } else {
+                                            GridLayoutManager(
+                                                activity,
+                                                2,
+                                                LinearLayoutManager.VERTICAL,
+                                                false
+                                            )
+                                        }
+                                    placeAdapter.placeData = places
+                                    adapter = placeAdapter
+                                    setHasFixedSize(true)
+                                }
+                            }
+                        }
+                        Status.ERROR -> {}
+                    }
+                }
+            })
+        }
+    }
+
+    //recyclerview setup
+    private fun setupRv(p0: String?, currentLocation: Location,query:String="") {
+        p0?.let { location ->
+            placeAdapter = PlaceAdapter(this, currentLocation)
+            homeViewModel.getQueryPlaces(query!!, location).observe(this, { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
