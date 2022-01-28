@@ -52,8 +52,6 @@ class NearYouFragment : Fragment(), CellClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNearYouBinding.inflate(inflater)
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireActivity())
         if (LocationPermission.checkPermission(requireActivity())) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                 currentLocation = location
@@ -82,6 +80,15 @@ class NearYouFragment : Fragment(), CellClickListener {
             }
         }
         return binding.root
+    }
+
+    override fun onResume() {
+        if (LocationPermission.checkPermission(requireActivity())) {
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                setupRv("${location.latitude},${location.longitude}", location)
+            }
+        }
+        super.onResume()
     }
 
     //recyclerview setup

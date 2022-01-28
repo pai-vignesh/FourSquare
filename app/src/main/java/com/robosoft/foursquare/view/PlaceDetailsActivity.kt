@@ -23,13 +23,17 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.ActivityPlaceDetailsBinding
+import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.preferences.Preferences
 import com.robosoft.foursquare.room.FavouriteModel
+import com.robosoft.foursquare.util.CustomDialogClass
 import com.robosoft.foursquare.util.LocationPermission
 import com.robosoft.foursquare.util.Status
+import com.robosoft.foursquare.viewmodel.HomeViewModel
 import com.robosoft.foursquare.viewmodel.PlaceDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PlaceDetailsActivity : AppCompatActivity() {
@@ -38,37 +42,44 @@ class PlaceDetailsActivity : AppCompatActivity() {
     private lateinit var googleMap: GoogleMap
     private lateinit var currentLocation: Location
     private val placeDetailsViewModel: PlaceDetailsViewModel by viewModels()
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var favouriteModel: FavouriteModel
+    private val homeViewModel : HomeViewModel by viewModels()
+
+    @Inject
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var fsqId : String? = null
+    lateinit var favouriteModel : FavouriteModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlaceDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.topAppBar)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        val fsqId = intent.getStringExtra("fsqId")
-        binding.topAppBar.setNavigationOnClickListener {
-            onBackPressed()
+        fsqId = intent.getStringExtra("fsqId")
+        binding.apply {
+            topAppBar.setNavigationOnClickListener {
+                onBackPressed()
+            }
+            addReview.setOnClickListener {
+                val i = Intent(this@PlaceDetailsActivity, AddReview::class.java)
+                startActivity(i)
+            }
+            reviews.setOnClickListener {
+                val i = Intent(this@PlaceDetailsActivity, ReviewActivity::class.java)
+                i.putExtra("fsqId", fsqId)
+                i.putExtra("placeName",topAppBar.title)
+                startActivity(i)
+            }
+            photos.setOnClickListener {
+                val i = Intent(this@PlaceDetailsActivity, GalleryActivity::class.java)
+                i.putExtra("fsqId", fsqId)
+                i.putExtra("placeName", topAppBar.title)
+                startActivity(i)
+            }
+            ratingTv?.setOnClickListener {
+                val cdd = CustomDialogClass(this@PlaceDetailsActivity)
+                cdd.show()
+            }
         }
-        binding.addReview.setOnClickListener {
-            val i = Intent(this, AddReview::class.java)
-            startActivity(i)
-        }
-        binding.reviews.setOnClickListener {
-            val i = Intent(this, ReviewActivity::class.java)
-            i.putExtra("fsqId", fsqId)
-            i.putExtra("placeName", binding.topAppBar.title)
-            startActivity(i)
-        }
-        binding.photos.setOnClickListener {
-            val i = Intent(this, GalleryActivity::class.java)
-            i.putExtra("fsqId", fsqId)
-            i.putExtra("placeName", binding.topAppBar.title)
-            startActivity(i)
-        }
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(this)
-
         fsqId?.let {
             placeDetailsViewModel.getPlaceDetails(it).observe(this, { data ->
                 data?.let { resource ->
@@ -76,36 +87,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
                         Status.LOADING -> {}
                         Status.SUCCESS -> {
                             resource.data?.let { placeData ->
-                                if (!placeData.photos.isNullOrEmpty()) {
-                                    Log.d("TAG", "onCreate: ${placeData.photos} ")
-                                    val requestOptions = RequestOptions().diskCacheStrategy(
-                                        DiskCacheStrategy.ALL
-                                    )
-                                    val imgSize = "400x400"
-                                    val imageUrl =
-                                        placeData.photos[0].prefix + imgSize + placeData.photos[0].suffix
-                                    Log.d("TAG", "onCreate: $imageUrl ")
-                                    Glide.with(this).load(imageUrl).apply(requestOptions)
-                                        .into(binding.placeImg)
-                                }
-                                binding.topAppBar.title = placeData.name
-                                binding.tvAddr.text = placeData.location.address
-                                binding.tvLocality.text = placeData.location.locality
-                                placeData.rating?.let { stars ->
-                                    binding.ratingBar.rating = ((stars * 5) / 10).toFloat()
-                                }
-                                placeData.tel?.let { tel ->
-                                    binding.tvphone.text = tel
-                                }
-                                if (placeData.categories.isEmpty()) {
-                                    binding.placeType.text = "unknown type"
-                                } else {
-                                    binding.placeType.text = placeData.categories[0].name
-                                }
-                                fetchLocation(
-                                    placeData.geocodes.main.latitude.toDouble(),
-                                    placeData.geocodes.main.longitude.toDouble()
-                                )
+                                updateView(placeData)
                             }
                         }
                         Status.ERROR -> {}
@@ -115,9 +97,65 @@ class PlaceDetailsActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun updateView(placeData: PlaceData){
+        fetchLocation(
+            placeData.geocodes.main.latitude.toDouble(),
+            placeData.geocodes.main.longitude.toDouble()
+        )
+        var imageUrl = ""
+        if (!placeData.photos.isNullOrEmpty()) {
+            val requestOptions = RequestOptions().diskCacheStrategy(
+                DiskCacheStrategy.ALL
+            )
+            val imgSize = "400x400"
+            imageUrl =
+                placeData.photos[0].prefix + imgSize + placeData.photos[0].suffix
+            Glide.with(this).load(imageUrl).apply(requestOptions)
+                .into(binding.placeImg)
+        }
+        binding.apply {
+            topAppBar.title = placeData.name
+            tvAddr.text = placeData.location.address
+            tvLocality.text = placeData.location.locality
+            placeData.rating?.let { stars ->
+                ratingBar.rating = ((stars * 5) / 10).toFloat()
+            }
+            placeData.tel?.let { tel ->
+                tvphone.text = tel
+            }
+            if (placeData.categories.isEmpty()) {
+                placeType.text = "unknown type"
+            } else {
+                placeType.text = placeData.categories[0].name
+            }
+            var priceVal = "• ₹"
+            placeData.price?.let { price ->
+                priceVal = when (price) {
+                    1 -> "• ₹"
+                    2 -> "• ₹₹"
+                    3 -> "• ₹₹₹"
+                    4 -> "• ₹₹₹₹"
+                    5 -> "• ₹₹₹₹₹"
+                    else -> ""
+                }
+            }
+            favouriteModel = FavouriteModel(
+                placeData.fsqId,
+                placeData.name,
+                placeType.text.toString(),
+                priceVal,
+                placeData.geocodes.main.latitude,
+                placeData.geocodes.main.longitude,
+                ratingBar.rating.toString(),
+                imageUrl,
+                placeData.location.address
+            )
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.place_details_bar, menu)
-        val fsqId = intent.getStringExtra("fsqId")
         val fsqList = Preferences.getArrayPrefs("PlaceList", this)
         if (fsqList.contains(fsqId)) {
             menu.getItem(1).icon = ContextCompat.getDrawable(this, R.drawable.fav_selected)
@@ -135,21 +173,37 @@ class PlaceDetailsActivity : AppCompatActivity() {
                 startActivity(Intent.createChooser(i, "Share URL"))
             }
             R.id.favorite ->{
-                val fsqId = intent.getStringExtra("fsqId")
                 val fsqList = Preferences.getArrayPrefs("PlaceList", this)
                 if (fsqList.contains(fsqId)) {
                     item.icon = ContextCompat.getDrawable(this, R.drawable.favourite)
                     fsqList.remove(fsqId)
                     Preferences.setArrayPrefs("PlaceList",fsqList,this)
+                    homeViewModel.deleteFavourites(favouriteModel).observe(this, { dataInserted ->
+                        dataInserted?.let { resource ->
+                            when (resource.status) {
+                                Status.LOADING -> {}
+                                Status.SUCCESS -> {}
+                                Status.ERROR -> {}
+                            }
+                        }
+                    })
                 }else{
                     fsqList.add(fsqId)
                     Preferences.setArrayPrefs("PlaceList",fsqList,this)
                     item.icon = ContextCompat.getDrawable(this, R.drawable.fav_selected)
+                    homeViewModel.insertFavourites(favouriteModel).observe(this, { dataInserted ->
+                        dataInserted?.let { resource ->
+                            when (resource.status) {
+                                Status.LOADING -> {}
+                                Status.SUCCESS -> {}
+                                Status.ERROR -> {}
+                            }
+                        }
+                    })
                 }
             }
         }
         return super.onOptionsItemSelected(item)
-
     }
 
     private fun fetchLocation(lat: Double, lng: Double) {
