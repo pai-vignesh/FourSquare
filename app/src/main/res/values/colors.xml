@@ -21,4 +21,6 @@
     <color name="green700">#00c301</color>
     <color name="green500">#26d701</color>
     <color name="green300">#4ded30</color>
+    <color name="bg_dailog">#9fffff</color>
+
 </resources>
