@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:background="@color/white"
+        android:background="@drawable/dialog_border"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             android:gravity="center"
             android:text="Overall Rating"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:gravity="center"
             android:text="4.5"
             android:textColor="#36b000"
-            android:textSize="26sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:gravity="center"
             android:text="How would you rate your"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -61,14 +61,16 @@
             android:gravity="center"
             android:text="experience?"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="22sp" />
 
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginVertical="7dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="17dp"
             android:numStars="5"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             style="@style/customRatingBar"
             android:rating="2.5"
             android:layout_gravity="center"
@@ -84,7 +86,6 @@
             android:background="@color/textGrey" />
 
         <Button
-            android:id="@+id/imageView1"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -100,6 +101,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:padding="7dp"
