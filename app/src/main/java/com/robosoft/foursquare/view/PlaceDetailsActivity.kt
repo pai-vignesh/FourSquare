@@ -83,7 +83,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
             ratingTv?.setOnClickListener {
                 val cdd = CustomDialogClass(this@PlaceDetailsActivity)
                 val map = takeScreenShot(this@PlaceDetailsActivity)
-                val fast = fastBlur(map!!, 10)
+                val fast = fastBlur(map!!, 120)
                 val draw: Drawable = BitmapDrawable(resources, fast)
                 cdd.window!!.setBackgroundDrawable(draw)
                 cdd.show()
