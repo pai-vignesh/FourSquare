@@ -8,6 +8,13 @@
     android:fitsSystemWindows="true"
     tools:context=".view.LoginActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4"/>
+
     <ImageView
         android:id="@+id/logoIv"
         android:layout_width="wrap_content"
@@ -15,19 +22,18 @@
         android:contentDescription="@string/logoImage"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcvMain"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:navGraph = "@navigation/nav_home"
-        app:layout_constraintTop_toBottomOf="@id/logoIv"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
