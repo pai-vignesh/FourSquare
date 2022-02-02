@@ -84,7 +84,7 @@ class ListViewFragment : Fragment(), CellClickListener {
     private fun setupSearchRv(p0: String?, currentLocation: Location,near: String) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
-            homeViewModel.getSearchPlaces(location, near).observe(this, { data ->
+            homeViewModel.getSearchPlaces(location, near).observe(viewLifecycleOwner) { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -93,7 +93,7 @@ class ListViewFragment : Fragment(), CellClickListener {
                                 places = placeData.results as ArrayList<PlaceData>
                                 binding.searchRecyclerview.apply {
                                     layoutManager =
-                                        if (activity!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                        if (requireActivity().resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                                             LinearLayoutManager(
                                                 activity,
                                                 LinearLayoutManager.VERTICAL, false
@@ -115,7 +115,7 @@ class ListViewFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 

@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.robosoft.foursquare.R
@@ -27,12 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.LocationPermission
 import javax.inject.Inject
-
-import com.google.android.gms.maps.GoogleMapOptions
-
-import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.model.MapStyleOptions
-
 
 @AndroidEntryPoint
 class NearYouFragment : Fragment(), CellClickListener {
@@ -95,7 +89,7 @@ class NearYouFragment : Fragment(), CellClickListener {
     private fun setupRv(p0: String?, currentLocation: Location) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
-            homeViewModel.getQueryPlaces("", location,"DISTANCE").observe(this, { data ->
+            homeViewModel.getQueryPlaces("", location,"DISTANCE").observe(viewLifecycleOwner) { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -116,13 +110,13 @@ class NearYouFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
-            homeViewModel.deleteFavourites(data).observe(this, { dataDeleted ->
+            homeViewModel.deleteFavourites(data).observe(this) { dataDeleted ->
                 dataDeleted?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -130,9 +124,9 @@ class NearYouFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         } else {
-            homeViewModel.insertFavourites(data).observe(this, { dataInserted ->
+            homeViewModel.insertFavourites(data).observe(this) { dataInserted ->
                 dataInserted?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -140,7 +134,7 @@ class NearYouFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 }

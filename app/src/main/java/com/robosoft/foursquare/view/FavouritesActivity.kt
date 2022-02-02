@@ -82,7 +82,7 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
     //recyclerview setup
     private fun setupRv(currentLocation: Location) {
         favouritesAdapter = FavouritesAdapter(this, currentLocation)
-        favouritesViewModel.favourites.observe(this, { data ->
+        favouritesViewModel.favourites.observe(this) { data ->
             data?.let { favouritesData ->
                 favourites = favouritesData as ArrayList<FavouriteModel>
                 favouritesFilter.addAll(favourites)
@@ -96,21 +96,20 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
                     setHasFixedSize(true)
                 }
             }
-        })
+        }
     }
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
-            favouritesViewModel.deleteFavourites(data).observe(this, { dataDeleted ->
+            favouritesViewModel.deleteFavourites(data).observe(this) { dataDeleted ->
                 dataDeleted?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
-                        Status.SUCCESS -> {
-                        }
+                        Status.SUCCESS -> {}
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 }

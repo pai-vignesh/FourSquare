@@ -105,7 +105,7 @@ class SignInFragment : Fragment() {
 
     private fun updateUserPassword() {
         loginViewModel.getUserData(binding.personName.text.toString())
-            .observe(viewLifecycleOwner, { dataFav ->
+            .observe(viewLifecycleOwner) { dataFav ->
                 dataFav?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -125,20 +125,20 @@ class SignInFragment : Fragment() {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
     }
 
     private fun checkUserAndLogin() {
         loginViewModel.signInUser(
             binding.personName.text.toString(),
             binding.passwordEntry.text.toString()
-        ).observe(viewLifecycleOwner, { dataFav ->
+        ).observe(viewLifecycleOwner) { dataFav ->
             dataFav?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {}
                     Status.SUCCESS -> {
                         resource.data?.also {
-                            Preferences.setPrefs("isLogged","true",requireActivity())
+                            Preferences.setPrefs("isLogged", "true", requireActivity())
                             val i = Intent(requireActivity(), HomeActivity::class.java)
                             startActivity(i)
                             activity?.finish()
@@ -153,7 +153,7 @@ class SignInFragment : Fragment() {
                     Status.ERROR -> {}
                 }
             }
-        })
+        }
     }
 
     private fun sendVerificationCode(number: String) {

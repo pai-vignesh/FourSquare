@@ -42,12 +42,11 @@ class GalleryActivity : AppCompatActivity(), PhotoClickListener {
     private fun setupRv(p0: String?) {
         p0?.let {
             photosAdapter = PhotosAdapter(this)
-            galleryViewModel.getPhotos(it).observe(this, { data ->
+            galleryViewModel.getPhotos(it).observe(this) { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
                         Status.SUCCESS -> {
-                            Log.d("TAG", "setupRv: ${resource.data?.size} ")
                             resource.data?.let { photoData ->
                                 photos = photoData as ArrayList<Photo>
                                 binding.nearRecyclerView.apply {
@@ -76,7 +75,7 @@ class GalleryActivity : AppCompatActivity(), PhotoClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 

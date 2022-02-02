@@ -48,7 +48,7 @@ class ReviewActivity : AppCompatActivity() {
     private fun setupRv(p0: String?) {
         p0?.let {
             reviewAdapter = ReviewAdapter()
-            reviewViewModel.getPlaceReviews(it).observe(this, { data ->
+            reviewViewModel.getPlaceReviews(it).observe(this) { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -70,7 +70,7 @@ class ReviewActivity : AppCompatActivity() {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 }

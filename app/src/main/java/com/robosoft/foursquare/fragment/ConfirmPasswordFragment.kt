@@ -31,7 +31,7 @@ class ConfirmPasswordFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Password not matching", Toast.LENGTH_LONG).show()
             } else {
                 loginViewModel.updatePassword(binding.passwordEntry3.text.toString(), phone!!)
-                    .observe(viewLifecycleOwner, { dataFav ->
+                    .observe(viewLifecycleOwner) { dataFav ->
                         dataFav?.let { resource ->
                             when (resource.status) {
                                 Status.LOADING -> {}
@@ -45,7 +45,7 @@ class ConfirmPasswordFragment : Fragment() {
                                 Status.ERROR -> {}
                             }
                         }
-                    })
+                    }
             }
         }
         return binding.root

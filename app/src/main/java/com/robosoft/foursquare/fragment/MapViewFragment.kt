@@ -91,7 +91,7 @@ class MapViewFragment : Fragment() {
     //recyclerview setup
     private fun updateCard(p0: String?, currentLocation: Location) {
         p0?.let { location ->
-            homeViewModel.getQueryPlaces("", location,"DISTANCE").observe(this, { data ->
+            homeViewModel.getQueryPlaces("", location,"DISTANCE").observe(viewLifecycleOwner) { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -150,7 +150,7 @@ class MapViewFragment : Fragment() {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 }

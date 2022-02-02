@@ -21,7 +21,6 @@ import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import java.text.DecimalFormat
 import androidx.core.content.ContextCompat
-import android.R.attr.name
 import com.robosoft.foursquare.preferences.Preferences
 
 

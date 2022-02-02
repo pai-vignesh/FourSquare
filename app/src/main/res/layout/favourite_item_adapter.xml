@@ -58,6 +58,7 @@
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:src="@drawable/close_icon"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintDimensionRatio="1"

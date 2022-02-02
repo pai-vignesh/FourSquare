@@ -49,7 +49,7 @@ class PopularFragment : Fragment(), CellClickListener {
     private fun setupRv(p0: String?, currentLocation: Location) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
-            homeViewModel.getQueryPlaces("", location, "RATING").observe(this, { data ->
+            homeViewModel.getQueryPlaces("", location, "RATING").observe(viewLifecycleOwner) { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -58,7 +58,7 @@ class PopularFragment : Fragment(), CellClickListener {
                                 places = placeData.results as ArrayList<PlaceData>
                                 binding.nearRecyclerView.apply {
                                     layoutManager =
-                                        if (activity!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                        if (requireActivity().resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                                             LinearLayoutManager(
                                                 activity,
                                                 LinearLayoutManager.VERTICAL, false
@@ -80,13 +80,13 @@ class PopularFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
-            homeViewModel.deleteFavourites(data).observe(this, { dataDeleted ->
+            homeViewModel.deleteFavourites(data).observe(this) { dataDeleted ->
                 dataDeleted?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -94,9 +94,9 @@ class PopularFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         } else {
-            homeViewModel.insertFavourites(data).observe(this, { dataInserted ->
+            homeViewModel.insertFavourites(data).observe(this) { dataInserted ->
                 dataInserted?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -104,7 +104,7 @@ class PopularFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 }

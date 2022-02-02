@@ -83,7 +83,7 @@ class SignupFragment : Fragment() {
                     binding.EmailAddress.text.toString(),
                     binding.passwordEntry2.text.toString()
                 )
-                loginViewModel.registerUser(userModel).observe(viewLifecycleOwner, { dataFav ->
+                loginViewModel.registerUser(userModel).observe(viewLifecycleOwner) { dataFav ->
                     dataFav?.let { resource ->
                         when (resource.status) {
                             Status.LOADING -> {}
@@ -101,7 +101,7 @@ class SignupFragment : Fragment() {
                             Status.ERROR -> {}
                         }
                     }
-                })
+                }
             }
         }
         return binding.root
