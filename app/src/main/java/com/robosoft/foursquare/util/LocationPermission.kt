@@ -7,9 +7,7 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 
 class LocationPermission {
-
     companion object {
-
         fun checkPermission(context: Activity): Boolean {
             if (ActivityCompat.checkSelfPermission(
                     context, Manifest.permission.ACCESS_FINE_LOCATION
@@ -27,7 +25,5 @@ class LocationPermission {
             }
             return true
         }
-
     }
-
 }

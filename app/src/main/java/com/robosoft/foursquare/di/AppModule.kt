@@ -16,7 +16,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     fun provideApiService(@ApplicationContext context: Context): ApiService {
         return RetrofitInstance.getApiService(context)
@@ -31,5 +30,4 @@ object AppModule {
     fun provideRoomInstance(@ApplicationContext context: Context): FourSquareDao {
         return FourSquareRoomDatabase.getInstance(context).fourSquareDao
     }
-
 }

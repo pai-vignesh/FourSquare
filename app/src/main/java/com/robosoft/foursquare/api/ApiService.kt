@@ -12,7 +12,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-
     @Headers(
         "Authorization: ${BuildConfig.API_KEY}",
         "Accept: application/json"
@@ -63,6 +62,4 @@ interface ApiService {
     )
     @GET("places/{id}/tips")
     suspend fun getPlaceReviews(@Path("id") query: String): List<Tip>
-
-
 }

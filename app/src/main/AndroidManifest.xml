@@ -57,7 +57,9 @@
             android:exported="false" />
         <activity
             android:name=".view.HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AddReviewTheme"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".view.LoadingScreen"
             android:exported="true">

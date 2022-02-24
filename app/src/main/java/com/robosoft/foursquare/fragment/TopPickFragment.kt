@@ -79,15 +79,12 @@ class TopPickFragment : Fragment(), CellClickListener {
                                 }
                             }
                         }
-                        Status.ERROR -> {
-
-                        }
+                        Status.ERROR -> {}
                     }
                 }
 
             }
         }
-
     }
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {

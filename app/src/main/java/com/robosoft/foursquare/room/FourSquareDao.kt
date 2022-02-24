@@ -5,7 +5,6 @@ import androidx.room.*
 
 @Dao
 interface FourSquareDao {
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun registerUser(userModel: UserModel): Long
 
@@ -26,5 +25,4 @@ interface FourSquareDao {
 
     @Delete
     suspend fun deleteFavourites(favourite: FavouriteModel)
-
 }

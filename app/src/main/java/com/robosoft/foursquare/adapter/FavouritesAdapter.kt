@@ -25,9 +25,9 @@ class FavouritesAdapter(
 ) :
     RecyclerView.Adapter<FavouritesAdapter.MyViewHolder>() {
     var favourites: ArrayList<FavouriteModel> = ArrayList()
-    fun submitList(favouriteList: List<FavouriteModel>){
+    fun submitList(favouriteList: List<FavouriteModel>) {
         val oldList = favourites
-        val diffResult : DiffUtil.DiffResult = DiffUtil.calculateDiff(
+        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
             FavouriteItemDiffCallback(
                 oldList,
                 favouriteList
@@ -39,11 +39,11 @@ class FavouritesAdapter(
     }
 
     class FavouriteItemDiffCallback(
-        private var oldItem : List<FavouriteModel>,
-        private var newItem : List<FavouriteModel>
-    ) : DiffUtil.Callback(){
+        private var oldItem: List<FavouriteModel>,
+        private var newItem: List<FavouriteModel>
+    ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
-           return oldItem.size
+            return oldItem.size
         }
 
         override fun getNewListSize(): Int {
@@ -95,9 +95,9 @@ class FavouritesAdapter(
             placeAddress.text = favourite.address
             fav.setOnClickListener {
                 fav.visibility = View.GONE
-                val idList= Preferences.getArrayPrefs("PlaceList",fav.context)
+                val idList = Preferences.getArrayPrefs("PlaceList", fav.context)
                 idList.remove(favourite.fsqId)
-                Preferences.setArrayPrefs("PlaceList",idList,fav.context)
+                Preferences.setArrayPrefs("PlaceList", idList, fav.context)
                 cellClickListener.onCellClickListener(favourite, true)
             }
             card.setOnClickListener { v ->

@@ -82,7 +82,6 @@ class CoffeePlaceFragment : Fragment(), CellClickListener {
                 }
             }
         }
-
     }
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {

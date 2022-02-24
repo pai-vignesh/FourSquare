@@ -10,7 +10,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReviewViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
-
     fun getPlaceReviews(query: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {

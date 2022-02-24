@@ -14,7 +14,6 @@ import com.robosoft.foursquare.util.PhotoClickListener
 
 class PhotosAdapter(private val photoClickListener: PhotoClickListener) :
     RecyclerView.Adapter<PhotosAdapter.MyViewHolder>() {
-
     private val diffCallback = object : DiffUtil.ItemCallback<Photo>() {
         override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
             return oldItem.id == newItem.id

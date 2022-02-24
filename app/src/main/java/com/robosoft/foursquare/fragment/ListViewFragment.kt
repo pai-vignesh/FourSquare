@@ -80,7 +80,6 @@ class ListViewFragment : Fragment(), CellClickListener {
         return binding.root
     }
 
-    //recyclerview setup
     private fun setupSearchRv(p0: String?, currentLocation: Location,near: String) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
@@ -123,7 +122,7 @@ class ListViewFragment : Fragment(), CellClickListener {
     private fun setupRv(p0: String?, currentLocation: Location,query:String="") {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
-            homeViewModel.getQueryPlaces(query!!, location).observe(this, { data ->
+            homeViewModel.getQueryPlaces(query!!, location).observe(viewLifecycleOwner) { data ->
                 data?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -154,13 +153,13 @@ class ListViewFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
-            homeViewModel.deleteFavourites(data).observe(this, { dataDeleted ->
+            homeViewModel.deleteFavourites(data).observe(this) { dataDeleted ->
                 dataDeleted?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -168,9 +167,9 @@ class ListViewFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         } else {
-            homeViewModel.insertFavourites(data).observe(this, { dataInserted ->
+            homeViewModel.insertFavourites(data).observe(this) { dataInserted ->
                 dataInserted?.let { resource ->
                     when (resource.status) {
                         Status.LOADING -> {}
@@ -178,7 +177,7 @@ class ListViewFragment : Fragment(), CellClickListener {
                         Status.ERROR -> {}
                     }
                 }
-            })
+            }
         }
     }
 }

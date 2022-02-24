@@ -48,8 +48,7 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
                 setupRv(location)
             }
         }
-
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
@@ -62,24 +61,22 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
         })
     }
 
-    private fun performFilter(searchText:String){
+    private fun performFilter(searchText: String) {
         favouritesFilter.clear()
-        if(searchText.isNotEmpty()){
+        if (searchText.isNotEmpty()) {
             favourites.forEach { model ->
-                if(model.placeName.lowercase(Locale.getDefault()).contains(searchText)){
+                if (model.placeName.lowercase(Locale.getDefault()).contains(searchText)) {
                     favouritesFilter.add(model)
                 }
             }
             favouritesAdapter.submitList(favouritesFilter)
-        }else{
+        } else {
             favouritesFilter.clear()
             favouritesFilter.addAll(favourites)
             favouritesAdapter.submitList(favouritesFilter)
         }
     }
 
-
-    //recyclerview setup
     private fun setupRv(currentLocation: Location) {
         favouritesAdapter = FavouritesAdapter(this, currentLocation)
         favouritesViewModel.favourites.observe(this) { data ->

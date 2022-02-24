@@ -45,7 +45,6 @@ class PopularFragment : Fragment(), CellClickListener {
         return binding.root
     }
 
-    //recyclerview setup
     private fun setupRv(p0: String?, currentLocation: Location) {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)

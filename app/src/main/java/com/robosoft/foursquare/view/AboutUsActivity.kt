@@ -25,6 +25,5 @@ class AboutUsActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
     }
 }

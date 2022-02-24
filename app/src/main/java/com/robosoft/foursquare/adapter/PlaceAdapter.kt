@@ -89,26 +89,40 @@ class PlaceAdapter(
             val km = DecimalFormat("##.##").format(currentLocation.distanceTo(destLocation) / 1000)
             distance.text = distance.context.getString(R.string.card_distance_text, km)
             place.rating?.let { stars ->
-                val finalRating = ((stars * 5) / 10)
                 when {
-                    finalRating>=4 -> {
+                    stars >= 8 -> {
                         ratings.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(ratings.context,R.color.green900))
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    ratings.context,
+                                    R.color.green900
+                                )
+                            )
                     }
-                    finalRating>=3 -> {
+                    stars >= 6 -> {
                         ratings.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(ratings.context,R.color.green700))
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    ratings.context,
+                                    R.color.green700
+                                )
+                            )
                     }
-                    finalRating>=2 -> {
+                    stars >= 4 -> {
                         ratings.backgroundTintList =
-                            ColorStateList.valueOf(ContextCompat.getColor(ratings.context,R.color.green500))
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    ratings.context,
+                                    R.color.green500
+                                )
+                            )
                     }
                     else -> {
                         ratings.backgroundTintList =
                             ColorStateList.valueOf(ContextCompat.getColor(ratings.context,R.color.green300))
                     }
                 }
-                ratings.text = String.format("%.1f",finalRating)
+                ratings.text = String.format("%.1f", stars)
             }
             place.price?.let { price ->
                 when (price) {

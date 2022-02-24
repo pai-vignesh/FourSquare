@@ -82,13 +82,11 @@ class MapViewFragment : Fragment() {
                         updateCard("${pointLocation.latitude},${pointLocation.longitude}", location)
                     }
                 }
-
             }
         }
         return binding.root
     }
 
-    //recyclerview setup
     private fun updateCard(p0: String?, currentLocation: Location) {
         p0?.let { location ->
             homeViewModel.getQueryPlaces("", location,"DISTANCE").observe(viewLifecycleOwner) { data ->

@@ -22,5 +22,4 @@ class MyFragmentPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
             else -> CoffeePlaceFragment()
         }
     }
-
 }

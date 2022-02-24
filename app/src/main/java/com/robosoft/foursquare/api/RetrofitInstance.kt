@@ -38,7 +38,6 @@ class RetrofitInstance @Inject constructor() {
                     .removeHeader("Pragma")
                     .build()
             }
-
             val offlineInterceptor = Interceptor { chain ->
                 var request: Request = chain.request()
                 if (!isInternetAvailable(context)) {
@@ -50,14 +49,12 @@ class RetrofitInstance @Inject constructor() {
                 }
                 chain.proceed(request)
             }
-
             val okHttpClient: OkHttpClient =
                 OkHttpClient.Builder() // .addInterceptor(provideHttpLoggingInterceptor()) // For HTTP request & Response data logging
                     .addInterceptor(offlineInterceptor)
                     .addNetworkInterceptor(onlineInterceptor)
                     .cache(cache)
                     .build()
-
             return Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .client(okHttpClient)
@@ -68,6 +65,5 @@ class RetrofitInstance @Inject constructor() {
         fun getApiService(context: Context): ApiService {
             return getRetrofitInstance(context).create(ApiService::class.java)
         }
-
     }
 }

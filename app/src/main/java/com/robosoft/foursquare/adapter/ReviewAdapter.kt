@@ -30,8 +30,6 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.MyViewHolder>() {
         }
 
     class MyViewHolder(binding: ReviewAdapterBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val image = binding.imgProfile
-        private val name = binding.userName
         private val date = binding.date
         private val reviewText = binding.review
         fun bind(tip: Tip) {
