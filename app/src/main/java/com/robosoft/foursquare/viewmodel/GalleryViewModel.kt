@@ -11,11 +11,11 @@ import javax.inject.Inject
 @HiltViewModel
 class GalleryViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
     fun getPhotos(query: String) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = repository.getPlacePhotos(query)))
+            emit(Resource.Success(repository.getPlacePhotos(query)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
 }

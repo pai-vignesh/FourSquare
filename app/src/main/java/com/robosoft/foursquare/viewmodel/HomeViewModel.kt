@@ -16,42 +16,42 @@ class HomeViewModel @Inject constructor(
     private val roomRepository: RoomRepository
 ) : ViewModel() {
     fun deleteFavourites(favouriteModel: FavouriteModel) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = roomRepository.deleteFavourites(favouriteModel)))
+            emit(Resource.Success(data = roomRepository.deleteFavourites(favouriteModel)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
 
     fun insertFavourites(favouriteModel: FavouriteModel) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = roomRepository.addFavourites(favouriteModel)))
+            emit(Resource.Success(data = roomRepository.addFavourites(favouriteModel)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
 
     fun getQueryPlaces(query: String, ll: String, sort: String = "RELEVANCE") =
         liveData(Dispatchers.IO) {
-            emit(Resource.loading(data = null))
+            emit(Resource.Loading)
             try {
                 val fields = "fsq_id,photos,name,price,location,categories,geocodes,rating"
-                emit(Resource.success(data = repository.getQueryPlaces(query, ll, fields, sort)))
+                emit(Resource.Success(data = repository.getQueryPlaces(query, ll, fields, sort)))
             } catch (exception: Exception) {
-                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+                emit(Resource.Error(exception))
             }
         }
 
     fun getSearchPlaces(query: String, near: String = "") =
         liveData(Dispatchers.IO) {
-            emit(Resource.loading(data = null))
+            emit(Resource.Loading)
             try {
                 val fields = "fsq_id,photos,name,price,location,categories,geocodes,rating"
-                emit(Resource.success(data = repository.getSearchPlace(query, fields, near)))
+                emit(Resource.Success(data = repository.getSearchPlace(query, fields, near)))
             } catch (exception: Exception) {
-                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+                emit(Resource.Error(exception))
             }
         }
 }

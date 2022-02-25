@@ -32,7 +32,7 @@ import com.robosoft.foursquare.preferences.Preferences
 import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CustomDialogClass
 import com.robosoft.foursquare.util.LocationPermission
-import com.robosoft.foursquare.util.Status
+import com.robosoft.foursquare.util.Resource
 import com.robosoft.foursquare.viewmodel.HomeViewModel
 import com.robosoft.foursquare.viewmodel.PlaceDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,12 +47,12 @@ class PlaceDetailsActivity : AppCompatActivity() {
     private lateinit var googleMap: GoogleMap
     private lateinit var currentLocation: Location
     private val placeDetailsViewModel: PlaceDetailsViewModel by viewModels()
-    private val homeViewModel : HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var fsqId : String? = null
-    lateinit var favouriteModel : FavouriteModel
+    private var fsqId: String? = null
+    lateinit var favouriteModel: FavouriteModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlaceDetailsBinding.inflate(layoutInflater)
@@ -71,7 +71,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
             reviews.setOnClickListener {
                 val i = Intent(this@PlaceDetailsActivity, ReviewActivity::class.java)
                 i.putExtra("fsqId", fsqId)
-                i.putExtra("placeName",topAppBar.title)
+                i.putExtra("placeName", topAppBar.title)
                 startActivity(i)
             }
             photos.setOnClickListener {
@@ -91,18 +91,13 @@ class PlaceDetailsActivity : AppCompatActivity() {
         }
         fsqId?.let {
             placeDetailsViewModel.getPlaceDetails(it).observe(this) { data ->
-                data?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {
-                        }
-                        Status.SUCCESS -> {
-                            resource.data?.let { placeData ->
-                                updateView(placeData)
-                            }
-                        }
-                        Status.ERROR -> {
-                        }
+                when (data) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val placeData = (data as? Resource.Success)?.data
+                        updateView(placeData!!)
                     }
+                    is Resource.Error -> {}
                 }
             }
         }
@@ -338,7 +333,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
     }
 
 
-    private fun updateView(placeData: PlaceData){
+    private fun updateView(placeData: PlaceData) {
         fetchLocation(
             placeData.geocodes.main.latitude.toDouble(),
             placeData.geocodes.main.longitude.toDouble()
@@ -404,46 +399,36 @@ class PlaceDetailsActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.share ->{
+        when (item.itemId) {
+            R.id.share -> {
                 val i = Intent(Intent.ACTION_SEND)
                 i.type = "text/plain"
                 i.putExtra(Intent.EXTRA_SUBJECT, "Sharing URL")
                 i.putExtra(Intent.EXTRA_TEXT, "Thank you for using app")
                 startActivity(Intent.createChooser(i, "Share URL"))
             }
-            R.id.favorite ->{
+            R.id.favorite -> {
                 val fsqList = Preferences.getArrayPrefs("PlaceList", this)
                 if (fsqList.contains(fsqId)) {
                     item.icon = ContextCompat.getDrawable(this, R.drawable.favourite)
                     fsqList.remove(fsqId)
-                    Preferences.setArrayPrefs("PlaceList",fsqList,this)
+                    Preferences.setArrayPrefs("PlaceList", fsqList, this)
                     homeViewModel.deleteFavourites(favouriteModel).observe(this) { dataInserted ->
-                        dataInserted?.let { resource ->
-                            when (resource.status) {
-                                Status.LOADING -> {
-                                }
-                                Status.SUCCESS -> {
-                                }
-                                Status.ERROR -> {
-                                }
-                            }
+                        when (dataInserted) {
+                            is Resource.Loading -> {}
+                            is Resource.Success -> {}
+                            is Resource.Error -> {}
                         }
                     }
-                }else{
+                } else {
                     fsqList.add(fsqId)
-                    Preferences.setArrayPrefs("PlaceList",fsqList,this)
+                    Preferences.setArrayPrefs("PlaceList", fsqList, this)
                     item.icon = ContextCompat.getDrawable(this, R.drawable.fav_selected)
                     homeViewModel.insertFavourites(favouriteModel).observe(this) { dataInserted ->
-                        dataInserted?.let { resource ->
-                            when (resource.status) {
-                                Status.LOADING -> {
-                                }
-                                Status.SUCCESS -> {
-                                }
-                                Status.ERROR -> {
-                                }
-                            }
+                        when (dataInserted) {
+                            is Resource.Loading -> {}
+                            is Resource.Success -> {}
+                            is Resource.Error -> {}
                         }
                     }
                 }

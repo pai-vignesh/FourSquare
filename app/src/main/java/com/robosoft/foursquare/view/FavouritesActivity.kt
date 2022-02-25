@@ -14,7 +14,7 @@ import com.robosoft.foursquare.databinding.ActivityFavouritesBinding
 import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.util.LocationPermission
-import com.robosoft.foursquare.util.Status
+import com.robosoft.foursquare.util.Resource
 import com.robosoft.foursquare.viewmodel.FavouritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -99,12 +99,10 @@ class FavouritesActivity : AppCompatActivity(), CellClickListener {
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
             favouritesViewModel.deleteFavourites(data).observe(this) { dataDeleted ->
-                dataDeleted?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {}
-                        Status.SUCCESS -> {}
-                        Status.ERROR -> {}
-                    }
+                when (dataDeleted) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {}
+                    is Resource.Error -> {}
                 }
             }
         }

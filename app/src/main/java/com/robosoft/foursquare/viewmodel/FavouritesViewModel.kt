@@ -14,11 +14,11 @@ class FavouritesViewModel @Inject constructor(private val roomRepository: RoomRe
     ViewModel() {
 
     fun deleteFavourites(favouriteModel: FavouriteModel) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = roomRepository.deleteFavourites(favouriteModel)))
+            emit(Resource.Success(roomRepository.deleteFavourites(favouriteModel)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
     val favourites = roomRepository.favourites

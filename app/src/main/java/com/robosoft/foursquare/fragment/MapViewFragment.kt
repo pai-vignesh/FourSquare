@@ -24,7 +24,7 @@ import com.robosoft.foursquare.R
 import com.robosoft.foursquare.databinding.FragmentMapViewBinding
 import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.util.LocationPermission
-import com.robosoft.foursquare.util.Status
+import com.robosoft.foursquare.util.Resource
 import com.robosoft.foursquare.view.PlaceDetailsActivity
 import com.robosoft.foursquare.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -103,68 +103,65 @@ class MapViewFragment : Fragment() {
         p0?.let { location ->
             homeViewModel.getQueryPlaces("", location, "DISTANCE")
                 .observe(viewLifecycleOwner) { data ->
-                    data?.let { resource ->
-                        when (resource.status) {
-                            Status.LOADING -> {}
-                            Status.SUCCESS -> {
-                                resource.data?.let { placeData ->
-                                    binding.placeCard.layout.visibility = View.VISIBLE
-                                    places = placeData.results as ArrayList<PlaceData>
-                                    if (!places[0].photos.isNullOrEmpty()) {
-                                        val requestOptions = RequestOptions().diskCacheStrategy(
-                                            DiskCacheStrategy.ALL
-                                        )
-                                        val imgSize = "400x400"
-                                        val imageUrl =
-                                            places[0].photos[0].prefix + imgSize + places[0].photos[0].suffix
-                                        Glide.with(this).load(imageUrl).apply(requestOptions)
-                                            .into(binding.placeCard.imageView)
-                                    }
-                                    binding.placeCard.layout.setOnClickListener { v ->
-                                        val intent =
-                                            Intent(
-                                                requireActivity(),
-                                                PlaceDetailsActivity::class.java
-                                            )
-                                        intent.putExtra("fsqId", places[0].fsqId)
-                                        v.context.startActivity(intent)
-                                    }
-                                    binding.placeCard.placeName.text = places[0].name
-                                    binding.placeCard.placeAddress.text = places[0].location.address
-                                    if (places[0].categories.isNotEmpty()) {
-                                        binding.placeCard.placeType.text =
-                                            places[0].categories[0].name
-                                    }
-                                    places[0].price?.let { price ->
-                                        when (price) {
-                                            1 -> binding.placeCard.price.text =
-                                                getString(R.string.expense, "₹")
-                                            2 -> binding.placeCard.price.text =
-                                                getString(R.string.expense, "₹₹")
-                                            3 -> binding.placeCard.price.text =
-                                                getString(R.string.expense, "₹₹₹")
-                                            4 -> binding.placeCard.price.text =
-                                                getString(R.string.expense, "₹₹₹₹")
-                                            5 -> binding.placeCard.price.text =
-                                                getString(R.string.expense, "₹₹₹₹₹")
-                                            else -> binding.placeCard.price.text =
-                                                getString(R.string.expense, "")
-                                        }
-                                    }
-                                    val destLocation = Location("destination")
-                                    destLocation.latitude =
-                                        places[0].geocodes.main.latitude.toDouble()
-                                    destLocation.longitude =
-                                        places[0].geocodes.main.longitude.toDouble()
-                                    val km = DecimalFormat("##.##").format(
-                                        currentLocation.distanceTo(destLocation) / 1000
+                    when (data) {
+                        is Resource.Loading -> {}
+                        is Resource.Success -> {
+                            val placeData = (data as? Resource.Success)?.data
+                            binding.placeCard.layout.visibility = View.VISIBLE
+                            places = placeData?.results as ArrayList<PlaceData>
+                            if (!places[0].photos.isNullOrEmpty()) {
+                                val requestOptions = RequestOptions().diskCacheStrategy(
+                                    DiskCacheStrategy.ALL
+                                )
+                                val imgSize = "400x400"
+                                val imageUrl =
+                                    places[0].photos[0].prefix + imgSize + places[0].photos[0].suffix
+                                Glide.with(this).load(imageUrl).apply(requestOptions)
+                                    .into(binding.placeCard.imageView)
+                            }
+                            binding.placeCard.layout.setOnClickListener { v ->
+                                val intent =
+                                    Intent(
+                                        requireActivity(),
+                                        PlaceDetailsActivity::class.java
                                     )
-                                    binding.placeCard.distance.text =
-                                        getString(R.string.card_distance_text, km)
+                                intent.putExtra("fsqId", places[0].fsqId)
+                                v.context.startActivity(intent)
+                            }
+                            binding.placeCard.placeName.text = places[0].name
+                            binding.placeCard.placeAddress.text = places[0].location.address
+                            if (places[0].categories.isNotEmpty()) {
+                                binding.placeCard.placeType.text =
+                                    places[0].categories[0].name
+                            }
+                            places[0].price?.let { price ->
+                                when (price) {
+                                    1 -> binding.placeCard.price.text =
+                                        getString(R.string.expense, "₹")
+                                    2 -> binding.placeCard.price.text =
+                                        getString(R.string.expense, "₹₹")
+                                    3 -> binding.placeCard.price.text =
+                                        getString(R.string.expense, "₹₹₹")
+                                    4 -> binding.placeCard.price.text =
+                                        getString(R.string.expense, "₹₹₹₹")
+                                    5 -> binding.placeCard.price.text =
+                                        getString(R.string.expense, "₹₹₹₹₹")
+                                    else -> binding.placeCard.price.text =
+                                        getString(R.string.expense, "")
                                 }
                             }
-                            Status.ERROR -> {}
+                            val destLocation = Location("destination")
+                            destLocation.latitude =
+                                places[0].geocodes.main.latitude.toDouble()
+                            destLocation.longitude =
+                                places[0].geocodes.main.longitude.toDouble()
+                            val km = DecimalFormat("##.##").format(
+                                currentLocation.distanceTo(destLocation) / 1000
+                            )
+                            binding.placeCard.distance.text =
+                                getString(R.string.card_distance_text, km)
                         }
+                        is Resource.Error -> {}
                     }
                 }
         }

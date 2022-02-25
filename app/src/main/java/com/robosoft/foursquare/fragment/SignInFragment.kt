@@ -18,7 +18,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.robosoft.foursquare.databinding.FragmentSigninBinding
 import com.robosoft.foursquare.preferences.Preferences
-import com.robosoft.foursquare.util.Status
+import com.robosoft.foursquare.util.Resource
 import com.robosoft.foursquare.view.HomeActivity
 import com.robosoft.foursquare.view.LoginActivity
 import com.robosoft.foursquare.viewmodel.LoginViewModel
@@ -106,24 +106,23 @@ class SignInFragment : Fragment() {
     private fun updateUserPassword() {
         loginViewModel.getUserData(binding.personName.text.toString())
             .observe(viewLifecycleOwner) { dataFav ->
-                dataFav?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {}
-                        Status.SUCCESS -> {
-                            resource.data?.also {
-                                val number = "+91${it.phone}"
-                                phoneNum = it.phone
-                                sendVerificationCode(number)
-                            } ?: run {
-                                Toast.makeText(
-                                    requireActivity(),
-                                    "No user found.Please register",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                when (dataFav) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val loginData = (dataFav as? Resource.Success)?.data
+                        loginData?.also {
+                            val number = "+91${it.phone}"
+                            phoneNum = it.phone
+                            sendVerificationCode(number)
+                        } ?: run {
+                            Toast.makeText(
+                                requireActivity(),
+                                "No user found.Please register",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
-                        Status.ERROR -> {}
                     }
+                    is Resource.Error -> {}
                 }
             }
     }
@@ -133,25 +132,24 @@ class SignInFragment : Fragment() {
             binding.personName.text.toString(),
             binding.passwordEntry.text.toString()
         ).observe(viewLifecycleOwner) { dataFav ->
-            dataFav?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {}
-                    Status.SUCCESS -> {
-                        resource.data?.also {
-                            Preferences.setPrefs("isLogged", "true", requireActivity())
-                            val i = Intent(requireActivity(), HomeActivity::class.java)
-                            startActivity(i)
-                            activity?.finish()
-                        } ?: run {
-                            Toast.makeText(
-                                requireActivity(),
-                                "No user found.Please register",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
+            when (dataFav) {
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    val loginData = (dataFav as? Resource.Success)?.data
+                    loginData?.also {
+                        Preferences.setPrefs("isLogged", "true", requireActivity())
+                        val i = Intent(requireActivity(), HomeActivity::class.java)
+                        startActivity(i)
+                        activity?.finish()
+                    } ?: run {
+                        Toast.makeText(
+                            requireActivity(),
+                            "No user found.Please register",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                    Status.ERROR -> {}
                 }
+                is Resource.Error -> {}
             }
         }
     }

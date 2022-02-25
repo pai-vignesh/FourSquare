@@ -13,38 +13,38 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(val repository: RoomRepository) : ViewModel() {
 
     fun signInUser(email:String,password:String) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = repository.signInUser(email,password)))
+            emit(Resource.Success(data = repository.signInUser(email,password)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
 
     fun updatePassword(password: String,phone:String) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = repository.updatePassword(password,phone)))
+            emit(Resource.Success(data = repository.updatePassword(password,phone)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
 
     fun getUserData(email: String) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = repository.getUserData(email)))
+            emit(Resource.Success(data = repository.getUserData(email)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
 
     fun registerUser(userModel: UserModel) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = repository.registerUser(userModel)))
+            emit(Resource.Success(data = repository.registerUser(userModel)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
 }

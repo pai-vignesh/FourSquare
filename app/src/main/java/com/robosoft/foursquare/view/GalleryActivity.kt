@@ -13,7 +13,7 @@ import com.robosoft.foursquare.adapter.PhotosAdapter
 import com.robosoft.foursquare.databinding.ActivityGalleryBinding
 import com.robosoft.foursquare.model.Photo
 import com.robosoft.foursquare.util.PhotoClickListener
-import com.robosoft.foursquare.util.Status
+import com.robosoft.foursquare.util.Resource
 import com.robosoft.foursquare.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -43,37 +43,34 @@ class GalleryActivity : AppCompatActivity(), PhotoClickListener {
         p0?.let {
             photosAdapter = PhotosAdapter(this)
             galleryViewModel.getPhotos(it).observe(this) { data ->
-                data?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {}
-                        Status.SUCCESS -> {
-                            resource.data?.let { photoData ->
-                                photos = photoData as ArrayList<Photo>
-                                binding.nearRecyclerView.apply {
-                                    layoutManager =
-                                        if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                                            GridLayoutManager(
-                                                this@GalleryActivity,
-                                                3,
-                                                LinearLayoutManager.VERTICAL,
-                                                false
-                                            )
-                                        } else {
-                                            GridLayoutManager(
-                                                this@GalleryActivity,
-                                                5,
-                                                LinearLayoutManager.VERTICAL,
-                                                false
-                                            )
-                                        }
-                                    photosAdapter.photos = photos
-                                    adapter = photosAdapter
-                                    setHasFixedSize(true)
+                when(data){
+                    is Resource.Loading ->{}
+                    is Resource.Success ->{
+                        val photoData = (data as? Resource.Success)?.data
+                        photos = photoData as ArrayList<Photo>
+                        binding.nearRecyclerView.apply {
+                            layoutManager =
+                                if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                    GridLayoutManager(
+                                        this@GalleryActivity,
+                                        3,
+                                        LinearLayoutManager.VERTICAL,
+                                        false
+                                    )
+                                } else {
+                                    GridLayoutManager(
+                                        this@GalleryActivity,
+                                        5,
+                                        LinearLayoutManager.VERTICAL,
+                                        false
+                                    )
                                 }
-                            }
+                            photosAdapter.photos = photos
+                            adapter = photosAdapter
+                            setHasFixedSize(true)
                         }
-                        Status.ERROR -> {}
                     }
+                    is Resource.Error ->{}
                 }
             }
         }

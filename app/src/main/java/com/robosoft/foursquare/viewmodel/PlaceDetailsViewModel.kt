@@ -11,11 +11,11 @@ import javax.inject.Inject
 @HiltViewModel
 class PlaceDetailsViewModel  @Inject constructor(private val repository: MainRepository) : ViewModel(){
     fun getPlaceDetails(query: String) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Resource.Loading)
         try {
-            emit(Resource.success(data = repository.getPlaceDetails(query)))
+            emit(Resource.Success(data = repository.getPlaceDetails(query)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.Error(exception))
         }
     }
 }

@@ -11,7 +11,7 @@ import com.robosoft.foursquare.R
 import com.robosoft.foursquare.adapter.ReviewAdapter
 import com.robosoft.foursquare.databinding.ActivityReviewBinding
 import com.robosoft.foursquare.model.Tip
-import com.robosoft.foursquare.util.Status
+import com.robosoft.foursquare.util.Resource
 import com.robosoft.foursquare.viewmodel.ReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,26 +49,22 @@ class ReviewActivity : AppCompatActivity() {
         p0?.let {
             reviewAdapter = ReviewAdapter()
             reviewViewModel.getPlaceReviews(it).observe(this) { data ->
-                data?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {}
-                        Status.SUCCESS -> {
-                            Log.d("TAG", "setupRv: ${resource.data?.size} ")
-                            resource.data?.let { tipData ->
-                                tips = tipData as ArrayList<Tip>
-                                binding.reviewRecyclerview.apply {
-                                    layoutManager = LinearLayoutManager(
-                                        this@ReviewActivity,
-                                        LinearLayoutManager.VERTICAL, false
-                                    )
-                                    reviewAdapter.tips = tips
-                                    adapter = reviewAdapter
-                                    setHasFixedSize(true)
-                                }
-                            }
+                when(data){
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val tipData = (data as? Resource.Success)?.data
+                        tips = tipData as ArrayList<Tip>
+                        binding.reviewRecyclerview.apply {
+                            layoutManager = LinearLayoutManager(
+                                this@ReviewActivity,
+                                LinearLayoutManager.VERTICAL, false
+                            )
+                            reviewAdapter.tips = tips
+                            adapter = reviewAdapter
+                            setHasFixedSize(true)
                         }
-                        Status.ERROR -> {}
                     }
+                    is Resource.Error -> {}
                 }
             }
         }

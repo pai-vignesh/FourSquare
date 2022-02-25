@@ -41,6 +41,7 @@
                 android:gravity="center"
                 android:inputType="textEmailAddress"
                 android:text=""
+                android:imeOptions="actionNext"
                 android:textColor="@color/white"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey" />
@@ -65,6 +66,7 @@
                 android:gravity="center"
                 android:inputType="phone"
                 android:text=""
+                android:imeOptions="actionNext"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
@@ -90,6 +92,7 @@
                 android:gravity="center"
                 android:inputType="textPassword"
                 android:text=""
+                android:imeOptions="actionNext"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
@@ -116,6 +119,7 @@
                 android:inputType="textPassword"
                 android:text=""
                 android:textColor="#FFFFFF"
+                android:imeOptions="actionDone"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
                 tools:ignore="HardcodedText,MissingConstraints" />

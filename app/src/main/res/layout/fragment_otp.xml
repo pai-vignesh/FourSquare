@@ -59,6 +59,7 @@
             android:ems="10"
             android:fontFamily="@font/avenir_book"
             android:gravity="center"
+            android:imeOptions="actionDone"
             android:inputType="number"
             android:text=""
             android:textColor="#FFFFFF"

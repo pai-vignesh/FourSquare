@@ -18,11 +18,11 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.robosoft.foursquare.databinding.FragmentSignupBinding
 import com.robosoft.foursquare.room.UserModel
-import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.view.LoginActivity
 import com.robosoft.foursquare.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.robosoft.foursquare.R
+import com.robosoft.foursquare.util.Resource
 import com.robosoft.foursquare.view.HomeActivity
 import java.util.concurrent.TimeUnit
 
@@ -84,22 +84,21 @@ class SignupFragment : Fragment() {
                     binding.passwordEntry2.text.toString()
                 )
                 loginViewModel.registerUser(userModel).observe(viewLifecycleOwner) { dataFav ->
-                    dataFav?.let { resource ->
-                        when (resource.status) {
-                            Status.LOADING -> {}
-                            Status.SUCCESS -> {
-                                resource.data?.let {
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        "User Registered successfully. Please verify otp",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    val number = "+91${binding.mobileNum.text}"
-                                    sendVerificationCode(number)
-                                }
+                    when (dataFav) {
+                        is Resource.Loading -> {}
+                        is Resource.Success -> {
+                            val placeData = (dataFav as? Resource.Success)?.data
+                            placeData?.let {
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "User Registered successfully. Please verify otp",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                val number = "+91${binding.mobileNum.text}"
+                                sendVerificationCode(number)
                             }
-                            Status.ERROR -> {}
                         }
+                        is Resource.Error -> {}
                     }
                 }
             }

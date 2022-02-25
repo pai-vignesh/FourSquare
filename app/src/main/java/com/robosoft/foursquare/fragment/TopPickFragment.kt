@@ -16,11 +16,11 @@ import com.robosoft.foursquare.model.PlaceData
 import com.robosoft.foursquare.room.FavouriteModel
 import com.robosoft.foursquare.util.CellClickListener
 import com.robosoft.foursquare.util.LocationPermission
-import com.robosoft.foursquare.util.Status
 import com.robosoft.foursquare.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.recyclerview.widget.GridLayoutManager
+import com.robosoft.foursquare.util.Resource
 
 @AndroidEntryPoint
 class TopPickFragment : Fragment(), CellClickListener {
@@ -50,39 +50,33 @@ class TopPickFragment : Fragment(), CellClickListener {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
             homeViewModel.getQueryPlaces("", location).observe(viewLifecycleOwner) { data ->
-                data?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {
-
-                        }
-                        Status.SUCCESS -> {
-                            resource.data?.let { placeData ->
-                                places = placeData.results as ArrayList<PlaceData>
-                                binding.nearRecyclerView.apply {
-                                    layoutManager =
-                                        if (requireActivity().resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                                            LinearLayoutManager(
-                                                activity,
-                                                LinearLayoutManager.VERTICAL, false
-                                            )
-                                        } else {
-                                            GridLayoutManager(
-                                                activity,
-                                                2,
-                                                LinearLayoutManager.VERTICAL,
-                                                false
-                                            )
-                                        }
-                                    placeAdapter.placeData = places
-                                    adapter = placeAdapter
-                                    setHasFixedSize(true)
+                when (data) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val placeData = (data as? Resource.Success)?.data
+                        places = placeData?.results as ArrayList<PlaceData>
+                        binding.nearRecyclerView.apply {
+                            layoutManager =
+                                if (requireActivity().resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                    LinearLayoutManager(
+                                        activity,
+                                        LinearLayoutManager.VERTICAL, false
+                                    )
+                                } else {
+                                    GridLayoutManager(
+                                        activity,
+                                        2,
+                                        LinearLayoutManager.VERTICAL,
+                                        false
+                                    )
                                 }
-                            }
+                            placeAdapter.placeData = places
+                            adapter = placeAdapter
+                            setHasFixedSize(true)
                         }
-                        Status.ERROR -> {}
                     }
+                    is Resource.Error -> {}
                 }
-
             }
         }
     }
@@ -90,22 +84,18 @@ class TopPickFragment : Fragment(), CellClickListener {
     override fun onCellClickListener(data: FavouriteModel, isRemove: Boolean) {
         if (isRemove) {
             homeViewModel.deleteFavourites(data).observe(this) { dataDeleted ->
-                dataDeleted?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {}
-                        Status.SUCCESS -> {}
-                        Status.ERROR -> {}
-                    }
+                when (dataDeleted) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {}
+                    is Resource.Error -> {}
                 }
             }
         } else {
             homeViewModel.insertFavourites(data).observe(this) { dataInserted ->
-                dataInserted?.let { resource ->
-                    when (resource.status) {
-                        Status.LOADING -> {}
-                        Status.SUCCESS -> {}
-                        Status.ERROR -> {}
-                    }
+                when (dataInserted) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {}
+                    is Resource.Error -> {}
                 }
             }
         }

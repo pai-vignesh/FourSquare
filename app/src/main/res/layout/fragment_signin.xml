@@ -43,6 +43,7 @@
                 android:fontFamily="@font/avenir_book"
                 android:gravity="center"
                 android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
                 android:text=""
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/edit_textSize"
@@ -70,6 +71,7 @@
                 android:inputType="textPassword"
                 android:text=""
                 android:textColor="#FFFFFF"
+                android:imeOptions="actionDone"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
                 tools:ignore="HardcodedText,MissingConstraints" />
