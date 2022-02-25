@@ -9,7 +9,7 @@
         android:id="@+id/searchRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="@dimen/recyclerview_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/mapView"
@@ -19,16 +19,16 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="20dp"
+        android:paddingVertical="@dimen/content_margin"
         android:textAllCaps="false"
         android:background="@drawable/text_background"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="@dimen/button_textSize"
         android:gravity="center"
         android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Map View"/>
+        android:text="@string/map_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

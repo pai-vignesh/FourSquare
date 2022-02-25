@@ -14,14 +14,14 @@
             android:id="@+id/tvSort"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sort by"
-            android:textSize="20sp"
+            android:text="@string/sort_by"
+            android:textSize="@dimen/edit_textSize"
             android:textColor="#a3a3a3"
             android:fontFamily="@font/avenir_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginVertical="15dp"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginStart="@dimen/content_margin"/>
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/toggleButton"
@@ -39,8 +39,8 @@
                 android:layout_weight="1"
                 android:paddingVertical="15dp"
                 android:textAllCaps="false"
-                android:textSize="18sp"
-                android:text="Popular"
+                android:textSize="@dimen/label_textSize"
+                android:text="@string/popular"
                 style="@style/myButton"
                 />
             <Button
@@ -49,8 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingVertical="15dp"
-                android:text="Distance"
-                android:textSize="18sp"
+                android:text="@string/distanceText"
+                android:textSize="@dimen/label_textSize"
                 android:textAllCaps="false"
                 style="@style/myButton"
                 />
@@ -60,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="15dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
-                android:text="Rating"
+                android:textSize="@dimen/label_textSize"
+                android:text="@string/rating"
                 android:textAllCaps="false"
                 style="@style/myButton"
                 />
@@ -71,25 +71,25 @@
             android:id="@+id/tvFilter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Filter by"
-            android:textSize="20sp"
+            android:text="@string/filter_by"
+            android:textSize="@dimen/edit_textSize"
             android:textColor="#a3a3a3"
             android:fontFamily="@font/avenir_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toggleButton"
             app:layout_constraintBottom_toTopOf="@id/tt1"
             android:layout_marginVertical="15dp"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginStart="@dimen/content_margin"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tt1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:layout_marginTop="10dp"
-            android:hint="Set Radius"
+            android:layout_marginTop="@dimen/standardMargin"
+            android:hint="@string/set_radius"
             android:background="@color/white"
-            android:paddingVertical="20dp"
+            android:paddingVertical="@dimen/content_margin"
             app:boxStrokeColor="@color/textGrey"
             android:textColorHint="#a3a3a3"
             app:hintTextColor="#a3a3a3"
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="@dimen/content_margin"
                 android:textColor="@color/black"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"  />
@@ -124,8 +124,8 @@
                 android:layout_weight="1"
                 android:paddingVertical="15dp"
                 android:textAllCaps="false"
-                android:textSize="18sp"
-                android:text="₹"
+                android:textSize="@dimen/label_textSize"
+                android:text="@string/rupeeSymbol"
                 style="@style/myButton"
                 />
             <Button
@@ -134,8 +134,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingVertical="15dp"
-                android:text="₹₹"
-                android:textSize="18sp"
+                android:text="@string/rupeeSymbolx2"
+                android:textSize="@dimen/label_textSize"
                 android:textAllCaps="false"
                 style="@style/myButton"
                 />
@@ -145,8 +145,8 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="15dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
-                android:text="₹₹₹"
+                android:textSize="@dimen/label_textSize"
+                android:text="@string/rupeeSymbolX3"
                 android:textAllCaps="false"
                 style="@style/myButton"
                 />
@@ -157,8 +157,8 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="15dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
-                android:text="₹₹₹₹"
+                android:textSize="@dimen/label_textSize"
+                android:text="@string/rupeeSymbolX4"
                 android:textAllCaps="false"
                 style="@style/myButton"
                 />
@@ -168,16 +168,16 @@
             android:id="@+id/tvFeature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Features"
-            android:textSize="20sp"
+            android:text="@string/features"
+            android:textSize="@dimen/edit_textSize"
             android:textColor="#a3a3a3"
             android:fontFamily="@font/avenir_medium"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/standardMargin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toggleButtonExpense"
             app:layout_constraintBottom_toTopOf="@+id/llFeatures"
             android:layout_marginVertical="15dp"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginStart="@dimen/content_margin"/>
 
         <LinearLayout
             android:id="@+id/llFeatures"
@@ -198,9 +198,9 @@
                 android:button="@drawable/checkbox_drawable"
                 android:checked="true"
                 android:layout_marginBottom="2dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="@dimen/content_margin"
                 android:layoutDirection="rtl"
-                android:text="Accept credit cards" />
+                android:text="@string/accept_credit_cards" />
 
             <View
                 android:layout_width="match_parent"
@@ -215,8 +215,8 @@
                 style="@style/myCheckbox"
                 android:button="@drawable/checkbox_drawable"
                 android:layoutDirection="rtl"
-                android:layout_marginHorizontal="20dp"
-                android:text="Delivery" />
+                android:layout_marginHorizontal="@dimen/content_margin"
+                android:text="@string/delivery" />
 
             <View
                 android:layout_width="match_parent"
@@ -230,8 +230,8 @@
                 android:layout_marginBottom="2dp"
                 android:button="@drawable/checkbox_drawable"
                 android:layoutDirection="rtl"
-                android:layout_marginHorizontal="20dp"
-                android:text="Dog freindly" />
+                android:layout_marginHorizontal="@dimen/content_margin"
+                android:text="@string/dog_freindly" />
 
             <View
                 android:layout_width="match_parent"
@@ -246,8 +246,8 @@
                 android:background="@color/white"
                 android:button="@drawable/checkbox_drawable"
                 android:layoutDirection="rtl"
-                android:layout_marginHorizontal="20dp"
-                android:text="Family-freindly places" />
+                android:layout_marginHorizontal="@dimen/content_margin"
+                android:text="@string/family_freindly_places" />
 
             <View
                 android:layout_width="match_parent"
@@ -262,8 +262,8 @@
                 style="@style/myCheckbox"
                 android:button="@drawable/checkbox_drawable"
                 android:layoutDirection="rtl"
-                android:layout_marginHorizontal="20dp"
-                android:text="In Walking distance" />
+                android:layout_marginHorizontal="@dimen/content_margin"
+                android:text="@string/in_walking_distance" />
 
             <View
                 android:layout_width="match_parent"
@@ -278,8 +278,8 @@
                 style="@style/myCheckbox"
                 android:button="@drawable/checkbox_drawable"
                 android:layoutDirection="rtl"
-                android:layout_marginHorizontal="20dp"
-                android:text="Outdoor seating" />
+                android:layout_marginHorizontal="@dimen/content_margin"
+                android:text="@string/outdoor_seating" />
 
             <View
                 android:layout_width="match_parent"
@@ -294,8 +294,8 @@
                 android:layout_marginBottom="2dp"
                 android:button="@drawable/checkbox_drawable"
                 android:layoutDirection="rtl"
-                android:layout_marginHorizontal="20dp"
-                android:text="Parking" />
+                android:layout_marginHorizontal="@dimen/content_margin"
+                android:text="@string/parking" />
 
             <View
                 android:layout_width="match_parent"
@@ -309,9 +309,9 @@
                 android:background="@color/white"
                 android:button="@drawable/checkbox_drawable"
                 android:layoutDirection="rtl"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="wifi" />
+                android:layout_marginHorizontal="@dimen/content_margin"
+                android:layout_marginBottom="@dimen/standardMargin"
+                android:text="@string/wifi" />
 
             <View
                 android:layout_width="match_parent"

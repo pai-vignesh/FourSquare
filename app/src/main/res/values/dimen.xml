@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_marginHorizontal">5dp</dimen>
+    <dimen name="appBar_topPadding">20dp</dimen>
+    <dimen name="content_margin">20dp</dimen>
+    <dimen name="recyclerview_margin">10dp</dimen>
+    <dimen name="drawer_item_textSize">18sp</dimen>
+    <dimen name="drawer_item_spacingTop">50dp</dimen>
+    <dimen name="drawer_marginStart">30dp</dimen>
+    <dimen name="drawer_content_spacing">12dp</dimen>
+    <dimen name="drawer_divider_spacing">20dp</dimen>
+    <dimen name="drawer_divider_width">0dp</dimen>
+    <dimen name="drawer_divider_height">1dp</dimen>
+    <dimen name="aboutUs_textSize">18sp</dimen>
+    <dimen name="label_textSize">18sp</dimen>
+    <dimen name="name_textSize">20sp</dimen>
+    <dimen name="edit_textSize">20sp</dimen>
+    <dimen name="miniText">14sp</dimen>
+    <dimen name="editText_padding">10dp</dimen>
+    <dimen name="label_editText_padding">10dp</dimen>
+    <dimen name="button_textSize">18sp</dimen>
+    <dimen name="button_padding">20dp</dimen>
+    <dimen name="searchBar_height">45dp</dimen>
+    <dimen name="searchBar_marginHorizontal">60dp</dimen>
+    <dimen name="searchBar_marginVertical">10dp</dimen>
+    <dimen name="placeDetails_imageHeight">250dp</dimen>
+    <dimen name="ratingBar_height">30dp</dimen>\
+    <dimen name="headingTextSize">26sp</dimen>
+    <dimen name="addressTextSize">16sp</dimen>
+    <dimen name="miniMargin">5dp</dimen>
+    <dimen name="standardMargin">10dp</dimen>
+</resources>

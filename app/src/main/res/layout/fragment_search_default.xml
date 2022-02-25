@@ -4,34 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/ll1"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        android:orientation="horizontal">-->
-
-    <!--        <ImageView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:padding="20dp"-->
-    <!--            android:src="@drawable/location_icon"/>-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:gravity="start"-->
-    <!--            android:layout_marginStart="20dp"-->
-    <!--            android:fontFamily="@font/avenir_book"-->
-    <!--            android:textSize="20sp"-->
-    <!--            android:text="Use my current location"-->
-    <!--            android:layout_gravity="center" />-->
-
-    <!--    </LinearLayout>-->
-
     <TextView
         android:id="@+id/useLocation"
         android:layout_width="0dp"
@@ -41,7 +13,7 @@
         android:padding="20dp"
         android:fontFamily="@font/avenir_book"
         android:gravity="start"
-        android:text="Use my current location"
+        android:text="@string/currentLocation"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:drawablePadding="30dp"
@@ -61,7 +33,7 @@
         android:fontFamily="@font/avenir_book"
         android:gravity="start"
         android:textColor="@color/black"
-        android:text="Select Search area on Map"
+        android:text="@string/searchArea"
         android:textSize="20sp"
         android:drawablePadding="30dp"
         app:drawableLeftCompat="@drawable/map_icon"

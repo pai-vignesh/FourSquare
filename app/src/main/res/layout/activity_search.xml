@@ -25,8 +25,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:layout_marginTop="10dp"
-                android:paddingHorizontal="10dp"
+                android:layout_marginTop="@dimen/standardMargin"
+                android:paddingHorizontal="@dimen/standardMargin"
                 android:src="@drawable/back_icon"/>
 
             <LinearLayout
@@ -38,7 +38,7 @@
                 <SearchView
                     android:id="@+id/search_view"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/searchBar_height"
                     android:background="@drawable/bg_white_rounded"
                     android:focusable="false"
                     android:layout_gravity="center"
@@ -46,13 +46,13 @@
                     android:iconifiedByDefault="false"
                     android:searchIcon="@drawable/search_black"
                     android:queryHint="Search"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginVertical="@dimen/standardMargin"
                     app:defaultQueryHint="hint" />
 
                 <SearchView
                     android:id="@+id/search_view2"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/searchBar_height"
                     android:background="@drawable/bg_white_rounded"
                     android:focusable="false"
                     android:layout_gravity="center"
@@ -70,9 +70,9 @@
                 android:id="@+id/filterMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
+                android:paddingHorizontal="@dimen/standardMargin"
                 android:layout_gravity="top"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/standardMargin"
                 android:src="@drawable/filter_icon"/>
 
 

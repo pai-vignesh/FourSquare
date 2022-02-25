@@ -10,7 +10,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
+        android:paddingTop="@dimen/appBar_topPadding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/back_icon"
+            android:layout_marginHorizontal="@dimen/toolbar_marginHorizontal"
             app:menu="@menu/feedback_bar"
             app:title="About us"
             app:titleCentered="true"
@@ -36,14 +37,14 @@
             android:id="@+id/tvWrite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="@dimen/content_margin"
+            android:layout_marginTop="@dimen/content_margin"
+            android:layout_marginBottom="@dimen/content_margin"
             android:justificationMode="inter_word"
             android:fontFamily="@font/avenir_book"
             android:text="@string/lorem"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/aboutUs_textSize"/>
 
     </ScrollView>
 

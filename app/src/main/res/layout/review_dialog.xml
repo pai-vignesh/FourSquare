@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="30dp"
+    android:layout_marginStart="@dimen/drawer_marginStart"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.Guideline
@@ -27,10 +27,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/drawer_marginStart"
             android:fontFamily="@font/avenir_medium"
             android:gravity="center"
-            android:text="Overall Rating"
+            android:text="@string/overall_rating"
             android:textColor="@color/black"
             android:textSize="22sp" />
 
@@ -40,7 +40,7 @@
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/avenir_medium"
             android:gravity="center"
-            android:text="4.5"
+            android:text="@string/defaultRating"
             android:textColor="#36b000"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_medium"
             android:gravity="center"
-            android:text="How would you rate your"
+            android:text="@string/how_would_you_rate_your"
             android:textColor="@color/black"
             android:textSize="22sp" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_medium"
             android:gravity="center"
-            android:text="experience?"
+            android:text="@string/experience"
             android:textColor="@color/black"
             android:textSize="22sp" />
 
@@ -82,21 +82,20 @@
             android:id="@+id/SplitLine_hor1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/content_margin"
             android:background="@color/textGrey" />
 
         <Button
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/standardMargin"
             android:background="#00000000"
-            android:padding="10dp"
-            android:text="Submit"
+            android:padding="@dimen/standardMargin"
+            android:text="@string/submit"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="16sp" />
-
 
     </LinearLayout>
 
@@ -108,7 +107,8 @@
         app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/close_btn_border"
-        android:src="@drawable/close_icon"/>
+        android:src="@drawable/close_icon"
+        android:contentDescription="@string/todo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

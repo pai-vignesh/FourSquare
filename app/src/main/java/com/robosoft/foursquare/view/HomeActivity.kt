@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.view.WindowCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -35,10 +35,10 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         binding.drawer.setDrawerListener(drawerToggle)
         drawerToggle.syncState()
         val menuView = binding.drawer.menuView
-        val llFavourites = menuView.findViewById<LinearLayout>(R.id.list1)
-        val llFeedback = menuView.findViewById<LinearLayout>(R.id.list2)
-        val llAboutUs = menuView.findViewById<LinearLayout>(R.id.list3)
-        val llLogout = menuView.findViewById<LinearLayout>(R.id.list4)
+        val llFavourites = menuView.findViewById<TextView>(R.id.list1)
+        val llFeedback = menuView.findViewById<TextView>(R.id.list2)
+        val llAboutUs = menuView.findViewById<TextView>(R.id.list3)
+        val llLogout = menuView.findViewById<TextView>(R.id.list4)
         llFavourites.setOnClickListener(this)
         llFeedback.setOnClickListener(this)
         llAboutUs.setOnClickListener(this)

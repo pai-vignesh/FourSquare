@@ -1,146 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-
-    <LinearLayout
-        android:id="@+id/linear_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="wrap_content">
 
-        <TextView
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Email2"
-            android:text="Email"
-            android:textSize="18sp"
-            android:textColor="#b5abab"
-            android:fontFamily="@font/avenir_book"
-            android:gravity="center"
-            android:layout_marginTop="80dp" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/content_margin"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-       <EditText
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/Email_address"
-           android:text=""
-           android:textColor="@color/white"
-           android:gravity="center"
-           android:inputType="textEmailAddress"
-           android:textSize="20sp"
-           android:ems="10"
-           app:backgroundTint="@color/textGrey"
-           android:fontFamily="@font/avenir_book" />
+            <TextView
+                android:id="@+id/Email2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:text="@string/email"
+                android:textColor="#b5abab"
+                android:textSize="@dimen/label_textSize" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/mobile_number"
-            android:text="Mobile Number"
-            android:textSize="18sp"
-            android:textColor="#b5abab"
-            android:fontFamily="@font/avenir_book"
-            android:gravity="center"
-            android:layout_marginTop="10dp" />
+            <EditText
+                android:id="@+id/Email_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:inputType="textEmailAddress"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/edit_textSize"
+                app:backgroundTint="@color/textGrey" />
 
-        <EditText
-            android:id="@+id/mobile_num"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/avenir_book"
-            tools:ignore="HardcodedText,MissingConstraints"
-            android:ems="10"
-            app:backgroundTint="@color/textGrey"
-            android:inputType="phone" />
+            <TextView
+                android:id="@+id/mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standardMargin"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:text="@string/mobile_number"
+                android:textColor="#b5abab"
+                android:textSize="@dimen/label_textSize" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Password2"
-            android:text="@string/password"
-            android:textSize="18sp"
-            android:textColor="#b5abab"
-            android:fontFamily="@font/avenir_book"
-            android:gravity="center"
-            android:layout_marginTop="10dp" />
+            <EditText
+                android:id="@+id/mobile_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:inputType="phone"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/edit_textSize"
+                app:backgroundTint="@color/textGrey"
+                tools:ignore="HardcodedText,MissingConstraints" />
 
-        <EditText
-            android:id="@+id/password_entry2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/avenir_book"
-            tools:ignore="HardcodedText,MissingConstraints"
-            android:ems="10"
-            app:backgroundTint="@color/textGrey"
-            android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/Password2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standardMargin"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:text="@string/password"
+                android:textColor="#b5abab"
+                android:textSize="@dimen/label_textSize" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/confirm_Password"
-            android:text="Confirm Password"
-            android:textSize="18sp"
-            android:textColor="#b5abab"
-            android:fontFamily="@font/avenir_book"
-            android:gravity="center"
-            android:layout_marginTop="10dp" />
+            <EditText
+                android:id="@+id/password_entry2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:inputType="textPassword"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/edit_textSize"
+                app:backgroundTint="@color/textGrey"
+                tools:ignore="HardcodedText,MissingConstraints" />
 
-        <EditText
-            android:id="@+id/confirm_password_entry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/avenir_book"
-            tools:ignore="HardcodedText,MissingConstraints"
-            android:ems="10"
-            app:backgroundTint="@color/textGrey"
-            android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/confirm_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:text="@string/confirm_password"
+                android:textColor="#b5abab"
+                android:textSize="@dimen/label_textSize" />
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/login2"
-            android:text="@string/login"
-            android:textSize="22sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/avenir_book"
-            android:gravity="center"
-            android:textAllCaps="false"
-            android:layout_marginTop="80dp"
-            tools:ignore="MissingConstraints"
-            app:cornerRadius="20dp"
-            android:background="@drawable/button_border"/>
-
-    </LinearLayout>
+            <EditText
+                android:id="@+id/confirm_password_entry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:inputType="textPassword"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/edit_textSize"
+                app:backgroundTint="@color/textGrey"
+                tools:ignore="HardcodedText,MissingConstraints" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/login2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/button_border"
+                android:fontFamily="@font/avenir_book"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:cornerRadius="@dimen/content_margin"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

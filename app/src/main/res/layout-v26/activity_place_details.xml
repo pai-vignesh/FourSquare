@@ -14,42 +14,32 @@
         android:layout_height="wrap_content">
 
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/midLine"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"/>
-
-
         <ImageView
             android:id="@+id/placeImg"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/placeDetails_imageHeight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/mapFragment"
-            app:layout_constraintEnd_toStartOf="@id/midLine"
             android:scaleType="centerCrop"
-            android:src="@drawable/splashscreen"/>
+            android:src="@drawable/splashscreen"
+            android:contentDescription="@string/todo" />
 
         <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/placeDetails_imageHeight"
             android:background="@drawable/image_shadow"
-            app:layout_constraintEnd_toStartOf="@id/midLine"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/mapFragment"
+            app:layout_constraintEnd_toEndOf="@id/placeImg"
+            app:layout_constraintStart_toStartOf="@id/placeImg"
+            app:layout_constraintBottom_toBottomOf="@id/placeImg"
             app:layout_constraintTop_toTopOf="@id/placeImg" />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:animateLayoutChanges="true"
             android:stateListAnimator="@null"
-            app:layout_constraintEnd_toStartOf="@id/midLine"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -59,10 +49,10 @@
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/place_details_bar"
                 android:backgroundTint="#00000000"
-                app:title="Attil"
+                app:title=""
                 android:elevation="0dp"
                 app:titleCentered="true"
-                android:layout_marginHorizontal="5dp"
+                android:layout_marginHorizontal="@dimen/toolbar_marginHorizontal"
                 app:navigationIcon="@drawable/back_icon"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 />
@@ -72,15 +62,15 @@
 
         <TextView
             android:id="@+id/placeType"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="@dimen/label_textSize"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@id/ratingBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/midLine"
+            app:layout_constraintStart_toStartOf="@id/placeImg"
+            app:layout_constraintEnd_toEndOf="@id/placeImg"
             android:text="@string/place_type"/>
 
         <RatingBar
@@ -92,17 +82,17 @@
             style="@style/customRatingBar"
             android:rating="2.5"
             app:layout_constraintBottom_toBottomOf="@id/placeImg"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/placeImg"
             android:stepSize="0.1"
             android:isIndicator="true"
-            app:layout_constraintEnd_toStartOf="@id/midLine"/>
+            app:layout_constraintEnd_toEndOf="@id/placeImg"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/llMenu"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/midLine"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/placeImg"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/label_editText_padding">
 
@@ -151,16 +141,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <View
             android:id="@+id/SplitLine_hor1"
-            android:layout_width="0dp"
-            android:layout_height= "2dp"
+            android:layout_width="match_parent"
+            android:layout_height= "0.5dp"
             app:layout_constraintTop_toBottomOf="@id/llMenu"
-            app:layout_constraintStart_toEndOf="@id/midLine"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="@dimen/content_margin"
-            android:layout_marginTop="@dimen/content_margin"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
             android:background="#d3d3d3" />
 
         <TextView
@@ -168,22 +157,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/overview"
-            android:layout_marginStart="@dimen/content_margin"
+            android:layout_marginStart="20dp"
             android:textColor="@color/black"
             android:fontFamily="@font/avenir_book"
-            android:textSize="@dimen/headingTextSize"
-            app:layout_constraintStart_toEndOf="@id/midLine"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/SplitLine_hor1"/>
 
         <TextView
             android:id="@+id/details"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dummy_text"
             android:fontFamily="@font/avenir_book"
-            android:paddingHorizontal="@dimen/content_margin"
+            android:paddingHorizontal="20dp"
             android:justificationMode="inter_word"
-            app:layout_constraintStart_toEndOf="@id/midLine"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvOverview"/>
 
@@ -212,10 +201,10 @@
             android:layout_height="wrap_content"
             android:text="@string/dummy_address"
             android:fontFamily="@font/avenir_medium"
-            android:paddingHorizontal="@dimen/label_editText_padding"
-            android:layout_marginTop="@dimen/label_editText_padding"
-            android:textSize="@dimen/addressTextSize"
-            android:layout_marginStart="@dimen/content_margin"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="@id/mapFragment"
             app:layout_constraintTop_toTopOf="@id/mapFragment"/>
 
@@ -225,9 +214,9 @@
             android:layout_height="wrap_content"
             android:text="@string/dummy_street"
             android:fontFamily="@font/avenir_medium"
-            android:paddingHorizontal="@dimen/label_editText_padding"
-            android:textSize="@dimen/addressTextSize"
-            android:layout_marginStart="@dimen/content_margin"
+            android:paddingHorizontal="10dp"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="@id/mapFragment"
             app:layout_constraintTop_toBottomOf="@id/tvAddr"/>
 
@@ -237,10 +226,10 @@
             android:layout_height="wrap_content"
             android:text="@string/no_number"
             android:fontFamily="@font/avenir_medium"
-            android:paddingHorizontal="@dimen/label_editText_padding"
-            android:layout_marginTop="@dimen/content_margin"
-            android:layout_marginStart="@dimen/content_margin"
-            android:textSize="@dimen/addressTextSize"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/mapFragment"
             app:layout_constraintTop_toBottomOf="@id/tvLocality"/>
 
@@ -250,10 +239,10 @@
             android:layout_height="wrap_content"
             android:text="@string/distance"
             android:fontFamily="@font/avenir_medium"
-            android:paddingHorizontal="@dimen/label_editText_padding"
-            android:layout_marginTop="@dimen/content_margin"
-            android:layout_marginStart="@dimen/content_margin"
-            android:textSize="@dimen/addressTextSize"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/mapFragment"
             app:layout_constraintTop_toBottomOf="@id/tvphone"/>
 
@@ -262,11 +251,11 @@
             android:id="@+id/addReview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/button_padding"
+            android:paddingVertical="20dp"
             android:textAllCaps="false"
             android:background="@drawable/text_background"
             android:textColor="@color/white"
-            android:textSize="@dimen/button_textSize"
+            android:textSize="18sp"
             android:gravity="center"
             android:layout_marginBottom="2dp"
             app:layout_constraintTop_toBottomOf="@id/mapFragment"
@@ -274,10 +263,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/add_review"/>
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

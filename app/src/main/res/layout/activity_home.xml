@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Swaroop Kumar"
+                android:text="@string/swaroop_kumar"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@id/imageView"
@@ -70,164 +70,105 @@
                 app:layout_constraintGuide_percent="0.31" />
 
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/list1"
-                android:layout_width="240dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:text="@string/favourites"
+                android:drawablePadding="@dimen/drawer_content_spacing"
+                android:textColor="@color/white"
+                android:textSize="@dimen/drawer_item_textSize"
+                android:layout_marginStart="@dimen/drawer_marginStart"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guideline2">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/favourite"
-                    tools:ignore="ContentDescription" />
-
-                <Space
-                    android:layout_width="12dp"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
-                    android:text="Favourites"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/guideline2"
+                app:drawableStartCompat="@drawable/favourite" />
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="@dimen/drawer_divider_width"
+                android:layout_height="@dimen/drawer_divider_height"
+                android:layout_marginStart="@dimen/drawer_divider_spacing"
+                android:layout_marginTop="@dimen/drawer_divider_spacing"
                 android:background="#5fd3d3d3"
                 app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/list1" />
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/list2"
-                android:layout_width="240dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:text="@string/feedback"
+                android:layout_marginTop="@dimen/drawer_item_spacingTop"
+                android:drawablePadding="@dimen/drawer_content_spacing"
+                android:textColor="@color/white"
+                android:textSize="@dimen/drawer_item_textSize"
+                android:layout_marginStart="@dimen/drawer_marginStart"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list1">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/feedback"
-                    tools:ignore="ContentDescription" />
-
-                <Space
-                    android:layout_width="12dp"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
-                    android:text="Feedback"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/list1"
+                app:drawableStartCompat="@drawable/feedback" />
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="@dimen/drawer_divider_width"
+                android:layout_height="@dimen/drawer_divider_height"
+                android:layout_marginStart="@dimen/drawer_divider_spacing"
+                android:layout_marginTop="@dimen/drawer_divider_spacing"
                 android:background="#5fd3d3d3"
                 app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/list2" />
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/list3"
-                android:layout_width="240dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:text="@string/about_us"
+                android:layout_marginTop="@dimen/drawer_item_spacingTop"
+                android:drawablePadding="@dimen/drawer_content_spacing"
+                android:textColor="@color/white"
+                android:textSize="@dimen/drawer_item_textSize"
+                android:layout_marginStart="@dimen/drawer_marginStart"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list2">
+                app:layout_constraintTop_toBottomOf="@+id/list2"
+                app:drawableStartCompat="@drawable/about" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/about"
-                    tools:ignore="ContentDescription" />
-
-                <Space
-                    android:layout_width="12dp"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
-                    android:text="About us"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="@dimen/drawer_divider_width"
+                android:layout_height="@dimen/drawer_divider_height"
+                android:layout_marginStart="@dimen/drawer_divider_spacing"
+                android:layout_marginTop="@dimen/drawer_divider_spacing"
                 android:background="#5fd3d3d3"
                 app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/list3" />
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/list4"
-                android:layout_width="240dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:text="@string/logout"
+                android:layout_marginTop="@dimen/drawer_item_spacingTop"
+                android:drawablePadding="@dimen/drawer_content_spacing"
+                android:textColor="@color/white"
+                android:textSize="@dimen/drawer_item_textSize"
+                android:layout_marginStart="@dimen/drawer_marginStart"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list3">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/logout"
-                    tools:ignore="ContentDescription" />
-
-                <Space
-                    android:layout_width="12dp"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
-                    android:text="Logout"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/list3"
+                app:drawableStartCompat="@drawable/logout" />
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="@dimen/drawer_divider_width"
+                android:layout_height="@dimen/drawer_divider_height"
+                android:layout_marginStart="@dimen/drawer_divider_spacing"
+                android:layout_marginTop="@dimen/drawer_divider_spacing"
                 android:background="#5fd3d3d3"
                 app:layout_constraintEnd_toEndOf="@id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
@@ -257,7 +198,7 @@
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:layout_marginHorizontal="5dp"
+                android:layout_marginHorizontal="@dimen/toolbar_marginHorizontal"
                 app:logo="@drawable/app_bar_logo"
                 app:menu="@menu/top_app_bar"
                 app:navigationIcon="@drawable/menu_icon" />
@@ -280,27 +221,27 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Near you" />
+                android:text="@string/near_you" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Top pick" />
+                android:text="@string/top_pick" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Popular" />
+                android:text="@string/popular" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dinner" />
+                android:text="@string/dinner" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Coffe" />
+                android:text="@string/coffee" />
 
         </com.google.android.material.tabs.TabLayout>
 
