@@ -16,7 +16,7 @@ import javax.inject.Inject
 class RetrofitInstance @Inject constructor() {
     companion object {
         private fun isInternetAvailable(context: Context): Boolean {
-            var isConnected: Boolean = false // Initial Value
+            var isConnected: Boolean = false
             val connectivityManager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
@@ -26,13 +26,12 @@ class RetrofitInstance @Inject constructor() {
         }
 
         private fun getRetrofitInstance(context: Context): Retrofit {
-            val cacheSize = (10 * 1024 * 1024).toLong() // 10 MB
+            val cacheSize = (10 * 1024 * 1024).toLong()
             val cache = Cache(context.cacheDir, cacheSize)
 
             val onlineInterceptor = Interceptor { chain ->
                 val response = chain.proceed(chain.request())
-                val maxAge =
-                    60 // read from cache for 60 seconds even if there is internet connection
+                val maxAge = 60
                 response.newBuilder()
                     .header("Cache-Control", "public, max-age=$maxAge")
                     .removeHeader("Pragma")
@@ -41,7 +40,7 @@ class RetrofitInstance @Inject constructor() {
             val offlineInterceptor = Interceptor { chain ->
                 var request: Request = chain.request()
                 if (!isInternetAvailable(context)) {
-                    val maxStale = 60 * 60 * 24 * 30 // Offline cache available for 30 days
+                    val maxStale = 60 * 60 * 24 * 30
                     request = request.newBuilder()
                         .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
                         .removeHeader("Pragma")
@@ -50,7 +49,7 @@ class RetrofitInstance @Inject constructor() {
                 chain.proceed(request)
             }
             val okHttpClient: OkHttpClient =
-                OkHttpClient.Builder() // .addInterceptor(provideHttpLoggingInterceptor()) // For HTTP request & Response data logging
+                OkHttpClient.Builder()
                     .addInterceptor(offlineInterceptor)
                     .addNetworkInterceptor(onlineInterceptor)
                     .cache(cache)

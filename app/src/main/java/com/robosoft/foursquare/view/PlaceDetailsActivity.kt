@@ -290,8 +290,6 @@ class PlaceDetailsActivity : AppCompatActivity() {
             stackpointer = radius
             y = 0
             while (y < h) {
-
-                // Preserve alpha channel: ( 0xff000000 & pix[yi] )
                 pix[yi] =
                     -0x1000000 and pix[yi] or (dv[rsum] shl 16) or (dv[gsum] shl 8) or dv[bsum]
                 rsum -= routsum

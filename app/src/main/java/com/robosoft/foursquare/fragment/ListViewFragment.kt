@@ -114,11 +114,10 @@ class ListViewFragment : Fragment(), CellClickListener {
         }
     }
 
-    //recyclerview setup
     private fun setupRv(p0: String?, currentLocation: Location, query: String = "") {
         p0?.let { location ->
             placeAdapter = PlaceAdapter(this, currentLocation)
-            homeViewModel.getQueryPlaces(query!!, location).observe(viewLifecycleOwner) { data ->
+            homeViewModel.getQueryPlaces(query, location).observe(viewLifecycleOwner) { data ->
                 when (data) {
                     is Resource.Loading -> {}
                     is Resource.Success -> {

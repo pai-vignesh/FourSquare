@@ -61,8 +61,6 @@ class MapViewFragment : Fragment() {
                 transaction.commit()
             }
         }
-
-
         binding.placeCard.layout.visibility = View.GONE
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())

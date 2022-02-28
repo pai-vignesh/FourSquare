@@ -2,26 +2,14 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:id="@+id/linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/content_margin"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/content_margin"
+        >
 
             <TextView
                 android:id="@+id/Email"
@@ -32,6 +20,9 @@
                 android:gravity="center"
                 android:text="@string/email"
                 android:textColor="#b5abab"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:textSize="@dimen/label_textSize" />
 
 
@@ -48,7 +39,9 @@
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Email" />
 
             <TextView
                 android:id="@+id/Password"
@@ -59,6 +52,9 @@
                 android:gravity="center"
                 android:text="@string/password"
                 android:textColor="#b5abab"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/person_name"
                 android:textSize="@dimen/label_textSize" />
 
             <EditText
@@ -74,7 +70,9 @@
                 android:imeOptions="actionDone"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
-                tools:ignore="HardcodedText,MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Password" />
 
 
             <TextView
@@ -87,7 +85,9 @@
                 android:text="@string/forgot_password"
                 android:textColor="@color/textGrey"
                 android:textSize="@dimen/label_textSize"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password_entry" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login"
@@ -102,7 +102,9 @@
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 app:cornerRadius="@dimen/content_margin"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/forgotPassword" />
 
 
             <TextView
@@ -115,7 +117,9 @@
                 android:text="@string/create_account"
                 android:textColor="@color/white"
                 android:textSize="@dimen/edit_textSize"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/login" />
 
 
             <TextView
@@ -129,9 +133,11 @@
                 android:padding="5dp"
                 android:text="@string/or"
                 android:textColor="@color/white"
-                android:textSize="@dimen/addressTextSize" />
+                android:textSize="@dimen/addressTextSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/create_account"/>
 
-        </LinearLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/imgGuideline"
@@ -149,8 +155,8 @@
             android:layout_marginTop="@dimen/content_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imgGuideline"
-            app:layout_constraintTop_toBottomOf="@id/linear_layout"/>
+            app:layout_constraintEnd_toEndOf="@id/imgGuideline"
+            app:layout_constraintTop_toBottomOf="@id/OR"/>
 
         <ImageView
             android:layout_width="0dp"
@@ -159,10 +165,10 @@
             android:src="@drawable/google_btn"
             android:contentDescription="@string/google_img"
             android:layout_marginTop="@dimen/content_margin"
-            app:layout_constraintStart_toEndOf="@+id/imgGuideline"
+            app:layout_constraintStart_toEndOf="@id/imgGuideline"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_layout"/>
+            app:layout_constraintTop_toBottomOf="@id/OR"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -27,6 +27,7 @@ import com.robosoft.foursquare.util.LocationPermission
 import javax.inject.Inject
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.robosoft.foursquare.util.Resource
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class NearYouFragment : Fragment(), CellClickListener {
@@ -40,6 +41,7 @@ class NearYouFragment : Fragment(), CellClickListener {
 
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

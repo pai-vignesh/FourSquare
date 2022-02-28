@@ -12,10 +12,11 @@
         app:layout_constraintGuide_percent="0.25"
         android:orientation="horizontal"/>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:id="@+id/cLayout"
         android:background="@drawable/dialog_border"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,6 +26,7 @@
 
 
         <TextView
+            android:id="@+id/tvRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/drawer_marginStart"
@@ -32,9 +34,13 @@
             android:gravity="center"
             android:text="@string/overall_rating"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cLayout"/>
 
         <TextView
+            android:id="@+id/ratingNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -43,25 +49,36 @@
             android:text="@string/defaultRating"
             android:textColor="#36b000"
             android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRating"/>
 
         <TextView
+            android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_medium"
             android:gravity="center"
             android:text="@string/how_would_you_rate_your"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ratingNum"/>
 
         <TextView
+            android:id="@+id/experience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_medium"
             android:gravity="center"
             android:text="@string/experience"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/message"/>
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -76,14 +93,19 @@
             android:layout_gravity="center"
             android:stepSize="0.1"
             android:isIndicator="true"
-            app:layout_constraintEnd_toEndOf="@id/placeImg"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/experience"/>
 
         <View
             android:id="@+id/SplitLine_hor1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/content_margin"
-            android:background="@color/textGrey" />
+            android:background="@color/textGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ratingBar"/>
 
         <Button
             android:layout_width="310dp"
@@ -95,9 +117,12 @@
             android:text="@string/submit"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SplitLine_hor1"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageView1"

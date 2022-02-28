@@ -41,7 +41,6 @@ class SignInFragment : Fragment() {
     ): View {
         binding = FragmentSigninBinding.inflate(inflater)
         auth = FirebaseAuth.getInstance()
-        // Callback function for Phone Auth
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 startActivity(Intent(requireContext(), HomeActivity::class.java))

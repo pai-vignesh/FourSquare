@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/content_margin">
 
-
-        <LinearLayout
-            android:id="@+id/linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/content_margin"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/Email2"
@@ -30,7 +19,10 @@
                 android:gravity="center"
                 android:text="@string/email"
                 android:textColor="#b5abab"
-                android:textSize="@dimen/label_textSize" />
+                android:textSize="@dimen/label_textSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <EditText
                 android:id="@+id/Email_address"
@@ -44,7 +36,10 @@
                 android:imeOptions="actionNext"
                 android:textColor="@color/white"
                 android:textSize="@dimen/edit_textSize"
-                app:backgroundTint="@color/textGrey" />
+                app:backgroundTint="@color/textGrey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Email2"/>
 
             <TextView
                 android:id="@+id/mobile_number"
@@ -55,7 +50,10 @@
                 android:gravity="center"
                 android:text="@string/mobile_number"
                 android:textColor="#b5abab"
-                android:textSize="@dimen/label_textSize" />
+                android:textSize="@dimen/label_textSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Email_address"/>
 
             <EditText
                 android:id="@+id/mobile_num"
@@ -70,7 +68,9 @@
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
-                tools:ignore="HardcodedText,MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mobile_number" />
 
             <TextView
                 android:id="@+id/Password2"
@@ -81,7 +81,10 @@
                 android:gravity="center"
                 android:text="@string/password"
                 android:textColor="#b5abab"
-                android:textSize="@dimen/label_textSize" />
+                android:textSize="@dimen/label_textSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mobile_num"/>
 
             <EditText
                 android:id="@+id/password_entry2"
@@ -96,7 +99,9 @@
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
-                tools:ignore="HardcodedText,MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Password2" />
 
             <TextView
                 android:id="@+id/confirm_Password"
@@ -107,7 +112,10 @@
                 android:gravity="center"
                 android:text="@string/confirm_password"
                 android:textColor="#b5abab"
-                android:textSize="@dimen/label_textSize" />
+                android:textSize="@dimen/label_textSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password_entry2"/>
 
             <EditText
                 android:id="@+id/confirm_password_entry"
@@ -122,7 +130,9 @@
                 android:imeOptions="actionDone"
                 android:textSize="@dimen/edit_textSize"
                 app:backgroundTint="@color/textGrey"
-                tools:ignore="HardcodedText,MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/confirm_Password" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -138,9 +148,10 @@
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 app:cornerRadius="@dimen/content_margin"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/confirm_password_entry" />
 
-        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

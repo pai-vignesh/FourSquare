@@ -6,18 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <LinearLayout
-        android:id="@+id/linear_layout"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/txtGuideline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/content_margin"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"/>
 
         <TextView
             android:id="@+id/otp_notification"
@@ -28,7 +22,11 @@
             android:text="@string/we_have_sent_you_an_otp"
             android:textColor="@color/white"
             android:textSize="22sp"
-            tools:ignore="HardcodedText" />
+            android:layout_marginHorizontal="@dimen/content_margin"
+            tools:ignore="HardcodedText"
+            app:layout_constraintTop_toBottomOf="@id/txtGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/otp_notification2"
@@ -39,7 +37,11 @@
             android:gravity="center"
             android:text="@string/please_enter_it_below"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:layout_marginHorizontal="@dimen/content_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/otp_notification"/>
 
         <TextView
             android:id="@+id/Enter_OTP"
@@ -50,12 +52,17 @@
             android:gravity="center"
             android:text="@string/enter_otp"
             android:textColor="#b5abab"
-            android:textSize="@dimen/label_textSize" />
+            android:layout_marginHorizontal="@dimen/content_margin"
+            android:textSize="@dimen/label_textSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/otp_notification2"/>
 
         <EditText
             android:id="@+id/OTP_entry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/content_margin"
             android:ems="10"
             android:fontFamily="@font/avenir_book"
             android:gravity="center"
@@ -65,7 +72,10 @@
             android:textColor="#FFFFFF"
             android:textSize="@dimen/edit_textSize"
             app:backgroundTint="@color/textGrey"
-            tools:ignore="HardcodedText,MissingConstraints" />
+            tools:ignore="HardcodedText,MissingConstraints"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Enter_OTP"/>
 
         <TextView
             android:id="@+id/Resend_OTP"
@@ -73,10 +83,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/avenir_book"
+            android:layout_marginHorizontal="@dimen/content_margin"
             android:gravity="center"
             android:text="@string/resend_otp"
             android:textColor="#b5abab"
-            android:textSize="@dimen/label_textSize" />
+            android:textSize="@dimen/label_textSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/OTP_entry"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/get_in"
@@ -84,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:background="@drawable/button_border"
+            android:layout_marginHorizontal="@dimen/content_margin"
             android:fontFamily="@font/avenir_book"
             android:gravity="center"
             android:text="@string/get_in"
@@ -91,10 +106,12 @@
             android:textColor="@color/white"
             android:textSize="22sp"
             app:cornerRadius="@dimen/content_margin"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Resend_OTP"/>
 
 
-    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
