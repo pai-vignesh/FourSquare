@@ -60,7 +60,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         setPagerAdapter()
     }
 
-
+//set page adapter
     private fun setPagerAdapter() {
         myFragmentPagerAdapter = MyFragmentPagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = myFragmentPagerAdapter
