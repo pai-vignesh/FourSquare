@@ -42,7 +42,9 @@
         <item name="strokeWidth">@dimen/mtrl_btn_stroke_size</item>
         <item name="backgroundTint">@color/background_color_selector</item>
         <item name="android:textColor">@color/text_color_selector</item>
+        <item name="cornerRadius">0dp</item>
     </style>
+
 
     <style name="myCheckbox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="buttonTint">@color/button_tint</item>

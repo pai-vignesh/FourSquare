@@ -271,15 +271,16 @@
                 android:background="#5fd3d3d3"/>
 
             <CheckBox
+                style="@style/myCheckbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:layout_marginHorizontal="@dimen/content_margin"
                 android:layout_marginBottom="2dp"
-                style="@style/myCheckbox"
+                android:background="@color/white"
                 android:button="@drawable/checkbox_drawable"
                 android:layoutDirection="rtl"
-                android:layout_marginHorizontal="@dimen/content_margin"
-                android:text="@string/outdoor_seating" />
+                android:text="@string/outdoor_seating"
+                android:textColor="#757575" />
 
             <View
                 android:layout_width="match_parent"

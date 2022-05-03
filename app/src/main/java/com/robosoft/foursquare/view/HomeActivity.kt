@@ -60,11 +60,10 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         setPagerAdapter()
     }
 
-
+//set page adapter
     private fun setPagerAdapter() {
         myFragmentPagerAdapter = MyFragmentPagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = myFragmentPagerAdapter
-        //switch between tabs
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 binding.pager.currentItem = tab.position
